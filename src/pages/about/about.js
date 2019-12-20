@@ -4,7 +4,6 @@ import Glide from '@glidejs/glide';
 
 const mobileMenuButton = document.querySelector('.header__mobileico');
 const mobileMenu = document.querySelector('.header__menu_mobile');
-const mobileLinks = document.querySelector('.header__menu_mobile-links');
 const ghButton = document.querySelector('.github__button');
 
 let isOpenMenu = false;
