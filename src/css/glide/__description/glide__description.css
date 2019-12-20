@@ -1,0 +1,11 @@
+@import url(./_bg/glide__description_bg.css);
+
+.glide__description {
+    margin-top: 16px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    color: #1A1B22;
+}
+

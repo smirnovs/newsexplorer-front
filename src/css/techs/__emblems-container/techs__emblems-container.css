@@ -1,0 +1,21 @@
+.techs__emblems-container {
+    display: flex;
+    text-align: center;
+}
+
+@media screen and (max-width : 720px) {
+    .techs__emblems-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 32px;
+    }
+}
+
+/* 
+@media screen and (max-width : 720px) {
+    .techs__container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 16px;
+    }
+} */

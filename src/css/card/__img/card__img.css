@@ -1,0 +1,9 @@
+.card__img {
+    display: flex;
+    position: relative;
+    width: 100%;
+}
+
+.card__img img {
+    width: 100%;
+}

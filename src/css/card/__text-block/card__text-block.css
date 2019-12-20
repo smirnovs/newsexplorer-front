@@ -1,0 +1,9 @@
+.card__text-block {
+    padding: 24px 24px 0;
+}
+
+@media screen and (max-width : 768px) {
+    .card__text-block {
+        padding: 16px 16px 0;
+    }
+}

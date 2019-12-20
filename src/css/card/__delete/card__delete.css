@@ -1,0 +1,29 @@
+.card__delete {
+    display: none;
+    position: absolute;
+    width: 162px;
+    height: 40px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 12px;
+    align-items: center;
+    text-align: center;
+    color: #000;
+    background-color: #fff;
+    right: 45px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    z-index: 2;
+}
+
+.card__saver:hover .card__delete {
+    display: flex;
+}
+
+.card__saver:hover .trash {
+    stroke: #1A1B22;
+    fill: #1A1B22;
+}

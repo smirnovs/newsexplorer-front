@@ -1,0 +1,15 @@
+.popup__offer {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #000000;
+}
+
+.popup__offer_reg {
+    text-decoration: none;
+    color: #2F71E5;
+    cursor: pointer;
+}

@@ -1,0 +1,14 @@
+.glide__name {
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 26px;
+    line-height: 30px;
+    color: #1A1B22;
+}
+
+@media screen and (max-width : 1080px) {
+    .glide__name {
+        font-size: 20px;
+    }
+}

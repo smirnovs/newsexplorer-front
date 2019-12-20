@@ -1,0 +1,14 @@
+.glide__date {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    color: #B6BCBF;
+    margin-bottom: 16px;
+}
+
+@media screen and (max-width : 590px) {
+    .glide__date {
+        margin-bottom: 11px;
+    }
+}

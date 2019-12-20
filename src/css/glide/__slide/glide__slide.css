@@ -1,0 +1,22 @@
+.glide__slide {
+    background-color: #fff;
+    max-width: 400px;
+    border-radius: 16px;
+    padding: 24px 24px 80px;
+    height: 288px;
+}
+
+@media screen and (max-width : 1080px) {
+    .glide__slide {
+        max-width: 336px;
+        height: 242px;
+        padding-bottom: 46px;
+    }
+}
+
+@media screen and (max-width : 590px) {
+    .glide__slide {
+        height: 264px;
+        padding: 16px 16px 62px;
+    }
+}

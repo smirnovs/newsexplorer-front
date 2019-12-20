@@ -1,0 +1,5 @@
+.search-result-section__container {
+    padding: 80px 104px 0px;
+    display: flex;
+    flex-direction: column;
+}

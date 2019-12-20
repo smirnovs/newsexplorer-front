@@ -1,0 +1,5 @@
+@media screen and (max-width : 720px) {
+    .header__menu_mobile-links.header__menu_white {
+        background-color: #fff;
+    }
+}

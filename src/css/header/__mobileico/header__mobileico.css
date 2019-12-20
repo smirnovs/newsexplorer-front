@@ -1,0 +1,21 @@
+@import url(./_black/header__mobileico_black.css);
+@import url(./_black/header__mobileico_black-closed.css);
+@import url(./_white/header__mobileico_white.css);
+@import url(./_white/header__mobileico_white-closed.css);
+
+
+.header__mobileico {
+    display: none;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    margin-bottom: 18px;
+    width: 24px;
+    outline: none;
+}
+
+@media screen and (max-width : 720px) {
+    .header__mobileico {
+        display: block;
+    }
+}

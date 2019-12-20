@@ -1,0 +1,9 @@
+.glide__author-contacts {
+    margin-left: 16px;
+}
+
+@media screen and (max-width : 1080px) {
+    .glide__author-contacts {
+        margin-left: 12px;
+    }
+}

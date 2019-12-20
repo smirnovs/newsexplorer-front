@@ -1,0 +1,20 @@
+@import url(./__container/header__container.css);
+@import url(./__underline/header__underline.css);
+@import url(./__menu/header__menu.css);
+@import url(./__title/header__title.css);
+@import url(./__title/_white/header__title_white.css);
+@import url(./__link/header__link.css);
+@import url(./__login/header__login.css);
+@import url(./__mobileico/header__mobileico.css);
+@import url(./__logout-black/header__logout-black.css);
+@import url(./__fixed/header__fixed.css);
+
+.header {
+    background: rgba(196, 196, 196, 0.01);
+}
+
+@media screen and (min-width : 720px) {
+    .header {
+        background-color: transparent;
+    }
+}

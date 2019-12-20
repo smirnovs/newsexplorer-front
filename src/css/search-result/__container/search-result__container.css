@@ -1,0 +1,17 @@
+.search-result__container {
+    padding: 80px 104px 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width : 1024px) {
+    .search-result__container {
+        padding: 40px 40px 0;
+    }
+}
+
+@media screen and (max-width : 755px) {
+    .search-result__container {
+        padding: 32px 16px 0;
+    }
+}

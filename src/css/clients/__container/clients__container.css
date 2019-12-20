@@ -1,0 +1,15 @@
+.clients__container {
+    padding: 80px 104px 72px;
+}
+
+@media screen and (max-width : 1024px) {
+    .clients__container {
+        padding: 30px 40px 40px;
+    }
+}
+
+@media screen and (max-width : 720px) {
+    .clients__container {
+        padding: 16px 16px 37px;
+    }
+}

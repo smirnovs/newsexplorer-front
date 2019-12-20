@@ -1,0 +1,15 @@
+.user-greetings__container {
+    padding: 40px 104px 56px;
+}
+
+@media screen and (max-width : 950px) {
+    .user-greetings__container {
+        padding: 24px 40px 32px;
+    }
+}
+
+@media screen and (max-width : 720px) {
+    .user-greetings__container {
+        padding: 64px 16px 32px;
+    }
+}

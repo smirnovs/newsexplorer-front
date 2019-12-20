@@ -1,0 +1,14 @@
+@import url(./_black/header__menu_black.css);
+@import url(./_white/header__menu_white.css);
+@import url(./_mobile/header__menu_mobile.css);
+@import url(./_isopened/header__menu_isopened.css);
+
+.header__menu {
+    padding-bottom: 13px;
+}
+
+@media screen and (max-width : 720px) {
+    .header__menu {
+        display: none;
+    }
+}

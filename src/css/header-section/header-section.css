@@ -1,0 +1,6 @@
+@import url(./__bg/header-section__bg.css);
+
+.header-section {
+    color: #1A1B22;
+    position: relative;
+}

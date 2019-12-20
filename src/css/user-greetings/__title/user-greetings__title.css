@@ -1,0 +1,21 @@
+.user-greetings__title {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 24px;
+    color: rgba(26, 27, 34, 0.5);
+    padding-bottom: 28px;
+}
+
+@media screen and (max-width : 950px) {
+    .user-greetings__title {
+        font-size: 14px;
+        padding-bottom: 16px;
+    }
+}
+
+@media screen and (max-width : 720px) {
+    .user-greetings__title {
+        font-size: 12px;
+    }
+}

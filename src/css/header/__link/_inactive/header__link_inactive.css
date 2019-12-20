@@ -1,0 +1,13 @@
+.header__link_inactive {
+    color: #B6BCBF;
+}
+
+.header__link_inactive:hover {
+    color: #1A1B22;
+}
+
+@media screen and (max-width : 720px) {
+    .header__link_inactive {
+        color: #1A1B22;
+    }    
+}
