@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>News Explorer</title>
+    <link rel="stylesheet" href="src/css/index.036a5de78f4ff5766c9c.css?264e21d4739d7498b234" />
+    <link rel="shortcut icon" href="./src/images/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+    <div class="root">
+        <section class="header-section header-section__bg">
+            <header class="header header__underline_white">
+                <div class="header__container">
+                    <div class="header__title header__title_white">NewsExplorer</div>
+                    <nav class="header__menu header__menu_black">
+                        <a href="/" class="header__link header__link_active header__link_white">Главная</a>
+                        <a href="/about.html" class="header__link header__link_inactive-white">О проекте</a>
+                        <a href="/saved.html" class="header__link header__link_inactive-white">Сохраненные статьи</a>
+                        <button class="header__login header__login_white">Авторизоваться</button>
+                    </nav>
+                    <button class="header__mobileico header__mobileico_white"></button>
+                </div>
+            </header>
+            <div class="search">
+                <div class="search__container">
+                    <h1 class="search__title">Что в мире творится?</h1>
+                    <h2 class="search__subtitle">Находите самые свежие статьи на любую тему и сохраняйте в своём личном
+                        кабинете.</h2>
+                    <form name='search' class="search__form">
+                        <input type="text" placeholder="Введите тему новости">
+                        <button class="button search__button">Искать</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section class="search-result">
+            <div class="search-result__container">
+                <h2 class="search-result__title">Результаты поиска</h2>
+                <div class="search-result__cards">
+                    <div class="card">
+                        <picture class="card__img">
+                            <img alt="Изображение из новости" src=./src/images/card1.jpg />
+                            <div class="card__saver">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M11.3822 15.7137L6 19.9425V4L18 4V19.9425L12.6178 15.7137L12 15.2283L11.3822 15.7137Z"
+                                        stroke="#B6BCBF" stroke-width="2" class="bookmark" />
+                                </svg>
+                            </div>
+                        </picture>
+                        <div class="card__text-block">
+                            <div class="card__date">2 августа, 2019</div>
+                            <div class="card__news">
+                                <h3 class="card__title">Национальное достояние – парки</h3>
+                                <p class="card__text">В 2016 году Америка отмечала важный юбилей:
+                                    сто
+                                    лет назад здесь начала складываться система национальных парков – охраняемых
+                                    территорий,
+                                    где и сегодня каждый может приобщиться к природе.</p>
+                            </div>
+                        </div>
+                        <div class="card__source">Лента.ру</div>
+                    </div>
+                    <div class="card">
+                        <picture class="card__img">
+                            <img alt="Изображение из новости" src=./src/images/card2.jpg />
+                            <div class="card__saver">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M11.3822 15.7137L6 19.9425V4L18 4V19.9425L12.6178 15.7137L12 15.2283L11.3822 15.7137Z"
+                                        stroke="#B6BCBF" stroke-width="2" class="bookmark-fill" />
+                                </svg>
+                            </div>
+                        </picture>
+                        <div class="card__text-block">
+                            <div class="card__date">2 августа, 2019</div>
+                            <div class="card__news">
+                                <h3 class="card__title">Национальное достояние – парки</h3>
+                                <p class="card__text">В 2016 году Америка отмечала важный юбилей:
+                                    сто
+                                    лет назад здесь начала складываться система национальных парков – охраняемых
+                                    территорий,
+                                    где и сегодня каждый может приобщиться к природе.</p>
+                            </div>
+                        </div>
+                        <div class="card__source">Лента.ру</div>
+                    </div>
+                    <div class="card">
+                        <picture class="card__img">
+                            <img alt="Изображение из новости" src=./src/images/card4.jpg />
+                            <div class="card__nologin">Войдите, чтобы сохранять статьи</div>
+                            <div class="card__saver">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M11.3822 15.7137L6 19.9425V4L18 4V19.9425L12.6178 15.7137L12 15.2283L11.3822 15.7137Z"
+                                        stroke="#B6BCBF" stroke-width="2" class="bookmark-nologin" />
+                                </svg>
+                            </div>
+                        </picture>
+                        <div class="card__text-block">
+                            <div class="card__date">2 августа, 2019</div>
+                            <div class="card__news">
+                                <h3 class="card__title">Национальное достояние – парки</h3>
+                                <p class="card__text">В 2016 году Америка отмечала важный юбилей:
+                                    сто
+                                    лет назад здесь начала складываться система национальных парков – охраняемых
+                                    территорий,
+                                    где и сегодня каждый может приобщиться к природе.</p>
+                            </div>
+                        </div>
+                        <div class="card__source">Лента.ру</div>
+                    </div>
+                </div>
+                <button class="button search-result__button">Показать еще</button>
+            </div>
+            <div class="preloader">
+                <i class="preloader__circle"></i>
+                <p class="preloader__text">Идет поиск новостей</p>
+            </div>
+            <div class="preloader">
+                <div class="preloader__notfound-block">
+                    <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        class="preloader__notfound-img">
+                        <circle cx="43" cy="43" r="36.5" stroke="#D1D2D6" />
+                        <path d="M69 69L88.5 88.5" stroke="#D1D2D6" />
+                        <path
+                            d="M58.3283 55.959C54.6606 51.6979 49.2275 48.9998 43.1642 48.9998C37.1009 48.9998 31.6678 51.6979 28 55.959"
+                            stroke="#D1D2D6" />
+                        <circle cx="55.5" cy="33.5" r="1.5" fill="#D1D2D6" />
+                        <circle cx="30.5" cy="33.5" r="1.5" fill="#D1D2D6" />
+                    </svg>
+                    <h3 class="preloader__notfound-title">Ничего не найдено</h3>
+                    <p class="preloader__notfound-text">К сожалению по вашему запросу ничего не найдено.</p>
+                </div>
+            </div>
+        </section>
+        <section class="about-section">
+            <div class="about-section__container">
+                <img alt="Аватар" src=./src/images/avatar.png class="about-section__photo">
+
+                <div class="about-section__text-block">
+                    <h2 class="about-section__title">Об авторе</h2>
+                    <div class="about-section__text">
+                        <p class="about-section__paragraph">Это блок с описанием автора проекта. Здесь следует указать,
+                            как вас
+                            зовут, чем вы
+                            занимаетесь, какими
+                            технологиями разработки владеете.</p>
+                        <p class="about-section__paragraph">Также можно рассказать о процессе обучения в Практикуме,
+                            чему вы тут
+                            научились, и
+                            чем можете помочь
+                            потенциальным заказчикам.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="footer-section">
+            <footer class="footer-section__container">
+                <div class="footer-section__copyright">© 2019 Supersite</div>
+                <nav class="footer-section__links">
+                    <a href="" class="footer-section__link">Главная</a>
+                    <a href="/about/" class="footer-section__link">О проекте</a>
+                    <a href="https://praktikum.yandex.ru/" class="footer-section__link">Яндекс.Практикум</a>
+                </nav>
+                <nav class="footer-section__socials">
+                    <img src=./src/images/gh.png alt="Иконка гитхаба" class="footer-section__social">
+                    <img src=./src/images/fb.png alt="Иконка фейсбука" class="footer-section__social">
+                </nav>
+            </footer>
+        </section>
+        <div class="popup">
+            <div class="popup__content">
+                <img src=./src/images/close.svg alt="" class="popup__close" />
+                <h3 class="popup__title">Вход</h3>
+                <form class="popup__form" name="edit">
+                    <span class="popup__subtitle">Email</span>
+                    <input type="text" name="usermail" class="popup__input" placeholder="Введите почту" minLength="2"
+                        maxLength="30" />
+                    <span class="popup__error popup__error_email">Неправильный формат email</span>
+                    <span class="popup__subtitle">Пароль</span>
+                    <input type="text" name="userpwd" class="popup__input" placeholder="Введите пароль" minLength="2"
+                        maxLength="30" />
+                    <span class="popup__subtitle popup__input_name-sbt">Имя</span>
+                    <input type="text" name="username" class="popup__input popup__input_name"
+                        placeholder="Введите свое имя" minLength="2" maxLength="30" />
+                    <span class="popup__error popup__error_user">Такой пользователь уже есть</span>
+                    <button type class="button popup__button">
+                        Войти
+                    </button>
+                </form>
+                <span class="popup__offer">Или <span
+                        class="popup__offer popup__offer_reg">Зарегистрироваться</span></span>
+            </div>
+        </div>
+        <nav class="header__menu_mobile">
+            <div class="header__menu_mobile-links">
+                <a href="/" class="header__link header__link_active header__link_white">Главная</a>
+                <a href="/about.html" class="header__link header__link_inactive-white">О проекте</a>
+                <a href="/saved.html" class="header__link header__link_inactive-white">Сохраненные статьи</a>
+                <button class="header__login header__login_white header__login_mobile">Авторизоваться</button>
+            </div>
+        </nav>
+    </div>
+    <script src="index.ea85eb127b7970fd0590.js?264e21d4739d7498b234"></script>
+</body>
+
+</html>
