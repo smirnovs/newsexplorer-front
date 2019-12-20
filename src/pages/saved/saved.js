@@ -2,8 +2,6 @@ import "./saved.css";
 
 const mobileMenuButton = document.querySelector('.header__mobileico');
 const mobileMenu = document.querySelector('.header__menu_mobile');
-const mobileLinks = document.querySelector('.header__menu_mobile-links');
-
 
 let isOpenMenu = false;
 

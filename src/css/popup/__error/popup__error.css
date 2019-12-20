@@ -4,15 +4,12 @@
   font-size: 12px;
   line-height: 15px;
   color: #ff0000;
-  /* top: 53px; */
 }
 
 .popup__error_email {
-  top: 55px;
+  top: 58px;
 }
 
-/* .popup__error_user {
-  display: none;
-  bottom: 90px;
-  left: 95px;
-} */
+.popup__error_user {
+  bottom: 99px;
+}
