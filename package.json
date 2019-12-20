@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/smirnovs/diplom-frontend.git"
+    "url": "git+https://github.com/smirnovs/newsexplorer-front.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/smirnovs/diplom-frontend/issues"
+    "url": "https://github.com/smirnovs/newsexplorer-front/issues"
   },
-  "homepage": "https://smirnovs.github.io/diplom-frontend",
+  "homepage": "https://github.com/smirnovs/newsexplorer-front",
   "devDependencies": {
     "@babel/cli": "^7.6.0",
     "@babel/core": "^7.6.0",
