@@ -12,18 +12,11 @@
     z-index: 2;
 }
 
-.bookmark-fill {
-    fill: #2F71E5;
-    stroke: #2F71E5;
-}
 
 .card__saver:hover {
     cursor: pointer;
 }
 
-.card__saver:hover .bookmark {
-    stroke: #1A1B22;
-}
 
 @media screen and (max-width : 1000px) {
     .card__saver {

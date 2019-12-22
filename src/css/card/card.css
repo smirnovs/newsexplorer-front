@@ -8,6 +8,8 @@
 @import url(./__title/card__title.css);
 @import url(./__nologin/card__nologin.css);
 @import url(./__keyword/card__keyword.css);
+@import url(./__basket/card__basket.css);
+@import url(./__bookmark/card__bookmark.css);
 
 .card {
     max-width: 400px;

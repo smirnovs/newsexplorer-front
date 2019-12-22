@@ -5,9 +5,3 @@
 .header__link_inactive-white:hover {
     color: #fff;
 }
-
-@media screen and (max-width : 720px) {
-    .header__link_inactive-white {
-        color: #fff;
-    }    
-}

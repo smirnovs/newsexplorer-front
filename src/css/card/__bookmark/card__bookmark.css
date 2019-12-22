@@ -1,0 +1,5 @@
+@import url(./_saved/card__bookmark_saved.css);
+
+.card__saver:hover .card__bookmark {
+    stroke: #1A1B22;
+}

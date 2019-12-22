@@ -20,11 +20,6 @@
     z-index: 2;
 }
 
-.bookmark-nologin {
-    stroke: #1A1B22;
-}
-
-
 @media screen and (max-width : 1000px) {
     .card__nologin {
         top: 8px;

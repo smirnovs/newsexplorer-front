@@ -1,6 +1,7 @@
 @import url(../../vendor/normalize.css);
 @import url(../../vendor/fonts.css);
 @import url(../../css/root/root.css);
+@import url(../../css/menumobile/menumobile.css);
 @import url(../../css/card/card.css);
 @import url(../../css/popup/popup.css);
 @import url(../../css/preloader/preloader.css);

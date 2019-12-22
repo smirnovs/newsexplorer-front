@@ -13,22 +13,24 @@
 <body>
     <div class="root">
         <section class="header-section">
-            <header class="header header__underline_black">
-                <div class="header__container">
-                    <a href="index.html" class="header__title">NewsExplorer</a>
-                    <nav class="header__menu header__menu_white">
-                        <a href="index.html" class="header__link header__link_inactive">Главная</a>
-                        <a href="about.html" class="header__link header__link_active">О проекте</a>
-                        <a href="saved.html" class="header__link header__link_inactive">Сохраненные статьи</a>
-                        <button class="header__login header__login_black header__login_logged">Грета <svg width="24"
-                                height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M10 6L6 6L6 18H10V20H6C4.89543 20 4 19.1046 4 18V6C4 4.89543 4.89543 4 6 4H10V6ZM17.5856 13L13.2927 17.1339L14.707 18.4958L21.4141 12.0371L14.707 5.57837L13.2927 6.9402L17.5856 11.0741H8V13H17.5856Z"
-                                    fill="white" class="header__logout-black" />
-                            </svg>
-                        </button>
-                    </nav>
-                    <button class="header__mobileico header__mobileico_black"></button>
+            <header class="header">
+                <div class="header__underline header__underline_black">
+                    <div class="header__container">
+                        <a href="index.html" class="header__title">NewsExplorer</a>
+                        <nav class="header__menu header__menu_white">
+                            <a href="index.html" class="header__link header__link_inactive">Главная</a>
+                            <a href="about.html" class="header__link header__link_active">О проекте</a>
+                            <a href="saved.html" class="header__link header__link_inactive">Сохраненные статьи</a>
+                            <button class="header__login header__login_black header__login_logged">Грета <svg width="24"
+                                    height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M10 6L6 6L6 18H10V20H6C4.89543 20 4 19.1046 4 18V6C4 4.89543 4.89543 4 6 4H10V6ZM17.5856 13L13.2927 17.1339L14.707 18.4958L21.4141 12.0371L14.707 5.57837L13.2927 6.9402L17.5856 11.0741H8V13H17.5856Z"
+                                        fill="white" class="header__logout-black" />
+                                </svg>
+                            </button>
+                        </nav>
+                        <button class="header__mobileico header__mobileico_black"></button>
+                    </div>
                 </div>
             </header>
         </section>
@@ -56,7 +58,6 @@
                     <p class="clients__paragraph">Проект был проверен экспертами Яндекс.Практикума. Если вашему бизнесу
                         нужен сайт, мы рекомендуем обратиться к этому студенту.</p>
                 </div>
-
             </div>
         </section>
         <section class="techs">
@@ -138,7 +139,7 @@
                                         </div>
                                     </div>
                                     <p class="glide__description">You can install this plugin directly from NetBeans
-                                        Plugin Portal: in NetBeans, open <span class="glide__description_bg"> Tools >
+                                        Plugin Portal: in NetBeans, open <span class="glide__description glide__description_bg"> Tools >
                                             Plugins > Available plugins</span> and find and install Emmet plugin.</p>
                                 </div>
                             </li>
@@ -176,7 +177,6 @@
                         <button class="glide__bullet" data-glide-dir="=4"></button>
                     </div>
                 </div>
-
                 <button class="button github__button">Открыть в Github</button>
             </div>
         </section>
@@ -189,17 +189,17 @@
                     <a href="https://praktikum.yandex.ru/" class="footer-section__link">Яндекс.Практикум</a>
                 </nav>
                 <nav class="footer-section__socials">
-                    <img src=<%=require("../../images/gh.png")%> alt="" class="footer-section__social">
-                    <img src=<%=require("../../images/fb.png")%> alt="" class="footer-section__social">
+                    <a href="https://github.com/smirnovs" target="_blank" class="footer-section__social"><img src=<%=require("../../images/gh.png")%> alt="Иконка гитхаба"></a>
+                    <a href="https://www.facebook.com/uzukwert" target="_blank" class="footer-section__social"><img src=<%=require("../../images/fb.png")%> alt="Иконка фейсбука"></a>
                 </nav>
             </footer>
         </section>
-        <nav class="header__menu_mobile">
-            <div class="header__menu_mobile-links header__menu_white">
-                <a href="index.html" class="header__link header__link_active">Главная</a>
-                <a href="about.html" class="header__link header__link_inactive">О проекте</a>
-                <a href="saved.html" class="header__link header__link_inactive">Сохраненные статьи</a>
-                <button class="header__login header__login_black">Авторизоваться</button>
+        <nav class="menumobile">
+            <div class="menumobile__links menumobile__links_white">
+                <a href="index.html" class="menumobile__link menumobile__link_black">Главная</a>
+                <a href="about.html" class="menumobile__link menumobile__link_black">О проекте</a>
+                <a href="saved.html" class="menumobile__link menumobile__link_black">Сохраненные статьи</a>
+                <button class="menumobile__login menumobile__login_black">Авторизоваться</button>
             </div>
         </nav>
     </div>

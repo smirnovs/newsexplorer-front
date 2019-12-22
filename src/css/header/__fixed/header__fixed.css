@@ -1,5 +1,5 @@
 @media screen and (max-width : 720px) {
-    .header.header__fixed {
+    .header__fixed {
         position: fixed;
         width: 100%;
         background-color: #fff;
