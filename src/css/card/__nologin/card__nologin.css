@@ -1,0 +1,28 @@
+.card__nologin {
+    position: absolute;
+    width: 162px;
+    height: 40px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 12px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #000;
+    background-color: #fff;
+    top: 24px;
+    right: 69px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    z-index: 2;
+}
+
+@media screen and (max-width : 1000px) {
+    .card__nologin {
+        top: 8px;
+        right: 54px;
+    }
+}

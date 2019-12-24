@@ -1,0 +1,25 @@
+.search-result__cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 16px;
+}
+
+@media screen and (max-width : 875px) {
+    .search-result__cards {
+        grid-gap: 8px;
+    }
+}
+
+@media screen and (max-width : 720px) {
+    .search-result__cards {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width : 550px) {
+    .search-result__cards {
+        grid-template-columns: 1fr;
+        margin: 0 auto;
+        grid-gap: 10px;
+    }
+}

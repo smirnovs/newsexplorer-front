@@ -1,0 +1,22 @@
+.github__link {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    text-align: right;
+    color: #1A1B22;
+    text-decoration: none;
+}
+
+@media screen and (max-width : 1080px) {
+    .github__link {
+        margin-top: 8px;
+    }
+}
+
+
+@media screen and (max-width : 540px) {
+    .github__link {
+        display: none;
+    }
+}

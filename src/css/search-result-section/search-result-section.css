@@ -1,0 +1,18 @@
+@import url(./__container/search-result-section__container.css);
+@import url(./__title/search-result-section__title.css);
+@import url(./__cards/search-result-section__cards.css);
+@import url(./__card/search-result-section__card.css);
+@import url(./__card-img/search-result-section__card-img.css);
+@import url(./__card-saver/search-result-section__card-saver.css);
+@import url(./__card-textblock/search-result-section__card-textblock.css);
+@import url(./__card-date/search-result-section__card-date.css);
+@import url(./__card-title/search-result-section__card-title.css);
+@import url(./__card-text/search-result-section__card-text.css);
+@import url(./__card-source/search-result-section__card-source.css);
+@import url(./__show-more/search-result-section__show-more.css);
+
+
+.search-result-section {    
+    display: none;
+    background-color: #F5F6F7;
+}

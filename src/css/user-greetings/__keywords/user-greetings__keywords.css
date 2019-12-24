@@ -1,0 +1,19 @@
+.user-greetings__keywords {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 24px;
+    color: #1A1B22;
+}
+
+@media screen and (max-width : 950px) {
+    .user-greetings__keywords {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width : 720px) {
+    .user-greetings__keywords {
+        font-size: 18px;
+    }
+}

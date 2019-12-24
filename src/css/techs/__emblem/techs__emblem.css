@@ -1,0 +1,15 @@
+.techs__emblem:not(:first-child) {
+    margin-left: 40px;
+}
+
+@media screen and (max-width : 1024px) {
+    .techs__emblem:not(:first-child) {
+        margin-left: 64px;
+    }
+}
+
+@media screen and (max-width : 720px) {
+    .techs__emblem:not(:first-child) {
+        margin-left: 0;
+    }
+}

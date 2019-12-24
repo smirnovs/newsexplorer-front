@@ -1,0 +1,9 @@
+@import url(./__container/techs__container.css);
+@import url(./__emblem-title/tech__emblem-title.css);
+@import url(./__emblem/techs__emblem.css);
+@import url(./__emblems-container/techs__emblems-container.css);
+@import url(./__title/techs__title.css);
+
+.techs {
+    background-color: #F5F6F7;
+}

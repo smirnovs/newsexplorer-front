@@ -1,0 +1,26 @@
+.header__container {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 104px 0px;
+    color: #1A1B22;
+}
+
+@media screen and (max-width : 920px) {
+    .header__container {
+        padding: 22px 40px 0px;
+    }
+}
+
+@media screen and (max-width : 720px) {
+    .header__container {
+        position: relative;
+        padding: 16px 16px 0px;
+    }
+}
+
+@media screen and (max-width : 330px) {
+    .header__container {
+        position: relative;
+        padding: 16px 16px 0px;
+    }
+}

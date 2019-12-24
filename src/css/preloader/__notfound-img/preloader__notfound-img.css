@@ -1,0 +1,13 @@
+.preloader__notfound-img {
+	display: block;
+	width: 74px;
+	height: 74px;
+	border-bottom-color: #888;	
+	border-radius: 50%;	
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 180px;
+	margin: auto;	
+}

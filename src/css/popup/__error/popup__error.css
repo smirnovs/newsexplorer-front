@@ -1,0 +1,15 @@
+.popup__error {
+  position: absolute;
+  height: 11px;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ff0000;
+}
+
+.popup__error_email {
+  top: 58px;
+}
+
+.popup__error_user {
+  bottom: 99px;
+}

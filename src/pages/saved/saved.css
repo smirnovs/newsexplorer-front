@@ -1,0 +1,15 @@
+@import url(../../vendor/normalize.css);
+@import url(../../css/root/root.css);
+@import url(../../css/menumobile/menumobile.css);
+@import url(../../css/button/button.css);
+@import url(../../css/card/card.css);
+@import url(../../css/header-section/header-section.css);
+@import url(../../css/header/header.css);
+@import url(../../css/user-greetings/user-greetings.css);
+@import url(../../css/saved-news/saved-news.css);
+@import url(../../css/footer-section/footer-section.css);
+@import url(../../vendor/fonts.css);
+
+h1, h2, h3, p {
+    margin: 0;
+}

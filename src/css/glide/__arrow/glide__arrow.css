@@ -1,0 +1,20 @@
+.glide__arrow {
+    background: #1A1B22;
+    z-index: 3;
+    box-shadow: 0px 3px 10px rgba(14, 26, 57, 0.2);
+    border-radius: 50%;
+    border-color: #1A1B22;
+    background-color: #1A1B22;
+    width: 40px;
+    height: 40px;
+}
+
+.glide__arrow:hover {
+    border: 2px solid transparent;
+}
+
+@media screen and (max-width : 1080px) {
+    .glide__arrow {
+        display: none;
+    }
+}

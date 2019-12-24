@@ -1,0 +1,7 @@
+@import url(./_white/menumobile__links_white.css);
+.menumobile__links {
+    min-height: 330px;
+    display: flex;
+    flex-direction: column;
+    background-color: #1A1B22;
+}

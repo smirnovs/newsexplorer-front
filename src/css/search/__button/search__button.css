@@ -1,0 +1,37 @@
+.search__button {
+    margin-left: -55px;
+    width: 213px;
+    color:white;
+    background: #2F71E5;
+    box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+    border-radius: 100px;
+    box-sizing: border-box;
+    border: 1px solid #2F71E5;
+    cursor:pointer;
+}
+
+.search__button:hover {
+    background: #347EFF;
+    border: 1px solid #347EFF;
+}
+
+.search__button:active {
+    background: #2A65CC;
+    border: 1px solid #2A65CC;
+}
+
+@media screen and (max-width : 768px) {
+    .search__button {
+        padding: 15px 50px;
+    }
+}
+
+
+@media screen and (max-width : 768px) {
+    .search__button {
+        width: auto;
+        height: 56px;
+        margin-left: 0;
+        margin-top: 16px;
+    }
+}

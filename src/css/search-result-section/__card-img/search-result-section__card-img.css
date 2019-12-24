@@ -1,0 +1,8 @@
+.search-result-section__card-img {
+    display: flex;
+    position: relative;
+}    
+
+.search-result-section__card-img img {
+    max-width: 400px;
+}

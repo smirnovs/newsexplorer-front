@@ -1,0 +1,24 @@
+@import url(./_white/menumobile__login_white.css);
+@import url(./_black/menumobile__login_black.css);
+
+.menumobile__login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 14px;
+    max-width: 288px;
+    text-align: center;
+    margin-left: 16px;
+    height: 56px;
+    padding: 15px 12px;
+    box-sizing: border-box;
+    border-radius: 100px;
+    background-color: transparent;
+    cursor:pointer;
+    outline:none;
+}
+
+.menumobile__login svg {
+    margin-left: 5px;
+}

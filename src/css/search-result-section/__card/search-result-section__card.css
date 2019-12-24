@@ -1,0 +1,14 @@
+.search-result-section__card {
+    max-width: 400px;
+    overflow: auto;
+    border-radius: 16px;
+    z-index: 11;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.search-result-section__card:not(:first-child) {
+    margin-left: 16px;
+}

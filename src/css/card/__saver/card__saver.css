@@ -1,0 +1,27 @@
+.card__saver {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    top: 24px;
+    right: 24px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+
+.card__saver:hover {
+    cursor: pointer;
+}
+
+
+@media screen and (max-width : 1000px) {
+    .card__saver {
+        top: 8px;
+        right: 8px;
+    }
+}
+

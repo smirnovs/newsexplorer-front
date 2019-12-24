@@ -1,0 +1,11 @@
+.footer-section__copyright {
+    font-size: 16px;
+    line-height: 22px;
+    color: #B6BCBF;
+}
+
+@media screen and (max-width : 650px) {
+    .footer-section__copyright {
+        grid-area: c;
+    }
+}

@@ -1,0 +1,7 @@
+.header__link_inactive-white {
+    color: #B6BCBF;
+}
+
+.header__link_inactive-white:hover {
+    color: #fff;
+}

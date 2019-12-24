@@ -1,0 +1,34 @@
+@import url(./_logged/header__login_logged.css);
+@import url(./_black/header__login_black.css);
+@import url(./_white/header__login_white.css);
+
+.header__login {
+    height: 48px;
+    box-sizing: border-box;
+    border-radius: 100px;
+    background-color: transparent;
+    cursor:pointer;
+    outline:none;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    padding: 0 15px;
+    display: inline-flex;
+}
+
+.header__login svg{
+    margin-left: 5px;
+}
+
+.header__link_auth {
+    display: none;
+}
+
+@media screen and (max-width : 940px) {
+    .header__login {
+        height: 40px;
+        font-size: 16px;
+        padding: 0 12px;
+    }
+}

@@ -1,0 +1,14 @@
+@import url(../../../node_modules/@glidejs/glide/dist/css/glide.core.min.css);
+@import url(../../../node_modules/@glidejs/glide/dist/css/glide.theme.min.css);
+@import url(./__slide/glide__slide.css);
+@import url(./__date/glide__date.css);
+@import url(./__author/glide__author.css);
+@import url(./__name/glide__name.css);
+@import url(./__email/glide__email.css);
+@import url(./__description/glide__description.css);
+@import url(./__description-bg/glide__description-bg.css);
+@import url(./__bullets/glide__bullets.css);
+@import url(./__bullet/glide__bullet.css);
+@import url(./__arrow/glide__arrow.css);
+@import url(./__shadow/glide__shadow.css);
+@import url(./__author-contacts/glide__author-contacts.css);

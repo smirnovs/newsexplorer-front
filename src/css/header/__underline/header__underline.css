@@ -1,0 +1,6 @@
+@import url(./_white/header__underline_white.css);
+@import url(./_black/header__underline_black.css);
+
+.header__underline {
+    box-shadow: inset 0px -1px 0px;
+}

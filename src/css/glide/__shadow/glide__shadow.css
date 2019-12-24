@@ -1,0 +1,26 @@
+.glide__shadow {
+    position: absolute;
+    display: block;
+    bottom: 0%;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 1;
+    border-color: #1a1b22;
+    width: 88px;
+    height: 100%;
+}
+
+.glide__shadow--left {
+    background: linear-gradient(270deg, rgba(245, 246, 247, 0) 0%, #F5F6F7 100%);
+}
+
+.glide__shadow--right {
+    right: 0;
+    background: linear-gradient(90deg, rgba(245, 246, 247, 0) 0%, #F5F6F7 100%);
+}
+
+@media screen and (max-width : 600px) {
+    .glide__shadow {
+        display: none;
+    }
+}

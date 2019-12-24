@@ -1,0 +1,25 @@
+.saved-news__cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 16px;
+}
+
+@media screen and (max-width : 1024px) {
+    .saved-news__cards {
+        grid-gap: 8px;
+    }
+}
+
+@media screen and (max-width : 720px) {
+    .saved-news__cards {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width : 550px) {
+    .saved-news__cards {
+        grid-template-columns: 1fr;
+        margin: 0 auto;
+        grid-gap: 10px;
+    }
+}

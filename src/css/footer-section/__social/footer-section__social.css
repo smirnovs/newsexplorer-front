@@ -1,0 +1,15 @@
+.footer-section__social img {
+    width: 20px;
+    height: 20px;
+}
+
+.footer-section__social:not(:first-child) {
+    margin-left: 26px;
+}
+
+@media screen and (max-width : 650px) {
+    .footer-section__socials {
+        grid-area: b;
+        align-self: baseline;
+    }
+}

@@ -1,0 +1,9 @@
+.header__menu {
+    padding-bottom: 13px;
+}
+
+@media screen and (max-width : 720px) {
+    .header__menu {
+        display: none;
+    }
+}
