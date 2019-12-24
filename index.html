@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>News Explorer</title>
-    <link rel="stylesheet" href="src/css/index.b86ca68671f08fe36daa.css?9adae39ace346c57fe30" />
+    <link rel="stylesheet" href="src/css/index.3eb104f97db2bf44d45e.css?767245b82bc262a5ae22" />
     <link rel="shortcut icon" href="./src/images/favicon.ico" type="image/x-icon" />
 </head>
 
@@ -33,100 +33,18 @@
                     <h2 class="search__subtitle">Находите самые свежие статьи на любую тему и сохраняйте в своём личном
                         кабинете.</h2>
                     <form name='search' class="search__form">
-                        <input type="text" placeholder="Введите тему новости">
+                        <input type="text" name="question" placeholder="Введите тему новости">
                         <button class="button search__button">Искать</button>
                     </form>
                 </div>
             </div>
         </section>
         <section class="search-result">
-            <div class="search-result__container">
-                <h2 class="search-result__title">Результаты поиска</h2>
-                <div class="search-result__cards">
-                    <div class="card">
-                        <div class="card__img">
-                            <img alt="Изображение из новости" src=./src/images/card1.jpg />
-                            <div class="card__saver">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M11.3822 15.7137L6 19.9425V4L18 4V19.9425L12.6178 15.7137L12 15.2283L11.3822 15.7137Z"
-                                        stroke="#B6BCBF" stroke-width="2" class="card__bookmark" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="card__text-block">
-                            <div class="card__date">2 августа, 2019</div>
-                            <div class="card__news">
-                                <h3 class="card__title">Национальное достояние – парки</h3>
-                                <p class="card__text">В 2016 году Америка отмечала важный юбилей:
-                                    сто
-                                    лет назад здесь начала складываться система национальных парков – охраняемых
-                                    территорий,
-                                    где и сегодня каждый может приобщиться к природе.</p>
-                            </div>
-                        </div>
-                        <div class="card__source">Лента.ру</div>
-                    </div>
-                    <div class="card">
-                        <div class="card__img">
-                            <img alt="Изображение из новости" src=./src/images/card2.jpg />
-                            <div class="card__saver">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M11.3822 15.7137L6 19.9425V4L18 4V19.9425L12.6178 15.7137L12 15.2283L11.3822 15.7137Z"
-                                        stroke="#B6BCBF" stroke-width="2" class="card__bookmark card__bookmark_saved" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="card__text-block">
-                            <div class="card__date">2 августа, 2019</div>
-                            <div class="card__news">
-                                <h3 class="card__title">Национальное достояние – парки</h3>
-                                <p class="card__text">В 2016 году Америка отмечала важный юбилей:
-                                    сто
-                                    лет назад здесь начала складываться система национальных парков – охраняемых
-                                    территорий,
-                                    где и сегодня каждый может приобщиться к природе.</p>
-                            </div>
-                        </div>
-                        <div class="card__source">Лента.ру</div>
-                    </div>
-                    <div class="card">
-                        <div class="card__img">
-                            <img alt="Изображение из новости" src=./src/images/card4.jpg />
-                            <div class="card__nologin">Войдите, чтобы сохранять статьи</div>
-                            <div class="card__saver">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M11.3822 15.7137L6 19.9425V4L18 4V19.9425L12.6178 15.7137L12 15.2283L11.3822 15.7137Z"
-                                        stroke="#1A1B22" stroke-width="2" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="card__text-block">
-                            <div class="card__date">2 августа, 2019</div>
-                            <div class="card__news">
-                                <h3 class="card__title">Национальное достояние – парки</h3>
-                                <p class="card__text">В 2016 году Америка отмечала важный юбилей:
-                                    сто
-                                    лет назад здесь начала складываться система национальных парков – охраняемых
-                                    территорий,
-                                    где и сегодня каждый может приобщиться к природе.</p>
-                            </div>
-                        </div>
-                        <div class="card__source">Лента.ру</div>
-                    </div>
+            <div class="preloader">
+                <div class="preloader__await-block">
+                    <i class="preloader__circle"></i>
+                    <p class="preloader__text">Идет поиск новостей</p>
                 </div>
-                <button class="button search-result__button">Показать еще</button>
-            </div>
-            <div class="preloader">
-                <i class="preloader__circle"></i>
-                <p class="preloader__text">Идет поиск новостей</p>
-            </div>
-            <div class="preloader">
                 <div class="preloader__notfound-block">
                     <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"
                         class="preloader__notfound-img">
@@ -142,6 +60,13 @@
                     <p class="preloader__notfound-text">К сожалению по вашему запросу ничего не найдено.</p>
                 </div>
             </div>
+            <div class="search-result__container">
+                <h2 class="search-result__title">Результаты поиска</h2>
+                <div class="search-result__cards">
+                </div>
+                <button class="button search-result__button">Показать еще</button>
+            </div>
+
         </section>
         <section class="about-section">
             <div class="about-section__container">
@@ -173,8 +98,10 @@
                     <a href="https://praktikum.yandex.ru/" class="footer-section__link">Яндекс.Практикум</a>
                 </nav>
                 <nav class="footer-section__socials">
-                    <a href="https://github.com/smirnovs" target="_blank" class="footer-section__social"><img src=./src/images/gh.png alt="Иконка гитхаба"></a>
-                    <a href="https://www.facebook.com/uzukwert" target="_blank" class="footer-section__social"><img src=./src/images/fb.png alt="Иконка фейсбука"></a>
+                    <a href="https://github.com/smirnovs" target="_blank" class="footer-section__social"><img
+                            src=./src/images/gh.png alt="Иконка гитхаба"></a>
+                    <a href="https://www.facebook.com/uzukwert" target="_blank" class="footer-section__social"><img
+                            src=./src/images/fb.png alt="Иконка фейсбука"></a>
                 </nav>
             </footer>
         </section>
@@ -211,7 +138,7 @@
             </div>
         </nav>
     </div>
-    <script src="src/js/index.6b5e9ba02309fcde85f5.js?9adae39ace346c57fe30"></script>
+    <script src="src/js/index.fd038033c50b5206b365.js?767245b82bc262a5ae22"></script>
 </body>
 
 </html>
