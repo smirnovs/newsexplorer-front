@@ -4,27 +4,20 @@ const popUp = document.querySelector('.popup');
 const mobileAuth = document.querySelector('.menumobile__login');
 
 
-class Popup {
+export class Popup {
+    constructor() {
+        this.addListeners();
+    }
     open() {
         popUp.classList.toggle('popup_is-opened');
     }
     close() {
         popUp.classList.toggle('popup_is-opened');
     }
+    addListeners() {
+        authButton.addEventListener('click', this.open);
+        mobileAuth.addEventListener('click', this.open);
+        popupCloseButton.addEventListener('click', this.close);
+    }
 }
-
-export const popup = new Popup();
-
-
-authButton.addEventListener('click', () => {
-    popup.open();
-});
-
-mobileAuth.addEventListener('click', () => {
-    popup.open();
-});
-
-popupCloseButton.addEventListener('click', () => {
-    popup.close();
-});
 
