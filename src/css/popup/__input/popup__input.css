@@ -23,9 +23,6 @@
   margin-bottom: 0;
 }
 
-/* .popup__input_name {
+.popup__input_name-sbt, .popup__input_name, .popup__error_user {
   display: none;
 }
-.popup__input_name-sbt {
-  display: none;
-} */
