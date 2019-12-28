@@ -3,8 +3,10 @@ import { Card } from '../card/card.js';
 import { Api } from '../api/api.js';
 import { Showmore } from './showmore.js'
 import { Render } from './render.js'
-const regUrl = 'http://127.0.0.1:3000';
-const newsUrl = 'https://newsapi.org/v2/top-headlines?q='
+import { NEWSAPI_URL, SEARCH_NEWS } from '../helpers/messages.js';
+
+// const regUrl = 'https://api.myedudomen.ml';
+// const newsUrl = 'https://newsapi.org/v2/top-headlines?q='
 
 const searchInput = document.forms.search;
 const question = searchInput.elements.question;
@@ -49,7 +51,7 @@ export class Search {
     checkAuth() {
         event.preventDefault();
         const check = new Api({
-            baseUrl: regUrl,
+            baseUrl: NEWSAPI_URL,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -140,7 +142,7 @@ const startSearchStyling = () => {
 // searchButton.addEventListener('click', function () { search.find() });
 
 const api = new Api({
-    baseUrl: newsUrl,
+    baseUrl: SEARCH_NEWS,
     headers: {
         authorization: '67fcbb6d7e14456f995c19d4a0f3cfbc',
         // 'Content-Type': 'application/json'

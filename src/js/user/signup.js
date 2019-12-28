@@ -1,9 +1,9 @@
 import { Api } from '../api/api.js'
 import { popUp, popupReg } from '../popup/popup.js';
 import { userMail, userPwd, userName } from '../popup/popup-validate.js';
+import { NEWSAPI_URL } from '../helpers/messages.js';
 
-
-const regUrl = 'https://api.myedudomen.ml';
+// const regUrl = 'https://api.myedudomen.ml';
 
 export class Signup {
     constructor() {
@@ -23,7 +23,7 @@ export class Signup {
 }
 
 const api = new Api({
-    baseUrl: regUrl,
+    baseUrl: NEWSAPI_URL,
     headers: {
         // authorization: '67fcbb6d7e14456f995c19d4a0f3cfbc',
         'Content-Type': 'application/json'

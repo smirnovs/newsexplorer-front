@@ -7,11 +7,12 @@ import { Signup } from "./user/signup";
 import { Signin } from "./user/signin";
 import { api } from "./api/api.js";
 import { Header, authButton } from "./header/header.js";
+import { ICON_MOBILE_WHITE_CLOSED, HEADER_COLOR } from "./helpers/messages.js";
 // import { CheckLog } from './searcher/islogged.js'
 
 // const searchButton = document.querySelector('.search__button');
-const ICON_COLOR = 'header__mobileico_white-closed';
-const HEADER_COLOR = '#1A1B22';
+// const ICON_COLOR = 'header__mobileico_white-closed';
+// const HEADER_COLOR = '#1A1B22';
 // const authMenu = document.querySelector('.header__link_saved');
 // const unauthButton = document.querySelector('.header__login_unauth');
 // const authButton = document.querySelector('.header__login_auth');
@@ -25,7 +26,7 @@ new Search();
 new Popup();
 new Signup();
 new Signin();
-new Mobilemenu(ICON_COLOR, isOpenMenu, isHeader, HEADER_COLOR);
+new Mobilemenu(ICON_MOBILE_WHITE_CLOSED, isOpenMenu, isHeader, HEADER_COLOR);
 
 api.checkAuth().then(res => {
     if (res.ok) {

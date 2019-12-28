@@ -1,8 +1,9 @@
 import { cardContainer } from "./searcher";
 import { Card } from '../card/card.js';
 import { Api } from '../api/api.js';
+import { NEWSAPI_URL } from '../helpers/messages.js';
 
-const regUrl = 'https://api.myedudomen.ml';
+// const regUrl = 'https://api.myedudomen.ml';
 let isSaved = false;
 
 export class Render {
@@ -51,7 +52,7 @@ export class Render {
 }
 
 const api = new Api({
-    baseUrl: regUrl,
+    baseUrl: NEWSAPI_URL,
     headers: {
         authorization: '67fcbb6d7e14456f995c19d4a0f3cfbc',
         // 'Content-Type': 'application/json'

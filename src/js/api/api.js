@@ -54,9 +54,7 @@ export class Api {
         return fetch(`${this.url}/articles/${pseudoId}`, {
             headers: this.headers,
             credentials: 'include',
-        }).catch(err => {
-            console.log(err);
-        });
+        })
     }
     getCards(question) {
         return fetch(`${this.url + question}`, {

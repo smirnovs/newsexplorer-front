@@ -2,10 +2,11 @@ import { Api } from '../api/api.js'
 import { Popup, popupEnter } from '../popup/popup.js';
 import { userMail, userPwd } from '../popup/popup-validate.js';
 import { Header } from '../header/header.js';
-import { Search } from '../searcher/searcher.js';
+// import { Search } from '../searcher/searcher.js';
+import { NEWSAPI_URL } from '../helpers/messages.js';
 
 const errorAuth = document.querySelector('.popup__error_auth');
-const regUrl = 'https://api.myedudomen.ml';
+// const regUrl = 'https://api.myedudomen.ml';
 
 export class Signin {
     constructor() {
@@ -54,7 +55,7 @@ export class Signin {
 const popup = new Popup();
 
 const api = new Api({
-    baseUrl: regUrl,
+    baseUrl: NEWSAPI_URL,
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',

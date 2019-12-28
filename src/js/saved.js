@@ -2,6 +2,7 @@ import "../pages/saved/saved.css";
 import { Mobilemenu } from './helpers/mobilemenu.js';
 import { api } from "./api/api.js";
 import { Card } from './card/card.js';
+import { MAIN_PAGE, ICON_COLOR_BLACK } from './helpers/messages';
 
 const userName = document.querySelector('.header__login_name');
 const authButton = document.querySelector('.header__login_logged');
@@ -11,16 +12,16 @@ const keyWords = document.querySelector('.user-greetings__keywords');
 const greetingsName = document.querySelector('.user-greetings__username');
 const newsCount = document.querySelector('.user-greetings__newscount');
 
-const ICON_COLOR = 'header__mobileico_black-closed';
+// const ICON_COLOR = 'header__mobileico_black-closed';
 let isOpenMenu = false;
 
-new Mobilemenu(ICON_COLOR, isOpenMenu);
+new Mobilemenu(ICON_COLOR_BLACK, isOpenMenu);
 
 api.checkAuth().then(res => {
     if (res.ok) {
         return Promise.resolve(res.json());
     } else {
-        window.location.replace("http://localhost:8080");
+        window.location.replace(MAIN_PAGE);
         return Promise.reject(res.status);
     }
 }).then((user) => {
@@ -56,7 +57,7 @@ authButton.addEventListener('click', () => {
     api.unAuth().then(res => {
         if (res.ok) {
             console.log('разлогинило')
-            window.location.replace("http://localhost:8080");
+            window.location.replace(MAIN_PAGE);
             return Promise.resolve(res.json());
         } else {
             return Promise.reject(res.status);
