@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>News Explorer</title>
-    <link rel="stylesheet" href="src/css/saved.054e3631762c5cf33104.css?1bbea7626ef1fece1fe3" />
+    <link rel="stylesheet" href="src/css/saved.d943499e69929413dcd1.css?6835a3927e5b4f3660c5" />
     <link rel="shortcut icon" href="./src/images/favicon.ico" type="image/x-icon" />
 </head>
 
@@ -21,8 +21,9 @@
                             <a href="index.html" class="header__link header__link_inactive">Главная</a>
                             <a href="about.html" class="header__link header__link_inactive">О проекте</a>
                             <a href="saved.html" class="header__link header__link_active">Сохраненные статьи</a>
-                            <button class="header__login header__login_black header__login_logged">Грета <svg width="24"
-                                    height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <button class="header__login header__login_black header__login_logged"><span
+                                    class="header__login_name">Грета</span> <svg width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd"
                                         d="M10 6L6 6L6 18H10V20H6C4.89543 20 4 19.1046 4 18V6C4 4.89543 4.89543 4 6 4H10V6ZM17.5856 13L13.2927 17.1339L14.707 18.4958L21.4141 12.0371L14.707 5.57837L13.2927 6.9402L17.5856 11.0741H8V13H17.5856Z"
                                         fill="white" class="header__logout-black" />
@@ -37,7 +38,9 @@
         <section class="user-greetings">
             <div class="user-greetings__container">
                 <h3 class="user-greetings__title">Сохранённые статьи</h3>
-                <p class="user-greetings__msg">Грета, у вас 5 сохранённых статей</p>
+                <p class="user-greetings__msg"><span class="user-greetings__username"></span class="">, у вас <span
+                        class="user-greetings__newscount">5</span>
+                    сохранённых статей</p>
                 <p class="user-greetings__keywords">По ключевым словам: <span
                         class="user-greetings__keywords-keys">Природа, Тайга и 2 другим</span>
                 </p>
@@ -46,141 +49,6 @@
         <section class="saved-news">
             <div class="saved-news__container">
                 <div class="saved-news__cards">
-                    <div class="card">
-                        <div class="card__img">
-                            <img alt="Изображение из новости" src=./src/images/card4.jpg>
-                            <div class="card__keyword">Природа</div>
-                            <div class="card__saver">
-                                <div class="card__delete">Убрать из сохранённых</div>
-                                <svg width="18" height="19" viewBox="0 0 18 19" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M12 0H6V2H0V4H18V2H12V0ZM2 6V17C2 18.1046 2.89543 19 4 19H14C15.1046 19 16 18.1046 16 17V6H14V17H4V6H2ZM6 6L6 15H8L8 6H6ZM10 6V15H12V6H10Z"
-                                        fill="#B6BCBF" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="card__text-block">
-                            <div class="card__date">2 августа, 2019</div>
-                            <div class="card__news">
-                                <h3 class="card__title">Национальное достояние – парки</h3>
-                                <p class="card__text">В 2016 году Америка отмечала важный юбилей:
-                                    сто
-                                    лет назад здесь начала складываться система национальных парков – охраняемых
-                                    территорий,
-                                    где и сегодня каждый может приобщиться к природе.</p>
-                            </div>
-                        </div>
-                        <div class="card__source">Лента.ру</div>
-                    </div>
-                    <div class="card">
-                        <div class="card__img">
-                            <img alt="Изображение из новости" src=./src/images/card5.jpg>
-                            <div class="card__keyword">Природа</div>
-                            <div class="card__saver">
-                                <div class="card__delete">Убрать из сохранённых</div>
-                                <svg width="18" height="19" viewBox="0 0 18 19" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M12 0H6V2H0V4H18V2H12V0ZM2 6V17C2 18.1046 2.89543 19 4 19H14C15.1046 19 16 18.1046 16 17V6H14V17H4V6H2ZM6 6L6 15H8L8 6H6ZM10 6V15H12V6H10Z"
-                                        fill="#B6BCBF" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="card__text-block">
-                            <div class="card__date">2 августа, 2019</div>
-                            <div class="card__news">
-                                <h3 class="card__title">Национальное достояние – парки</h3>
-                                <p class="card__text">В 2016 году Америка отмечала важный юбилей:
-                                    сто
-                                    лет назад здесь начала складываться система национальных парков – охраняемых
-                                    территорий,
-                                    где и сегодня каждый может приобщиться к природе.</p>
-                            </div>
-                        </div>
-                        <div class="card__source">Лента.ру</div>
-                    </div>
-                    <div class="card">
-                        <div class="card__img">
-                            <img alt="Изображение из новости" src=./src/images/card4.jpg>
-                            <div class="card__keyword">Тайга</div>
-                            <div class="card__saver">
-                                <div class="card__delete">Убрать из сохранённых</div>
-                                <svg width="18" height="19" viewBox="0 0 18 19" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M12 0H6V2H0V4H18V2H12V0ZM2 6V17C2 18.1046 2.89543 19 4 19H14C15.1046 19 16 18.1046 16 17V6H14V17H4V6H2ZM6 6L6 15H8L8 6H6ZM10 6V15H12V6H10Z"
-                                        fill="#B6BCBF" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="card__text-block">
-                            <div class="card__date">2 августа, 2019</div>
-                            <div class="card__news">
-                                <h3 class="card__title">Национальное достояние – парки</h3>
-                                <p class="card__text">В 2016 году Америка отмечала важный юбилей:
-                                    сто
-                                    лет назад здесь начала складываться система национальных парков – охраняемых
-                                    территорий,
-                                    где и сегодня каждый может приобщиться к природе.</p>
-                            </div>
-                        </div>
-                        <div class="card__source">Лента.ру</div>
-                    </div>
-                    <div class="card">
-                        <div class="card__img">
-                            <img alt="Изображение из новости" src=./src/images/card5.jpg>
-                            <div class="card__keyword">Парки</div>
-                            <div class="card__saver">
-                                <div class="card__delete">Убрать из сохранённых</div>
-                                <svg width="18" height="19" viewBox="0 0 18 19" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M12 0H6V2H0V4H18V2H12V0ZM2 6V17C2 18.1046 2.89543 19 4 19H14C15.1046 19 16 18.1046 16 17V6H14V17H4V6H2ZM6 6L6 15H8L8 6H6ZM10 6V15H12V6H10Z"
-                                        fill="#B6BCBF" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="card__text-block">
-                            <div class="card__date">2 августа, 2019</div>
-                            <div class="card__news">
-                                <h3 class="card__title">Национальное достояние – парки</h3>
-                                <p class="card__text">В 2016 году Америка отмечала важный юбилей:
-                                    сто
-                                    лет назад здесь начала складываться система национальных парков – охраняемых
-                                    территорий,
-                                    где и сегодня каждый может приобщиться к природе.</p>
-                            </div>
-                        </div>
-                        <div class="card__source">Лента.ру</div>
-                    </div>
-                    <div class="card">
-                        <div class="card__img">
-                            <img alt="Изображение из новости" src=./src/images/card4.jpg>
-                            <div class="card__keyword">Фотография</div>
-                            <div class="card__saver">
-                                <div class="card__delete">Убрать из сохранённых</div>
-                                <svg width="18" height="19" viewBox="0 0 18 19" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M12 0H6V2H0V4H18V2H12V0ZM2 6V17C2 18.1046 2.89543 19 4 19H14C15.1046 19 16 18.1046 16 17V6H14V17H4V6H2ZM6 6L6 15H8L8 6H6ZM10 6V15H12V6H10Z"
-                                        fill="#B6BCBF" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="card__text-block">
-                            <div class="card__date">2 августа, 2019</div>
-                            <div class="card__news">
-                                <h3 class="card__title">Национальное достояние – парки</h3>
-                                <p class="card__text">В 2016 году Америка отмечала важный юбилей:
-                                    сто
-                                    лет назад здесь начала складываться система национальных парков – охраняемых
-                                    территорий,
-                                    где и сегодня каждый может приобщиться к природе.</p>
-                            </div>
-                        </div>
-                        <div class="card__source">Лента.ру</div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -215,7 +83,7 @@
             </div>
         </nav>
     </div>
-    <script src="src/js/saved.40d6fb569b1ae171c51c.js?1bbea7626ef1fece1fe3"></script>
+    <script src="src/js/saved.0d025b218fa58dc46ee6.js?6835a3927e5b4f3660c5"></script>
 </body>
 
 </html>
