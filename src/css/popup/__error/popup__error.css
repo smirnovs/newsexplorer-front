@@ -1,3 +1,5 @@
+@import url(./_auth/popup__error_auth.css);
+
 .popup__error {
   position: absolute;
   height: 11px;

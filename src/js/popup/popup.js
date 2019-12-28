@@ -1,6 +1,8 @@
-const authButton = document.querySelector('.header__login');
+import { userMail, userPwd } from '../popup/popup-validate.js';
+
+const authButton = document.querySelector('.header__login_unauth');
 const popupCloseButton = document.querySelector('.popup__close');
-const popUp = document.querySelector('.popup');
+export const popUp = document.querySelector('.popup');
 const mobileAuth = document.querySelector('.menumobile__login');
 const toRegister = document.querySelector('.popup__reg');
 // const offerText = document.querySelector('.popup__offer');
@@ -9,8 +11,8 @@ const popupInputNameSbt = document.querySelector('.popup__input_name-sbt');
 const popupInputName = document.querySelector('.popup__input_name');
 const popupErrorUser = document.querySelector('.popup__error_user');
 const toLogin = document.querySelector('.popup__auth');
-const popupEnter = document.querySelector('.popup__button_enter');
-const popupReg = document.querySelector('.popup__button_reg');
+export const popupEnter = popUp.querySelector('.popup__button_enter');
+export const popupReg = popUp.querySelector('.popup__button_reg');
 
 export class Popup {
     constructor() {
@@ -21,6 +23,8 @@ export class Popup {
     }
     close() {
         popUp.classList.toggle('popup_is-opened');
+        userMail.value = '';
+        userPwd.value = '';
     }
     toregister() {
         popupTitle.textContent = 'Регистрация';

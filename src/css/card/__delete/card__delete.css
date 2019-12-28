@@ -1,4 +1,4 @@
-.card__delete {
+/* .card__delete {
     display: none;
     position: absolute;
     width: 162px;
@@ -21,4 +21,36 @@
 
 .card__saver:hover .card__delete {
     display: flex;
+} */
+
+.card__deleter {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    top: 24px;
+    right: 24px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+
+.card__deleter:hover {
+    cursor: pointer;
+}
+
+.card__deleter:hover .card__delete{
+    cursor: pointer;
+    fill: #000;
+}
+
+
+@media screen and (max-width : 1000px) {
+    .card__deleter {
+        top: 8px;
+        right: 8px;
+    }
 }

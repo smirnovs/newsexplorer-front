@@ -1,6 +1,10 @@
-import { api } from '../api/api.js';
+// import { api } from '../api/api.js';
 import { Card } from '../card/card.js';
-
+import { Api } from '../api/api.js';
+import { Showmore } from './showmore.js'
+import { Render } from './render.js'
+const regUrl = 'http://127.0.0.1:3000';
+const newsUrl = 'https://newsapi.org/v2/top-headlines?q='
 
 const searchInput = document.forms.search;
 const question = searchInput.elements.question;
@@ -9,13 +13,22 @@ const preloader = document.querySelector('.preloader')
 const preloaderAwait = document.querySelector('.preloader__await-block');
 const preloaderNotfound = document.querySelector('.preloader__notfound-block');
 const searchResult = document.querySelector('.search-result__container');
-// const showMore = document.querySelector('.search-result__button');
-const cardContainer = document.querySelector('.search-result__cards');
-// const cardContainer = document.querySelector('.search-result__container');
-let isShowMore = false;
+export const cardContainer = document.querySelector('.search-result__cards');
 
-let n = 3;
 export class Search {
+    constructor() {
+        // this.find = this.find.bind(this);
+        // searchButton.addEventListener('click', this.find);
+        this.checkAuth = this.checkAuth.bind(this);
+        searchButton.addEventListener('click', this.checkAuth);
+    }
+    successSearchStyling(cards) {
+        preloader.style.display = 'none';
+        searchResult.style.display = 'flex';
+        if (cards.totalResults > 3) {
+            this.showmorebutton();
+        }
+    }
     showmorebutton() {
         const showMore = document.createElement('button');
         showMore.classList.add('button');
@@ -23,62 +36,75 @@ export class Search {
         showMore.textContent = 'Показать еще';
         searchResult.appendChild(showMore);
     }
-    find() {
+    showMoreLogic(showButton, cards, myQuestion, isLoggedIn) {
+        const btnLogic = new Showmore({ cards, myQuestion, showButton, isLoggedIn });
+        showButton.addEventListener('click', function () { btnLogic.showcards() });
+    }
+    render(where, count, cards, myQuestion) {
+        for (let i = where; i < count; i++) {
+            const { cardElement } = new Card(myQuestion, cards.articles[i].url, cards.articles[i].urlToImage, cards.articles[i].publishedAt, cards.articles[i].title, cards.articles[i].description, cards.articles[i].source.name);
+            cardContainer.appendChild(cardElement);
+        }
+    }
+    checkAuth() {
         event.preventDefault();
+        const check = new Api({
+            baseUrl: regUrl,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        });
+        check.checkAuth().then(res => {
+            if (res.ok) {
+                return Promise.resolve(res.json());
+            } else {
+                return Promise.reject(res.status);
+            }
+        }).then(() => {
+            let isLoggedIn = true;
+            this.find(isLoggedIn)
+            // let userLogin = user.name;
+            // new Header({ isLoggedIn, userLogin });
+            // return isLoggedIn;
+            // new Search(isLoggedIn);
+            // new CheckLog(isLoggedIn);
+
+        }).catch(() => {
+            // console.log(err);
+            let isLoggedIn = false;
+
+            this.find(isLoggedIn)
+            // return isLoggedIn;
+            // new Search(isLoggedIn);
+            // new CheckLog(isLoggedIn);
+        });
+    }
+    find(isLoggedIn) {
+        // event.preventDefault();
+        // console.log(isLoggedIn);
         startSearchStyling();
         let myQuestion = question.value;
         api.getCards(myQuestion).then(cards => {
+            // console.log(isLoggedIn);
             if (cards.totalResults === 0) {
                 preloaderAwait.style.display = 'none';
                 preloaderNotfound.style.display = 'flex';
             } else {
-                successSearchStyling(cards);
+                this.successSearchStyling(cards);
+                // console.log(isLoggedIn);
+                // let count = cards.articles.length
+                // load.render(0, count, cards, myQuestion, isLoggedIn);
                 if (cards.articles.length < 3) {
-                    let n = cards.articles.length
-                    for (let i = 0; i < n; i++) {
-                        const { cardElement } = new Card(cards.articles[i].urlToImage, cards.articles[i].publishedAt, cards.articles[i].title, cards.articles[i].description, cards.articles[i].source.name);
-                        cardContainer.appendChild(cardElement);
-                    }
+                    let count = cards.articles.length
+                    load.render(0, count, cards, myQuestion, isLoggedIn);
                 } else {
-                    for (let i = 0; i < 3; i++) {
-                        const { cardElement } = new Card(cards.articles[i].urlToImage, cards.articles[i].publishedAt, cards.articles[i].title, cards.articles[i].description, cards.articles[i].source.name);
-                        cardContainer.appendChild(cardElement);
-                    }
+                    let count = 3
+                    load.render(0, count, cards, myQuestion, isLoggedIn);
                 }
                 if (document.querySelector('.search-result__button')) {
                     const showMore = document.querySelector('.search-result__button');
-                    let n = 3;
-                    showMore.addEventListener('click', function showMoreHandler() {
-                        if (cards.articles.length <= 6) {
-                            for (let i = 3; i < n; i++) {
-                                const { cardElement } = new Card(cards.articles[i].urlToImage, cards.articles[i].publishedAt, cards.articles[i].title, cards.articles[i].description, cards.articles[i].source.name);
-                                cardContainer.appendChild(cardElement);
-                                showMore.style.display = 'none'
-                                n = 3;
-                            }
-                        } else if (cards.articles.length > 6) {
-                            if (n + 3 > cards.articles.length) {
-                                let s = cards.articles.length;
-                                for (let i = n; i < s; i++) {
-                                    const { cardElement } = new Card(cards.articles[i].urlToImage, cards.articles[i].publishedAt, cards.articles[i].title, cards.articles[i].description, cards.articles[i].source.name);
-                                    cardContainer.appendChild(cardElement);
-                                }
-                            } else {
-                                let s = n + 3;
-                                for (let i = n; i < s; i++) {
-                                    const { cardElement } = new Card(cards.articles[i].urlToImage, cards.articles[i].publishedAt, cards.articles[i].title, cards.articles[i].description, cards.articles[i].source.name);
-                                    cardContainer.appendChild(cardElement);
-                                }
-                            }
-
-                            n = n + 3;
-                            if (n >= cards.articles.length) {
-                                showMore.style.display = 'none';
-                                showMore.removeEventListener('click', showMoreHandler);
-                                n = 3;
-                            }
-                        }
-                    })
+                    this.showMoreLogic(showMore, cards, myQuestion, isLoggedIn);
                 }
             }
         }).catch(() => {
@@ -88,8 +114,8 @@ export class Search {
     }
 }
 
-const search = new Search();
-
+// const search = new Search();
+const load = new Render();
 const startSearchStyling = () => {
     while (cardContainer.hasChildNodes()) {
         cardContainer.removeChild(cardContainer.lastChild);
@@ -103,12 +129,21 @@ const startSearchStyling = () => {
     preloaderAwait.style.display = 'flex';
 };
 
-const successSearchStyling = (cards) => {
-    preloader.style.display = 'none';
-    searchResult.style.display = 'flex';
-    if (cards.totalResults > 3) {
-        search.showmorebutton();
-    }
-}
+// const successSearchStyling = (cards) => {
+//     preloader.style.display = 'none';
+//     searchResult.style.display = 'flex';
+//     if (cards.totalResults > 3) {
+//         search.showmorebutton();
+//     }
+// }
 
-searchButton.addEventListener('click', function () { search.find() });
+// searchButton.addEventListener('click', function () { search.find() });
+
+const api = new Api({
+    baseUrl: newsUrl,
+    headers: {
+        authorization: '67fcbb6d7e14456f995c19d4a0f3cfbc',
+        // 'Content-Type': 'application/json'
+    }
+});
+
