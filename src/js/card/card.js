@@ -2,8 +2,9 @@ import textHelper from '../helpers/messages.js';
 import { api } from '../api/api.js';
 
 export class Card {
-    constructor(isSaved, isExist, pseudoId, keyword, link, imgUrl, date, title, text, source, id) {
+    constructor(isLoggedIn, isSaved, isExist, pseudoId, keyword, link, imgUrl, date, title, text, source, id) {
         this.id = id;
+        this.isLoggedIn = isLoggedIn;
         this.isSaved = isSaved;
         this.isExist = isExist;
         this.pseudoId = pseudoId;
@@ -24,21 +25,48 @@ export class Card {
         this.cardElement.addEventListener('click', this.deleteCard);
     }
 
+    currentCard(data){
+        console.log(data)
+    }
+
     saveCard() {
+        // console.log(this.isExist)
         if (event.target.classList.contains('card__saver') || event.target.classList.contains('card__svg-bookmark') || event.target.classList.contains('card__bookmark')) {
+            if(!this.isLoggedIn) {
+                console.log('Надо залогиниться')
+                console.log(this.isLoggedIn)
+            } else {
             if (!this.isExist) {
                 let iconSvg = event.currentTarget.querySelector('.card__bookmark');
+                console.log(this.date)
                 api.saveCard(this.pseudoId, this.keyword, this.title, this.text, this.date, this.source, this.link, this.imgUrl)
-                    .then(() => {
+                    .then((res) => {
                         iconSvg.setAttribute('fill', '#2f71e5');
                         iconSvg.setAttribute('stroke', '#2f71e5');
                         iconSvg.classList.add('card__bookmark_saved');
-
-                        this.isExist = !this.isExist;
+                        console.log(this.isExist)
+                        this.isExist = !this.isExist;                        
+                        return Promise.resolve(res.json());
+                    }).then((res) => {
+                        this.id = res.data._id;
+                        // this.currentCard(this.id)
+                        // return this.id
                     })
+                    
             } else {
                 console.log('вы уже сохраняли эту карточку')
+                console.log(this.id)
+                let iconSvg = event.currentTarget.querySelector('.card__bookmark');
+
+                api.deleteCard(this.id)
+                .then(()=>{
+                    iconSvg.setAttribute('fill', 'none');
+                    iconSvg.setAttribute('stroke', '#B6BCBF');
+                    iconSvg.classList.remove('card__bookmark_saved');
+                    this.isExist = !this.isExist;
+                });
             }
+        }
         }
     }
     deleteCard() {
@@ -87,7 +115,22 @@ export class Card {
         cardBookmark.appendChild(cardSvg);
         cardSvg.appendChild(svgPath);
     }
+
+    dateFormat (date, cardDate){
+        date = date.slice(0, 10);
+        date = date.replace(/-/g, ', ');
+        const publicDate = new Date(date);
+        const formatter = new Intl.DateTimeFormat("ru", {
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+          });
+        date = formatter.format(publicDate);
+        cardDate.textContent = date;  
+
+    }
     create() {
+        
         const newCard = document.createElement('div');
         newCard.classList.add('card');
 
@@ -102,14 +145,32 @@ export class Card {
         // cardBookmark.classList.add('card__saver');
 
         this.createIcon(cardBookmark);
-
+        imgBlock.appendChild(cardImg);
+        imgBlock.appendChild(cardBookmark);
+        if(!this.isLoggedIn) {
+            const cardNologin = document.createElement('div');
+            cardNologin.classList.add('card__nologin');
+            cardNologin.textContent = 'Войдите, чтобы сохранять статьи';
+            // cardNologin.style.border = ".5px solid #000";
+            imgBlock.appendChild(cardNologin);
+        }
+        
+        if(this.isSaved) {
+            const cardKeyword = document.createElement('div');
+            cardKeyword.classList.add('card__keyword');
+            cardKeyword.textContent = this.keyword;
+            imgBlock.appendChild(cardKeyword);
+        }
 
         const textBlock = document.createElement('div');
         textBlock.classList.add('card__text-block');
 
         const cardDate = document.createElement('div');
-        cardDate.classList.add('card__date-block');
-        cardDate.textContent = this.date
+        cardDate.classList.add('card__date');
+        this.dateFormat(this.date, cardDate);
+        // const cardDate = document.createElement('div');
+        // cardDate.classList.add('card__date');
+        // cardDate.textContent = this.date
 
         const cardNews = document.createElement('div');
         cardNews.classList.add('card__news');
@@ -130,8 +191,8 @@ export class Card {
 
         newCard.appendChild(imgBlock);
 
-        imgBlock.appendChild(cardImg);
-        imgBlock.appendChild(cardBookmark);
+        
+        
 
         // cardBookmark.appendChild(cardSvg);
         // cardSvg.appendChild(svgPath);

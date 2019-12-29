@@ -9,9 +9,16 @@
 }
 
 .popup__error_email {
+  display: none;
   top: 58px;
 }
 
 .popup__error_user {
+  display: none;
   bottom: 99px;
+}
+
+.popup__error_pwd {
+  display: none;
+  bottom: 129px;
 }

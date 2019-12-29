@@ -16,23 +16,27 @@ export class Render {
                 let pseudoId = cards.articles[i].publishedAt.slice(0, 19)
                 pseudoId = pseudoId.replace(/-/g, '');
                 pseudoId = pseudoId.replace(/:/g, '');
-                api.checkCard(pseudoId).then(res => {
-                    if (res.ok) {
+                    api.checkCard(pseudoId).then(res => {
+                        console.log(res.status)
+                        if (res.ok) {                        
+                        console.log('карточка существует')
                         return Promise.resolve(res.json());
                     }
                     else {
-                        return Promise.reject(res.json());
+
+                        console.log('карточка НЕ существует')
+                        let isExist = false;
+                        const { cardElement } = new Card(isLoggedIn, isSaved, isExist, pseudoId, myQuestion, cards.articles[i].url, cards.articles[i].urlToImage, cards.articles[i].publishedAt, cards.articles[i].title, cards.articles[i].description, cards.articles[i].source.name);
+                        cardContainer.appendChild(cardElement);
                     }
-                }).then(() => {
-                    console.log('карточка существует')
+                }).then((res) => {
+                    console.log(res.data[0]._id)
+                    const id = res.data[0]._id;
                     let isExist = true;
-                    const { cardElement } = new Card(isSaved, isExist, pseudoId, myQuestion, cards.articles[i].url, cards.articles[i].urlToImage, cards.articles[i].publishedAt, cards.articles[i].title, cards.articles[i].description, cards.articles[i].source.name);
+                    const { cardElement } = new Card(isLoggedIn, isSaved, isExist, pseudoId, myQuestion, cards.articles[i].url, cards.articles[i].urlToImage, cards.articles[i].publishedAt, cards.articles[i].title, cards.articles[i].description, cards.articles[i].source.name, id);
                     cardContainer.appendChild(cardElement);
                 }).catch(() => {
-                    console.log('карточка НЕ существует')
-                    let isExist = false;
-                    const { cardElement } = new Card(isSaved, isExist, pseudoId, myQuestion, cards.articles[i].url, cards.articles[i].urlToImage, cards.articles[i].publishedAt, cards.articles[i].title, cards.articles[i].description, cards.articles[i].source.name);
-                    cardContainer.appendChild(cardElement);
+                    console.log('карточка НЕ существует eror')
                 })
             }
         } else {
@@ -44,7 +48,8 @@ export class Render {
                 console.log(cards.articles[i].publishedAt);
                 let isExist = false;
                 let isSaved = false;
-                const { cardElement } = new Card(isSaved, isExist, pseudoId, myQuestion, cards.articles[i].url, cards.articles[i].urlToImage, cards.articles[i].publishedAt, cards.articles[i].title, cards.articles[i].description, cards.articles[i].source.name);
+                console.log(isLoggedIn)
+                const { cardElement } = new Card(isLoggedIn, isSaved, isExist, pseudoId, myQuestion, cards.articles[i].url, cards.articles[i].urlToImage, cards.articles[i].publishedAt, cards.articles[i].title, cards.articles[i].description, cards.articles[i].source.name);
                 cardContainer.appendChild(cardElement);
             }
         }
@@ -55,6 +60,5 @@ const api = new Api({
     baseUrl: NEWSAPI_URL,
     headers: {
         authorization: '67fcbb6d7e14456f995c19d4a0f3cfbc',
-        // 'Content-Type': 'application/json'
     }
 });

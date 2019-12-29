@@ -1,26 +1,16 @@
 import "../pages/index/index.css";
 import { Popup } from './popup/popup.js';
 import { Mobilemenu } from './helpers/mobilemenu.js';
-
-import { Search } from './searcher/searcher.js';
+import { Search, searchResult } from './searcher/searcher.js';
 import { Signup } from "./user/signup";
 import { Signin } from "./user/signin";
 import { api } from "./api/api.js";
 import { Header, authButton } from "./header/header.js";
 import { ICON_MOBILE_WHITE_CLOSED, HEADER_COLOR } from "./helpers/messages.js";
-// import { CheckLog } from './searcher/islogged.js'
-
-// const searchButton = document.querySelector('.search__button');
-// const ICON_COLOR = 'header__mobileico_white-closed';
-// const HEADER_COLOR = '#1A1B22';
-// const authMenu = document.querySelector('.header__link_saved');
-// const unauthButton = document.querySelector('.header__login_unauth');
-// const authButton = document.querySelector('.header__login_auth');
-// const userName = document.querySelector('.header__login_name');
+import { Mobileheader, mobileAuthButton } from "./header/mobileheader.js";
 
 let isOpenMenu = false;
 let isHeader = true;
-// let isLoggedIn = false;
 
 new Search();
 new Popup();
@@ -28,8 +18,10 @@ new Signup();
 new Signin();
 new Mobilemenu(ICON_MOBILE_WHITE_CLOSED, isOpenMenu, isHeader, HEADER_COLOR);
 
+
 api.checkAuth().then(res => {
-    if (res.ok) {
+    console.log(res.status)
+    if (res.status===200) {
         return Promise.resolve(res.json());
     } else {
         return Promise.reject(res);
@@ -40,6 +32,7 @@ api.checkAuth().then(res => {
     let isLoggedIn = true;
     let userLogin = user.name;
     new Header({ isLoggedIn, userLogin });
+    new Mobileheader({ isLoggedIn, userLogin });
     // new Search(isLoggedIn);
     // new CheckLog(isLoggedIn);
 
@@ -60,8 +53,26 @@ authButton.addEventListener('click', () => {
             let isLoggedIn = false;
             let userLogin = '';
             new Header({ isLoggedIn, userLogin });
-            // new Search(isLoggedIn);
-            // new CheckLog(isLoggedIn);
+            new Mobileheader({ isLoggedIn, userLogin });
+            searchResult.style.display = 'none';
+        } else {
+            return Promise.reject(res.status);
+        }
+
+    }).catch(err => {
+        console.log(err);
+    });
+})
+
+mobileAuthButton.addEventListener('click', () => {
+    api.unAuth().then(res => {
+        if (res.ok) {
+            console.log('разлогинило');
+            let isLoggedIn = false;
+            let userLogin = '';
+            new Header({ isLoggedIn, userLogin });
+            new Mobileheader({ isLoggedIn, userLogin });
+            searchResult.style.display = 'none';
         } else {
             return Promise.reject(res.status);
         }

@@ -3,3 +3,7 @@
 .card__saver:hover .card__bookmark {
     stroke: #1A1B22;
 }
+
+.card__saver:hover ~ .card__nologin {
+    display: flex;
+}

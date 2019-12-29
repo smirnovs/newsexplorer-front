@@ -29,6 +29,12 @@ export class Api {
             }
         });
     }
+    // checkAuth() {
+    //     return fetch(`${this.url}/checkauth`, {
+    //         headers: this.headers,
+    //         credentials: 'include',
+    //     })
+    // }
     checkAuth() {
         return fetch(`${this.url}/users/me`, {
             headers: this.headers,
@@ -56,8 +62,8 @@ export class Api {
             credentials: 'include',
         })
     }
-    getCards(question) {
-        return fetch(`${this.url + question}`, {
+    getCards(question, weekAgo, today) {
+        return fetch(`${this.url + question}&from=${weekAgo}&to=${today}`, {
             headers: this.headers
         }).then(res => {
             if (res.ok) {

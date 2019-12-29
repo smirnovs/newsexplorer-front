@@ -1,0 +1,13 @@
+.mini-popup__content {
+    width: 430px;
+    min-height: 182px;
+    background-color: #fff;
+    border-radius: 16px;
+    position: relative;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+    padding: 43px 36px 51px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

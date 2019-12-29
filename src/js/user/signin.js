@@ -4,6 +4,9 @@ import { userMail, userPwd } from '../popup/popup-validate.js';
 import { Header } from '../header/header.js';
 // import { Search } from '../searcher/searcher.js';
 import { NEWSAPI_URL } from '../helpers/messages.js';
+// import { searchResult } from "../searcher/searcher.js";
+
+// const searchResult = document.querySelector('.search-result__container')
 
 const errorAuth = document.querySelector('.popup__error_auth');
 // const regUrl = 'https://api.myedudomen.ml';
@@ -17,6 +20,7 @@ export class Signin {
         api.loginUser(userMail.value, userPwd.value).then((res) => {
             if (res.ok) {
                 api.checkAuth().then(res => {
+                    // console.log(res)
                     if (res.ok) {
                         return Promise.resolve(res.json());
                     } else {
@@ -28,8 +32,14 @@ export class Signin {
                     new Header({ isLoggedIn, userLogin });
                     // new Search(isLoggedIn);
                     popup.close();
+                    if (document.querySelector('.search-result__container')) {
+                        const searchResult = document.querySelector('.search-result__container')
+                        searchResult.style.display = 'none';
+                    }
+                    // window.location.replace(MAIN_PAGE);
                 }).catch(() => {
-                    console.log(err);
+                    // console.log(err);
+                    console.log('Не удалось авторизоваться');
                 });
                 return Promise.resolve();
             } else {
@@ -44,6 +54,7 @@ export class Signin {
                 return Promise.reject(res);
             }
         }).catch((err) => {
+            console.log('Не удалось авторизоваться');
             return err;
         });
     }

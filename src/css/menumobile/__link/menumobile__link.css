@@ -1,5 +1,6 @@
 @import url(./_white/menumobile__link_white.css);
 @import url(./_black/menumobile__link_black.css);
+@import url(./_saved/menumobile__link_saved.css);
 
 .menumobile__link {
     text-decoration: none;

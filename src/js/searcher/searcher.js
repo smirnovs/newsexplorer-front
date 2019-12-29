@@ -5,8 +5,6 @@ import { Showmore } from './showmore.js'
 import { Render } from './render.js'
 import { NEWSAPI_URL, SEARCH_NEWS } from '../helpers/messages.js';
 
-// const regUrl = 'https://api.myedudomen.ml';
-// const newsUrl = 'https://newsapi.org/v2/top-headlines?q='
 
 const searchInput = document.forms.search;
 const question = searchInput.elements.question;
@@ -14,8 +12,10 @@ const searchButton = document.querySelector('.search__button');
 const preloader = document.querySelector('.preloader')
 const preloaderAwait = document.querySelector('.preloader__await-block');
 const preloaderNotfound = document.querySelector('.preloader__notfound-block');
-const searchResult = document.querySelector('.search-result__container');
+export const searchResult = document.querySelector('.search-result__container');
 export const cardContainer = document.querySelector('.search-result__cards');
+const notFoundTitle = document.querySelector('.preloader__notfound-title');
+const notFoundText = document.querySelector('.preloader__notfound-text');
 
 export class Search {
     constructor() {
@@ -39,12 +39,14 @@ export class Search {
         searchResult.appendChild(showMore);
     }
     showMoreLogic(showButton, cards, myQuestion, isLoggedIn) {
+        // console.log('123123123123132' + isLoggedIn);
         const btnLogic = new Showmore({ cards, myQuestion, showButton, isLoggedIn });
         showButton.addEventListener('click', function () { btnLogic.showcards() });
     }
-    render(where, count, cards, myQuestion) {
+    render(where, count, cards, myQuestion, isLoggedIn) {
+        // console.log('123123123123132' + isLoggedIn);
         for (let i = where; i < count; i++) {
-            const { cardElement } = new Card(myQuestion, cards.articles[i].url, cards.articles[i].urlToImage, cards.articles[i].publishedAt, cards.articles[i].title, cards.articles[i].description, cards.articles[i].source.name);
+            const { cardElement } = new Card(myQuestion, cards.articles[i].url, cards.articles[i].urlToImage, cards.articles[i].publishedAt, cards.articles[i].title, cards.articles[i].description, cards.articles[i].source.name, isLoggedIn);
             cardContainer.appendChild(cardElement);
         }
     }
@@ -65,6 +67,7 @@ export class Search {
             }
         }).then(() => {
             let isLoggedIn = true;
+            // console.log(isLoggedIn)
             this.find(isLoggedIn)
             // let userLogin = user.name;
             // new Header({ isLoggedIn, userLogin });
@@ -83,36 +86,56 @@ export class Search {
         });
     }
     find(isLoggedIn) {
-        // event.preventDefault();
-        // console.log(isLoggedIn);
         startSearchStyling();
+        const week = 6;
+        let today = new Date();
+        let weekAgo = new Date();
+        weekAgo.setDate(today.getDate() - week);
+
+        today = today.toISOString().slice(0, 10)
+        weekAgo = weekAgo.toISOString().slice(0, 10)
+
         let myQuestion = question.value;
-        api.getCards(myQuestion).then(cards => {
-            // console.log(isLoggedIn);
-            if (cards.totalResults === 0) {
+        if(myQuestion.length === 0) {
+            preloaderNotfound.style.display = 'flex';
+            notFoundTitle.textContent = 'Введите хотя бы одно ключевое слово'
+            preloaderAwait.style.display = 'none';
+            notFoundText.textContent = ''
+        } else {
+            api.getCards(myQuestion, weekAgo, today).then(cards => {
+                // console.log(isLoggedIn);
+                if (cards.totalResults === 0) {
+                    preloaderAwait.style.display = 'none';
+                    preloaderNotfound.style.display = 'flex';
+                    notFoundTitle.textContent = 'Ничего не найдено'
+                    notFoundText.textContent = 'К сожалению по вашему запросу ничего не найдено.'
+                    searchResult.style.display = 'none'
+                } else {
+                    this.successSearchStyling(cards);
+                    // console.log(isLoggedIn);
+                    // let count = cards.articles.length
+                    // load.render(0, count, cards, myQuestion, isLoggedIn);
+                    // console.log(isLoggedIn)
+                    if (cards.articles.length < 3) {
+                        let count = cards.articles.length
+                        // console.log(isLoggedIn);
+                        load.render(0, count, cards, myQuestion, isLoggedIn);
+                    } else {
+                        let count = 3
+                        // console.log('123123123123132' + isLoggedIn);
+                        load.render(0, count, cards, myQuestion, isLoggedIn);
+                    }
+                    if (document.querySelector('.search-result__button')) {
+                        const showMore = document.querySelector('.search-result__button');
+                        // console.log('123123123123132' + isLoggedIn);
+                        this.showMoreLogic(showMore, cards, myQuestion, isLoggedIn);
+                    }
+                }
+            }).catch(() => {
                 preloaderAwait.style.display = 'none';
                 preloaderNotfound.style.display = 'flex';
-            } else {
-                this.successSearchStyling(cards);
-                // console.log(isLoggedIn);
-                // let count = cards.articles.length
-                // load.render(0, count, cards, myQuestion, isLoggedIn);
-                if (cards.articles.length < 3) {
-                    let count = cards.articles.length
-                    load.render(0, count, cards, myQuestion, isLoggedIn);
-                } else {
-                    let count = 3
-                    load.render(0, count, cards, myQuestion, isLoggedIn);
-                }
-                if (document.querySelector('.search-result__button')) {
-                    const showMore = document.querySelector('.search-result__button');
-                    this.showMoreLogic(showMore, cards, myQuestion, isLoggedIn);
-                }
-            }
-        }).catch(() => {
-            preloaderAwait.style.display = 'none';
-            preloaderNotfound.style.display = 'flex';
-        });
+            });
+        }
     }
 }
 
@@ -130,16 +153,6 @@ const startSearchStyling = () => {
     preloader.style.display = 'flex';
     preloaderAwait.style.display = 'flex';
 };
-
-// const successSearchStyling = (cards) => {
-//     preloader.style.display = 'none';
-//     searchResult.style.display = 'flex';
-//     if (cards.totalResults > 3) {
-//         search.showmorebutton();
-//     }
-// }
-
-// searchButton.addEventListener('click', function () { search.find() });
 
 const api = new Api({
     baseUrl: SEARCH_NEWS,
