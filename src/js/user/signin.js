@@ -4,6 +4,7 @@ import { userMail, userPwd } from '../popup/popup-validate.js';
 import { Header } from '../header/header.js';
 // import { Search } from '../searcher/searcher.js';
 import { NEWSAPI_URL } from '../helpers/messages.js';
+import { Mobileheader } from '../header/mobileheader.js';
 // import { searchResult } from "../searcher/searcher.js";
 
 // const searchResult = document.querySelector('.search-result__container')
@@ -30,6 +31,7 @@ export class Signin {
                     let isLoggedIn = true;
                     let userLogin = user.name;
                     new Header({ isLoggedIn, userLogin });
+                    new Mobileheader({ isLoggedIn, userLogin });
                     // new Search(isLoggedIn);
                     popup.close();
                     if (document.querySelector('.search-result__container')) {

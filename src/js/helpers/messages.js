@@ -10,7 +10,7 @@ module.exports = {
     NEWSAPI_URL: 'http://127.0.0.1:3000',
     // NEWSAPI_URL: 'https://api.myedudomen.ml',
     SEARCH_NEWS: 'https://newsapi.org/v2/top-headlines?country=ru&pageSize=100&q=',
-    GIT_API: '',
+    GIT_API: 'https://api.github.com/repos/smirnovs/newsexplorer-front/commits',
     // MAIN_PAGE: 'https://smirnovs.github.io/newsexplorer-front'
     MAIN_PAGE: 'http://localhost:8080/'
 }

@@ -6,6 +6,14 @@ export class Api {
         this.url = baseUrl;
         this.headers = headers;
     }
+    getGit() {
+        return fetch(`${this.url}`, {
+            headers: this.headers,
+            // credentials: 'include',
+        }).catch(err => {
+            console.log(err);
+        });
+    }
     deleteCard(id) {
         return fetch(`${this.url}/articles/${id}`, {
             method: 'DELETE',

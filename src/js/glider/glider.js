@@ -2,8 +2,9 @@ import Glide from '@glidejs/glide';
 
 export const glide = new Glide('.glide', {
     type: 'carousel',
-
-    perView: 1,
+    hoverpause: false,
+    bound: true,
+    perView: 2,
     breakpoints: {
         2560: {
             perView: 3,
@@ -13,7 +14,7 @@ export const glide = new Glide('.glide', {
             }
         },
         1252: {
-            perView: 1.5,
+            perView: 2,
             peek: {
                 before: 0,
                 after: 132
