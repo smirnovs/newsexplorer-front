@@ -29,14 +29,14 @@ const api = new Api({
 });
 
 api.checkAuth()
-    // .then(res => {
-    //     if (res.ok) {
-    //         return Promise.resolve(res.json());
-    //     } else {
-    //         // window.location.replace(MAIN_PAGE);
-    //         return Promise.reject(res.status);
-    //     }
-    // })
+    .then(res => {
+        if (res.ok) {
+            return Promise.resolve(res.json());
+        } else {
+            // window.location.replace(MAIN_PAGE);
+            return Promise.reject(res.status);
+        }
+    })
     .then((user) => {
         // let myName = user.name;
         userName.textContent = user.name;
