@@ -1,11 +1,11 @@
 // import { GIT_API } from '../helpers/messages.js';
 import { Api } from '../api/api.js';
 import { GIT_API } from '../helpers/messages.js';
-import { GitCatdsCreate } from './git-catds-create.js';
+import { GitCard } from './git-card.js';
 import { glide } from '../glider/glide.js';
 
 
-export class GitGet {
+export class GitCommitLoader {
     constructor() {
         this.getGitCards()
     }
@@ -28,7 +28,7 @@ export class GitGet {
                     const date = res[i].commit.committer.date;
                     const message = res[i].commit.message;
                     const url = res[i].author.avatar_url;
-                    new GitCatdsCreate(name, email, date, message, url);
+                    new GitCard(name, email, date, message, url);
                 }
             }).then(() => {
                 glide.mount();

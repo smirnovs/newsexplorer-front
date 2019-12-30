@@ -2,7 +2,7 @@
 const slideBlock = document.querySelector('.glide__slides');
 
 
-export class GitCatdsCreate {
+export class GitCard {
     constructor(name, email, date, message, avatar) {
         this.name = name;
         this.email = email;

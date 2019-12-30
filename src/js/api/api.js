@@ -45,15 +45,6 @@ export class Api {
         return fetch(`${this.url}/users/me`, {
             headers: this.headers,
             credentials: 'include',
-        }).then(res => {
-            // console.log('start')
-            if (res.ok) {
-                // console.log('resok')
-                return Promise.resolve(res.json());
-            } else {
-                // console.log('resneok')
-                return Promise.reject(res);
-            }
         })
     }
     unAuth() {

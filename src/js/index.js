@@ -27,7 +27,16 @@ const api = new Api({
     }
 });
 
-api.checkAuth().then((user) => {
+api.checkAuth().then(res => {
+    // console.log('start')
+    if (res.ok) {
+        // console.log('resok')
+        return Promise.resolve(res.json());
+    } else {
+        // console.log('resneok')
+        return Promise.reject(res);
+    }
+}).then((user) => {
     // console.log(user)
     const isLoggedIn = true;
     const userLogin = user.name;

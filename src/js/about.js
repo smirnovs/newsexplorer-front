@@ -8,7 +8,7 @@ import { Popup } from './popup/popup.js';
 import { Signup } from "./user/signup";
 import { Signin } from "./user/signin";
 import { Mobileheader } from "./header/mobileheader.js";
-import { GitGet } from "./card/git-get.js";
+import { GitCommitLoader } from "./card/git-commit-loader.js";
 
 const ICON_COLOR = 'header__mobileico_black-closed';
 const ghButton = document.querySelector('.github__button');
@@ -16,7 +16,7 @@ const mobileAuthButton = document.querySelector('.menumobile__login_auth');
 
 const isOpenMenu = false;
 new Mobilemenu(ICON_COLOR, isOpenMenu);
-new GitGet();
+new GitCommitLoader();
 new Popup();
 new Signup();
 new Signin();
@@ -30,13 +30,13 @@ const api = new Api({
 });
 
 api.checkAuth()
-    // .then(res => {
-    //     if (res.status === 200) {
-    //         return Promise.resolve(res.json());
-    //     } else {
-    //         return Promise.reject(res);
-    //     }
-    // })
+    .then(res => {
+        if (res.status === 200) {
+            return Promise.resolve(res.json());
+        } else {
+            return Promise.reject(res);
+        }
+    })
     .then((user) => {
         const isLoggedIn = true;
         const userLogin = user.name;
