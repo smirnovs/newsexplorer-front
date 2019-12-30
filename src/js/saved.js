@@ -1,8 +1,9 @@
 import "../pages/saved/saved.css";
 import { Mobilemenu } from './helpers/mobilemenu.js';
-import { api } from "./api/api.js";
+import { Api } from "./api/api.js";
+// import { api } from "./api/api.js";
 import { Card } from './card/card.js';
-import { MAIN_PAGE, ICON_COLOR_BLACK } from './helpers/messages';
+import { MAIN_PAGE, ICON_COLOR_BLACK, NEWSAPI_URL } from './helpers/messages';
 // import { Mobileheader, mobileAuthButton } from "./header/mobileheader.js";
 
 const userName = document.querySelector('.header__login_name');
@@ -18,24 +19,35 @@ const mobileAuthButton = document.querySelector('.menumobile__login_logged');
 const isOpenMenu = false;
 
 new Mobilemenu(ICON_COLOR_BLACK, isOpenMenu);
-
-api.checkAuth().then(res => {
-    if (res.ok) {
-        return Promise.resolve(res.json());
-    } else {
-        window.location.replace(MAIN_PAGE);
-        return Promise.reject(res.status);
+const api = new Api({
+    baseUrl: NEWSAPI_URL,
+    headers: {
+        // authorization: '67fcbb6d7e14456f995c19d4a0f3cfbc',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
     }
-}).then((user) => {
-    // let myName = user.name;
-    userName.textContent = user.name;
-    greetingsName.textContent = user.name;
-    // let isLoggedIn = true;
-    // new Mobileheader({ isLoggedIn, myName });
-
-}).catch(err => {
-    console.log(err);
 });
+
+api.checkAuth()
+    // .then(res => {
+    //     if (res.ok) {
+    //         return Promise.resolve(res.json());
+    //     } else {
+    //         // window.location.replace(MAIN_PAGE);
+    //         return Promise.reject(res.status);
+    //     }
+    // })
+    .then((user) => {
+        // let myName = user.name;
+        userName.textContent = user.name;
+        greetingsName.textContent = user.name;
+        // let isLoggedIn = true;
+        // new Mobileheader({ isLoggedIn, myName });
+
+    }).catch(err => {
+        console.log(err);
+        window.location.replace(MAIN_PAGE);
+    });
 
 api.getSavedCards().then(res => {
     if (res.ok) {

@@ -45,6 +45,15 @@ export class Api {
         return fetch(`${this.url}/users/me`, {
             headers: this.headers,
             credentials: 'include',
+        }).then(res => {
+            // console.log('start')
+            if (res.ok) {
+                // console.log('resok')
+                return Promise.resolve(res.json());
+            } else {
+                // console.log('resneok')
+                return Promise.reject(res);
+            }
         })
     }
     unAuth() {
@@ -117,11 +126,11 @@ export class Api {
     }
 }
 
-export const api = new Api({
-    baseUrl: textHelper.NEWSAPI_URL,
-    headers: {
-        // authorization: '67fcbb6d7e14456f995c19d4a0f3cfbc',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    }
-});
+// export const api = new Api({
+//     baseUrl: textHelper.NEWSAPI_URL,
+//     headers: {
+//         // authorization: '67fcbb6d7e14456f995c19d4a0f3cfbc',
+//         'Accept': 'application/json',
+//         'Content-Type': 'application/json'
+//     }
+// });

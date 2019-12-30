@@ -1,5 +1,7 @@
-import textHelper from '../helpers/messages.js';
-import { api } from '../api/api.js';
+import { NEWSAPI_URL, CARD_DELETE, CARD_BOOKMARK } from '../helpers/messages.js';
+// import { MAIN_PAGE, NEWSAPI_URL } from './helpers/messages';
+// import { api } from '../api/api.js';
+import { Api } from '../api/api.js';
 
 export class Card {
     constructor(isLoggedIn, isSaved, isExist, pseudoId, keyword, link, imgUrl, date, title, text, source, id) {
@@ -81,7 +83,7 @@ export class Card {
             svgPath.setAttribute('fill-rule', 'evenodd');
             svgPath.setAttribute('clip-rule', 'evenodd');
             svgPath.setAttribute('fill', '#B6BCBF');
-            svgPath.setAttribute('d', textHelper.CARD_DELETE);
+            svgPath.setAttribute('d', CARD_DELETE);
         } else {
             cardBookmark.classList.add('card__saver');
             cardSvg.classList.add('card__svg-bookmark');
@@ -98,7 +100,7 @@ export class Card {
                 svgPath.setAttribute('fill', 'none');
                 svgPath.setAttribute('stroke', '#B6BCBF');
             }
-            svgPath.setAttribute('d', textHelper.CARD_BOOKMARK);
+            svgPath.setAttribute('d', CARD_BOOKMARK);
             svgPath.setAttribute('stroke-width', '2');
         }
         cardBookmark.appendChild(cardSvg);
@@ -201,6 +203,15 @@ export class Card {
 
     }
 }
+
+const api = new Api({
+    baseUrl: NEWSAPI_URL,
+    headers: {
+        // authorization: '67fcbb6d7e14456f995c19d4a0f3cfbc',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
+});
 
 // const api = new Api({
 //     baseUrl: textHelper.NEWSAPI_URL,

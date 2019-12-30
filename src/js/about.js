@@ -1,13 +1,14 @@
 import "../pages/about/about.css";
 import { Mobilemenu } from './helpers/mobilemenu.js';
-import { MAIN_PAGE } from './helpers/messages';
-import { api } from "./api/api.js";
+import { MAIN_PAGE, NEWSAPI_URL } from './helpers/messages';
+// import { api } from "./api/api.js";
+import { Api } from "./api/api.js";
 import { Header, authButton } from "./header/header.js";
 import { Popup } from './popup/popup.js';
 import { Signup } from "./user/signup";
 import { Signin } from "./user/signin";
 import { Mobileheader } from "./header/mobileheader.js";
-import { GitGet } from "./card/getgitcard";
+import { GitGet } from "./card/git-get.js";
 
 const ICON_COLOR = 'header__mobileico_black-closed';
 const ghButton = document.querySelector('.github__button');
@@ -19,22 +20,32 @@ new GitGet();
 new Popup();
 new Signup();
 new Signin();
-
-api.checkAuth().then(res => {
-    if (res.status === 200) {
-        return Promise.resolve(res.json());
-    } else {
-        return Promise.reject(res);
+const api = new Api({
+    baseUrl: NEWSAPI_URL,
+    headers: {
+        // authorization: '67fcbb6d7e14456f995c19d4a0f3cfbc',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
     }
-}).then((user) => {
-    const isLoggedIn = true;
-    const userLogin = user.name;
-    new Header({ isLoggedIn, userLogin });
-    new Mobileheader({ isLoggedIn, userLogin });
-
-}).catch((err) => {
-    console.log('Посетитель не авторизован');
 });
+
+api.checkAuth()
+    // .then(res => {
+    //     if (res.status === 200) {
+    //         return Promise.resolve(res.json());
+    //     } else {
+    //         return Promise.reject(res);
+    //     }
+    // })
+    .then((user) => {
+        const isLoggedIn = true;
+        const userLogin = user.name;
+        new Header({ isLoggedIn, userLogin });
+        new Mobileheader({ isLoggedIn, userLogin });
+
+    }).catch((err) => {
+        console.log('Посетитель не авторизован');
+    });
 
 
 authButton.addEventListener('click', () => {

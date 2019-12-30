@@ -1,4 +1,4 @@
-import { cardContainer } from "./searcher";
+import { cardContainer } from "./search";
 import { Card } from '../card/card.js';
 import { Api } from '../api/api.js';
 import { NEWSAPI_URL } from '../helpers/messages.js';

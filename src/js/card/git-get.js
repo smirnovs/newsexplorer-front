@@ -1,8 +1,8 @@
 // import { GIT_API } from '../helpers/messages.js';
 import { Api } from '../api/api.js';
 import { GIT_API } from '../helpers/messages.js';
-import { GitCatdsCreate } from './creategitcard.js';
-import { glide } from '../glider/glider.js';
+import { GitCatdsCreate } from './git-catds-create.js';
+import { glide } from '../glider/glide.js';
 
 
 export class GitGet {
@@ -10,6 +10,13 @@ export class GitGet {
         this.getGitCards()
     }
     getGitCards() {
+        const api = new Api({
+            baseUrl: GIT_API,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
         api.getGit()
             .then(res => {
                 return Promise.resolve(res.json())
@@ -32,10 +39,3 @@ export class GitGet {
 
 }
 
-export const api = new Api({
-    baseUrl: GIT_API,
-    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    }
-});
