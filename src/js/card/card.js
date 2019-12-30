@@ -25,53 +25,42 @@ export class Card {
         this.cardElement.addEventListener('click', this.deleteCard);
     }
 
-    currentCard(data){
-        console.log(data)
-    }
-
     saveCard() {
-        // console.log(this.isExist)
         if (event.target.classList.contains('card__saver') || event.target.classList.contains('card__svg-bookmark') || event.target.classList.contains('card__bookmark')) {
-            if(!this.isLoggedIn) {
+            if (!this.isLoggedIn) {
                 console.log('Надо залогиниться')
-                console.log(this.isLoggedIn)
             } else {
-            if (!this.isExist) {
-                let iconSvg = event.currentTarget.querySelector('.card__bookmark');
-                console.log(this.date)
-                api.saveCard(this.pseudoId, this.keyword, this.title, this.text, this.date, this.source, this.link, this.imgUrl)
-                    .then((res) => {
-                        iconSvg.setAttribute('fill', '#2f71e5');
-                        iconSvg.setAttribute('stroke', '#2f71e5');
-                        iconSvg.classList.add('card__bookmark_saved');
-                        console.log(this.isExist)
-                        this.isExist = !this.isExist;                        
-                        return Promise.resolve(res.json());
-                    }).then((res) => {
-                        this.id = res.data._id;
-                        // this.currentCard(this.id)
-                        // return this.id
-                    })
-                    
-            } else {
-                console.log('вы уже сохраняли эту карточку')
-                console.log(this.id)
-                let iconSvg = event.currentTarget.querySelector('.card__bookmark');
+                if (!this.isExist) {
+                    let iconSvg = event.currentTarget.querySelector('.card__bookmark');
+                    api.saveCard(this.pseudoId, this.keyword, this.title, this.text, this.date, this.source, this.link, this.imgUrl)
+                        .then((res) => {
+                            iconSvg.setAttribute('fill', '#2f71e5');
+                            iconSvg.setAttribute('stroke', '#2f71e5');
+                            iconSvg.classList.add('card__bookmark_saved');
+                            this.isExist = !this.isExist;
+                            return Promise.resolve(res.json());
+                        }).then((res) => {
+                            this.id = res.data._id;
+                            // this.currentCard(this.id)
+                            // return this.id
+                        })
 
-                api.deleteCard(this.id)
-                .then(()=>{
-                    iconSvg.setAttribute('fill', 'none');
-                    iconSvg.setAttribute('stroke', '#B6BCBF');
-                    iconSvg.classList.remove('card__bookmark_saved');
-                    this.isExist = !this.isExist;
-                });
+                } else {
+                    let iconSvg = event.currentTarget.querySelector('.card__bookmark');
+
+                    api.deleteCard(this.id)
+                        .then(() => {
+                            iconSvg.setAttribute('fill', 'none');
+                            iconSvg.setAttribute('stroke', '#B6BCBF');
+                            iconSvg.classList.remove('card__bookmark_saved');
+                            this.isExist = !this.isExist;
+                        });
+                }
             }
-        }
         }
     }
     deleteCard() {
         if (event.target.classList.contains('card__deleter') || event.target.classList.contains('card__svg-deleter') || event.target.classList.contains('card__delete')) {
-            console.log(this.id);
             api.deleteCard(this.id).then(event.target.closest('.card').remove()).catch(() => {
                 console.log('не удалено')
             })
@@ -116,7 +105,7 @@ export class Card {
         cardSvg.appendChild(svgPath);
     }
 
-    dateFormat (date, cardDate){
+    dateFormat(date, cardDate) {
         date = date.slice(0, 10);
         date = date.replace(/-/g, ', ');
         const publicDate = new Date(date);
@@ -124,13 +113,13 @@ export class Card {
             year: "numeric",
             month: "long",
             day: "numeric"
-          });
+        });
         date = formatter.format(publicDate);
-        cardDate.textContent = date;  
+        cardDate.textContent = date;
 
     }
     create() {
-        
+
         const newCard = document.createElement('div');
         newCard.classList.add('card');
 
@@ -147,15 +136,15 @@ export class Card {
         this.createIcon(cardBookmark);
         imgBlock.appendChild(cardImg);
         imgBlock.appendChild(cardBookmark);
-        if(!this.isLoggedIn) {
+        if (!this.isLoggedIn) {
             const cardNologin = document.createElement('div');
             cardNologin.classList.add('card__nologin');
             cardNologin.textContent = 'Войдите, чтобы сохранять статьи';
             // cardNologin.style.border = ".5px solid #000";
             imgBlock.appendChild(cardNologin);
         }
-        
-        if(this.isSaved) {
+
+        if (this.isSaved) {
             const cardKeyword = document.createElement('div');
             cardKeyword.classList.add('card__keyword');
             cardKeyword.textContent = this.keyword;
@@ -191,8 +180,8 @@ export class Card {
 
         newCard.appendChild(imgBlock);
 
-        
-        
+
+
 
         // cardBookmark.appendChild(cardSvg);
         // cardSvg.appendChild(svgPath);

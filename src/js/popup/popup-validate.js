@@ -9,14 +9,13 @@ export const shortPwdError = document.querySelector('.popup__error_pwd');
 const shortNameError = document.querySelector('.popup__error_user');
 
 
- 
+
 
 export class PopupValidate {
-    constructor(){
+    constructor() {
         this.isMail = this.isMail.bind(this);
         this.isPwd = this.isPwd.bind(this);
         this.isName = this.isName.bind(this);
-        // console.dir(this)
     }
     clearFields() {
         popupForm.reset();
@@ -25,7 +24,7 @@ export class PopupValidate {
         shortNameError.style.display = 'none'
         wrongData.style.display = 'none'
     }
-    disableButton(){
+    disableButton() {
         popupEnter.setAttribute('disabled', true);
         popupEnter.classList.add('popup__button_disabled')
         popupReg.setAttribute('disabled', true);
@@ -34,70 +33,57 @@ export class PopupValidate {
     enableButton(button) {
         button.removeAttribute('disabled');
         button.classList.remove('popup__button_disabled')
-      }
-      isMail(){
+    }
+    isMail() {
         notMailError.textContent = 'Неправильный формат email';
-        if(!isEmail(userMail.value)){
+        if (!isEmail(userMail.value)) {
             notMailError.style.display = 'inline-block'
             this.disableButton(popupEnter);
             return false;
         } else {
             notMailError.style.display = 'none'
-            console.log(userPwd.value.length)
-            if(userPwd.value.length >=6 && userName.value.length >=3){
+            if (userPwd.value.length >= 6 && userName.value.length >= 3) {
                 this.enableButton(popupReg);
             }
-            if(userPwd.value.length >=6) {
+            if (userPwd.value.length >= 6) {
                 this.enableButton(popupEnter);
-                // console.dir(this)
-                console.log('activate')
                 return true;
             } else {
-                console.log('deactivate')
                 this.disableButton();
                 return false;
             }
         }
-      }
-      isPwd(){
-          if(userPwd.validity.tooShort) {
+    }
+    isPwd() {
+        if (userPwd.validity.tooShort) {
             shortPwdError.style.display = 'inline-block'
-              console.log('short')
-              this.disableButton();
-              return false;
-          } else {
-            console.log('norm')
+            this.disableButton();
+            return false;
+        } else {
             shortPwdError.style.display = 'none';
-            if(isEmail(userMail.value) && userName.value.length >=3){
+            if (isEmail(userMail.value) && userName.value.length >= 3) {
                 this.enableButton(popupReg);
             }
-            if(isEmail(userMail.value)) {
-                console.log('activate')
+            if (isEmail(userMail.value)) {
                 this.enableButton(popupEnter)
                 return true;
             } else {
-                console.log('deactivate')
                 this.disableButton();
                 return false;
             }
-          }
-      }
-      isName(){
-        console.log(userName.validity.tooShort)
-        if(userName.validity.tooShort){
+        }
+    }
+    isName() {
+        if (userName.validity.tooShort) {
             shortNameError.style.display = 'inline-block';
             this.disableButton();
         } else {
             shortNameError.style.display = 'none';
-            if(isEmail(userMail.value) && userPwd.value.length >=6){
+            if (isEmail(userMail.value) && userPwd.value.length >= 6) {
                 this.enableButton(popupReg);
             } else {
                 this.disableButton();
             }
         }
-      }
+    }
 }
-
-// const valid = new PopupValidate();
-
-// popupEnter.addEventListener('click', valid.isEmail)

@@ -1,5 +1,3 @@
-import { Search } from './searcher.js'
-
 import { Render } from './render.js'
 
 export class Showmore {

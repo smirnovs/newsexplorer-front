@@ -20,36 +20,25 @@ new Mobilemenu(ICON_MOBILE_WHITE_CLOSED, isOpenMenu, isHeader, HEADER_COLOR);
 
 
 api.checkAuth().then(res => {
-    console.log(res.status)
-    if (res.status===200) {
+    if (res.status === 200) {
         return Promise.resolve(res.json());
     } else {
         return Promise.reject(res);
-        // return Promise.resolve(res.json());
     }
 }).then((user) => {
-    // console.log(user);
     let isLoggedIn = true;
     let userLogin = user.name;
     new Header({ isLoggedIn, userLogin });
     new Mobileheader({ isLoggedIn, userLogin });
-    // new Search(isLoggedIn);
-    // new CheckLog(isLoggedIn);
 
 }).catch((err) => {
     console.log('Посетитель не авторизован');
-    // throw err;
-    // let isLoggedIn = false;
-    // new Header({ isLoggedIn });
-    // new Search(isLoggedIn);
-    // new CheckLog(isLoggedIn);
 });
 
 
 authButton.addEventListener('click', () => {
     api.unAuth().then(res => {
         if (res.ok) {
-            console.log('разлогинило');
             let isLoggedIn = false;
             let userLogin = '';
             new Header({ isLoggedIn, userLogin });
@@ -67,7 +56,6 @@ authButton.addEventListener('click', () => {
 mobileAuthButton.addEventListener('click', () => {
     api.unAuth().then(res => {
         if (res.ok) {
-            console.log('разлогинило');
             let isLoggedIn = false;
             let userLogin = '';
             new Header({ isLoggedIn, userLogin });

@@ -1,4 +1,3 @@
-// import { api } from '../api/api.js';
 import { Card } from '../card/card.js';
 import { Api } from '../api/api.js';
 import { Showmore } from './showmore.js'
@@ -19,8 +18,6 @@ const notFoundText = document.querySelector('.preloader__notfound-text');
 
 export class Search {
     constructor() {
-        // this.find = this.find.bind(this);
-        // searchButton.addEventListener('click', this.find);
         this.checkAuth = this.checkAuth.bind(this);
         searchButton.addEventListener('click', this.checkAuth);
     }
@@ -39,12 +36,10 @@ export class Search {
         searchResult.appendChild(showMore);
     }
     showMoreLogic(showButton, cards, myQuestion, isLoggedIn) {
-        // console.log('123123123123132' + isLoggedIn);
         const btnLogic = new Showmore({ cards, myQuestion, showButton, isLoggedIn });
         showButton.addEventListener('click', function () { btnLogic.showcards() });
     }
     render(where, count, cards, myQuestion, isLoggedIn) {
-        // console.log('123123123123132' + isLoggedIn);
         for (let i = where; i < count; i++) {
             const { cardElement } = new Card(myQuestion, cards.articles[i].url, cards.articles[i].urlToImage, cards.articles[i].publishedAt, cards.articles[i].title, cards.articles[i].description, cards.articles[i].source.name, isLoggedIn);
             cardContainer.appendChild(cardElement);
@@ -67,22 +62,11 @@ export class Search {
             }
         }).then(() => {
             let isLoggedIn = true;
-            // console.log(isLoggedIn)
             this.find(isLoggedIn)
-            // let userLogin = user.name;
-            // new Header({ isLoggedIn, userLogin });
-            // return isLoggedIn;
-            // new Search(isLoggedIn);
-            // new CheckLog(isLoggedIn);
 
         }).catch(() => {
-            // console.log(err);
             let isLoggedIn = false;
-
             this.find(isLoggedIn)
-            // return isLoggedIn;
-            // new Search(isLoggedIn);
-            // new CheckLog(isLoggedIn);
         });
     }
     find(isLoggedIn) {
@@ -96,14 +80,13 @@ export class Search {
         weekAgo = weekAgo.toISOString().slice(0, 10)
 
         let myQuestion = question.value;
-        if(myQuestion.length === 0) {
+        if (myQuestion.length === 0) {
             preloaderNotfound.style.display = 'flex';
             notFoundTitle.textContent = 'Введите хотя бы одно ключевое слово'
             preloaderAwait.style.display = 'none';
             notFoundText.textContent = ''
         } else {
             api.getCards(myQuestion, weekAgo, today).then(cards => {
-                // console.log(isLoggedIn);
                 if (cards.totalResults === 0) {
                     preloaderAwait.style.display = 'none';
                     preloaderNotfound.style.display = 'flex';
@@ -112,22 +95,15 @@ export class Search {
                     searchResult.style.display = 'none'
                 } else {
                     this.successSearchStyling(cards);
-                    // console.log(isLoggedIn);
-                    // let count = cards.articles.length
-                    // load.render(0, count, cards, myQuestion, isLoggedIn);
-                    // console.log(isLoggedIn)
                     if (cards.articles.length < 3) {
                         let count = cards.articles.length
-                        // console.log(isLoggedIn);
                         load.render(0, count, cards, myQuestion, isLoggedIn);
                     } else {
                         let count = 3
-                        // console.log('123123123123132' + isLoggedIn);
                         load.render(0, count, cards, myQuestion, isLoggedIn);
                     }
                     if (document.querySelector('.search-result__button')) {
                         const showMore = document.querySelector('.search-result__button');
-                        // console.log('123123123123132' + isLoggedIn);
                         this.showMoreLogic(showMore, cards, myQuestion, isLoggedIn);
                     }
                 }

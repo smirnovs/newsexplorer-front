@@ -5,11 +5,9 @@ const popupCloseButton = document.querySelector('.popup__close');
 export const popUp = document.querySelector('.popup');
 const mobileAuth = document.querySelector('.menumobile__login');
 const toRegister = document.querySelector('.popup__reg');
-// const offerText = document.querySelector('.popup__offer');
 const popupTitle = document.querySelector('.popup__title');
 const popupInputNameSbt = document.querySelector('.popup__input_name-sbt');
 const popupInputName = document.querySelector('.popup__input_name');
-const popupErrorUser = document.querySelector('.popup__error_user');
 export const wrongData = document.querySelector('.popup__error_auth');
 const toLogin = document.querySelector('.popup__auth');
 export const popupEnter = popUp.querySelector('.popup__button_enter');
@@ -69,5 +67,4 @@ const validate = new PopupValidate();
 const display = (status) => {
     popupInputNameSbt.style.display = status;
     popupInputName.style.display = status;
-    // popupErrorUser.style.display = status;
 }

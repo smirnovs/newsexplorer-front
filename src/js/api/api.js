@@ -50,7 +50,6 @@ export class Api {
         })
     }
     unAuth() {
-        console.log('unauth')
         return fetch(`${this.url}/unauth`, {
             headers: this.headers,
             credentials: 'include',
@@ -101,7 +100,6 @@ export class Api {
         });
     }
     createUser(userMail, userPwd, userName) {
-        // console.log(userMail, userPwd, userName);
         return fetch(`${this.url}/signup`, {
             method: 'POST',
             headers: this.headers,
@@ -113,7 +111,6 @@ export class Api {
         });
     }
     loginUser(userMail, userPwd) {
-        console.log(userMail, userPwd);
         return fetch(`${this.url}/signin`, {
             method: 'POST',
             headers: this.headers,

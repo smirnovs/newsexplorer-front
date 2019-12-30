@@ -1,6 +1,5 @@
 
 const slideBlock = document.querySelector('.glide__slides');
-// import { glide } from './glider/glider.js';
 
 
 export class CreateGitCatds {
@@ -10,12 +9,9 @@ export class CreateGitCatds {
         this.date = date;
         this.message = message;
         this.avatar = avatar;
-
         this.createCard();
-
     }
     createCard() {
-        // console.log(this.message);
         const newCard = document.createElement('li');
         newCard.classList.add('glide__slide');
 
