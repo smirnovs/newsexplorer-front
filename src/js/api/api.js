@@ -10,9 +10,7 @@ export class Api {
         return fetch(`${this.url}`, {
             headers: this.headers,
             // credentials: 'include',
-        }).catch(err => {
-            console.log(err);
-        });
+        })
     }
     deleteCard(id) {
         return fetch(`${this.url}/articles/${id}`, {
@@ -59,9 +57,7 @@ export class Api {
         return fetch(`${this.url}/articles`, {
             headers: this.headers,
             credentials: 'include',
-        }).catch(err => {
-            console.log(err);
-        });
+        })
     }
     checkCard(pseudoId) {
         return fetch(`${this.url}/articles/${pseudoId}`, {
@@ -78,9 +74,7 @@ export class Api {
             } else {
                 return Promise.reject(res.status);
             }
-        }).catch(err => {
-            console.log(err);
-        });
+        })
     }
     saveCard(pseudoId, keyword, title, text, date, source, link, image) {
         return fetch(`${this.url}/articles`, {

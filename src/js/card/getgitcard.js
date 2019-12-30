@@ -1,11 +1,11 @@
 // import { GIT_API } from '../helpers/messages.js';
 import { Api } from '../api/api.js';
 import { GIT_API } from '../helpers/messages.js';
-import { CreateGitCatds } from './creategitcard.js';
+import { GitCatdsCreate } from './creategitcard.js';
 import { glide } from '../glider/glider.js';
 
 
-export class GetGit {
+export class GitGet {
     constructor() {
         this.getGitCards()
     }
@@ -16,12 +16,12 @@ export class GetGit {
             })
             .then(res => {
                 for (let i = 0; i < res.length; i++) {
-                    let name = res[i].commit.committer.name;
-                    let email = res[i].commit.committer.email;
-                    let date = res[i].commit.committer.date;
-                    let message = res[i].commit.message;
-                    let url = res[i].author.avatar_url;
-                    new CreateGitCatds(name, email, date, message, url);
+                    const name = res[i].commit.committer.name;
+                    const email = res[i].commit.committer.email;
+                    const date = res[i].commit.committer.date;
+                    const message = res[i].commit.message;
+                    const url = res[i].author.avatar_url;
+                    new GitCatdsCreate(name, email, date, message, url);
                 }
             }).then(() => {
                 glide.mount();

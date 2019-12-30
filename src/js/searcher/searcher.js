@@ -61,11 +61,11 @@ export class Search {
                 return Promise.reject(res.status);
             }
         }).then(() => {
-            let isLoggedIn = true;
+            const isLoggedIn = true;
             this.find(isLoggedIn)
 
         }).catch(() => {
-            let isLoggedIn = false;
+            const isLoggedIn = false;
             this.find(isLoggedIn)
         });
     }
@@ -79,7 +79,7 @@ export class Search {
         today = today.toISOString().slice(0, 10)
         weekAgo = weekAgo.toISOString().slice(0, 10)
 
-        let myQuestion = question.value;
+        const myQuestion = question.value;
         if (myQuestion.length === 0) {
             preloaderNotfound.style.display = 'flex';
             notFoundTitle.textContent = 'Введите хотя бы одно ключевое слово'
@@ -96,10 +96,10 @@ export class Search {
                 } else {
                     this.successSearchStyling(cards);
                     if (cards.articles.length < 3) {
-                        let count = cards.articles.length
+                        const count = cards.articles.length
                         load.render(0, count, cards, myQuestion, isLoggedIn);
                     } else {
-                        let count = 3
+                        const count = 3
                         load.render(0, count, cards, myQuestion, isLoggedIn);
                     }
                     if (document.querySelector('.search-result__button')) {

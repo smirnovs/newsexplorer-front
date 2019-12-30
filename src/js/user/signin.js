@@ -23,8 +23,8 @@ export class Signin {
                         return Promise.reject(res.status);
                     }
                 }).then((user) => {
-                    let isLoggedIn = true;
-                    let userLogin = user.name;
+                    const isLoggedIn = true;
+                    const userLogin = user.name;
                     new Header({ isLoggedIn, userLogin });
                     new Mobileheader({ isLoggedIn, userLogin });
                     popup.close();

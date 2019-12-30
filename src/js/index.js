@@ -9,8 +9,8 @@ import { Header, authButton } from "./header/header.js";
 import { ICON_MOBILE_WHITE_CLOSED, HEADER_COLOR } from "./helpers/messages.js";
 import { Mobileheader, mobileAuthButton } from "./header/mobileheader.js";
 
-let isOpenMenu = false;
-let isHeader = true;
+const isOpenMenu = false;
+const isHeader = true;
 
 new Search();
 new Popup();
@@ -26,8 +26,8 @@ api.checkAuth().then(res => {
         return Promise.reject(res);
     }
 }).then((user) => {
-    let isLoggedIn = true;
-    let userLogin = user.name;
+    const isLoggedIn = true;
+    const userLogin = user.name;
     new Header({ isLoggedIn, userLogin });
     new Mobileheader({ isLoggedIn, userLogin });
 
@@ -39,8 +39,8 @@ api.checkAuth().then(res => {
 authButton.addEventListener('click', () => {
     api.unAuth().then(res => {
         if (res.ok) {
-            let isLoggedIn = false;
-            let userLogin = '';
+            const isLoggedIn = false;
+            const userLogin = '';
             new Header({ isLoggedIn, userLogin });
             new Mobileheader({ isLoggedIn, userLogin });
             searchResult.style.display = 'none';
@@ -56,8 +56,8 @@ authButton.addEventListener('click', () => {
 mobileAuthButton.addEventListener('click', () => {
     api.unAuth().then(res => {
         if (res.ok) {
-            let isLoggedIn = false;
-            let userLogin = '';
+            const isLoggedIn = false;
+            const userLogin = '';
             new Header({ isLoggedIn, userLogin });
             new Mobileheader({ isLoggedIn, userLogin });
             searchResult.style.display = 'none';

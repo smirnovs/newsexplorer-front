@@ -31,7 +31,7 @@ export class Card {
                 console.log('Надо залогиниться')
             } else {
                 if (!this.isExist) {
-                    let iconSvg = event.currentTarget.querySelector('.card__bookmark');
+                    const iconSvg = event.currentTarget.querySelector('.card__bookmark');
                     api.saveCard(this.pseudoId, this.keyword, this.title, this.text, this.date, this.source, this.link, this.imgUrl)
                         .then((res) => {
                             iconSvg.setAttribute('fill', '#2f71e5');
@@ -46,7 +46,7 @@ export class Card {
                         })
 
                 } else {
-                    let iconSvg = event.currentTarget.querySelector('.card__bookmark');
+                    const iconSvg = event.currentTarget.querySelector('.card__bookmark');
 
                     api.deleteCard(this.id)
                         .then(() => {

@@ -15,7 +15,7 @@ const newsCount = document.querySelector('.user-greetings__newscount');
 const keywordKeys = document.querySelector('.user-greetings__keywords-keys');
 const mobileAuthButton = document.querySelector('.menumobile__login_logged');
 
-let isOpenMenu = false;
+const isOpenMenu = false;
 
 new Mobilemenu(ICON_COLOR_BLACK, isOpenMenu);
 
@@ -47,11 +47,11 @@ api.getSavedCards().then(res => {
         return Promise.reject(res.status);
     }
 }).then(cards => {
-    let isExist = true;
-    let isSaved = true;
-    let isLoggedIn = true;
+    const isExist = true;
+    const isSaved = true;
+    const isLoggedIn = true;
     newsCount.textContent = cards.data.length;
-    let keys = []
+    const keys = []
     for (const card of cards.data) {
         const { cardElement } = new Card(isLoggedIn, isSaved, isExist, card.pseudoId, card.keyword, card.link, card.image, card.date, card.title, card.text, card.source, card._id);
         cardContainer.appendChild(cardElement);
@@ -69,26 +69,26 @@ api.getSavedCards().then(res => {
         return b[1] - a[1];
     });
 
-    let keysFinal = []
-    for (let key of keysSort) {
+    const keysFinal = []
+    for (const key of keysSort) {
         keysFinal.push(key[0])
     }
     if (keysSort.length === 1) {
-        let keyPhrase = `${keysFinal[0]}`
+        const keyPhrase = `${keysFinal[0]}`
         keywordKeys.textContent = keyPhrase;
     } else if (keysSort.length === 2) {
-        let keyPhrase = `${keysFinal[0]}, ${keysFinal[1]}`
+        const keyPhrase = `${keysFinal[0]}, ${keysFinal[1]}`
         keywordKeys.textContent = keyPhrase;
     } else if (keysSort.length === 3) {
-        let keyPhrase = `${keysFinal[0]}, ${keysFinal[1]}, ${keysFinal[2]}`
+        const keyPhrase = `${keysFinal[0]}, ${keysFinal[1]}, ${keysFinal[2]}`
         keywordKeys.textContent = keyPhrase;
     }
     else if (keysSort.length > 3) {
-        let otherKeys = keysSort.length - 2
-        let keyPhrase = `${keysFinal[0]}, ${keysFinal[1]} и ${otherKeys} других`
+        const otherKeys = keysSort.length - 2
+        const keyPhrase = `${keysFinal[0]}, ${keysFinal[1]} и ${otherKeys} других`
         keywordKeys.textContent = keyPhrase;
     } else if (keysSort.length === 0 || typeof card.keyword === 'undefined') {
-        let keyPhrase = 'У вас нет ключевых слов'
+        const keyPhrase = 'У вас нет ключевых слов'
         keywordKeys.textContent = keyPhrase;
     }
 

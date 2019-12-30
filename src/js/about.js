@@ -7,15 +7,15 @@ import { Popup } from './popup/popup.js';
 import { Signup } from "./user/signup";
 import { Signin } from "./user/signin";
 import { Mobileheader } from "./header/mobileheader.js";
-import { GetGit } from "./card/getgitcard";
+import { GitGet } from "./card/getgitcard";
 
 const ICON_COLOR = 'header__mobileico_black-closed';
 const ghButton = document.querySelector('.github__button');
 const mobileAuthButton = document.querySelector('.menumobile__login_auth');
 
-let isOpenMenu = false;
+const isOpenMenu = false;
 new Mobilemenu(ICON_COLOR, isOpenMenu);
-new GetGit();
+new GitGet();
 new Popup();
 new Signup();
 new Signin();
@@ -27,8 +27,8 @@ api.checkAuth().then(res => {
         return Promise.reject(res);
     }
 }).then((user) => {
-    let isLoggedIn = true;
-    let userLogin = user.name;
+    const isLoggedIn = true;
+    const userLogin = user.name;
     new Header({ isLoggedIn, userLogin });
     new Mobileheader({ isLoggedIn, userLogin });
 
@@ -40,8 +40,8 @@ api.checkAuth().then(res => {
 authButton.addEventListener('click', () => {
     api.unAuth().then(res => {
         if (res.ok) {
-            let isLoggedIn = false;
-            let userLogin = '';
+            const isLoggedIn = false;
+            const userLogin = '';
             new Header({ isLoggedIn, userLogin });
             new Mobileheader({ isLoggedIn, userLogin });
         } else {
@@ -57,8 +57,8 @@ authButton.addEventListener('click', () => {
 mobileAuthButton.addEventListener('click', () => {
     api.unAuth().then(res => {
         if (res.ok) {
-            let isLoggedIn = false;
-            let userLogin = '';
+            const isLoggedIn = false;
+            const userLogin = '';
             new Header({ isLoggedIn, userLogin });
             new Mobileheader({ isLoggedIn, userLogin });
         } else {
