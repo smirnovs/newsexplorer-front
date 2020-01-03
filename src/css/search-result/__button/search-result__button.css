@@ -1,4 +1,5 @@
 .search-result__button {
+    /* display: none; */
     width: 288px;
     height: 64px;
     background: #fff;

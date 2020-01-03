@@ -1,6 +1,8 @@
 @import url(./_logged/header__login_logged.css);
 @import url(./_black/header__login_black.css);
 @import url(./_white/header__login_white.css);
+@import url(./_auth/header__login_auth.css);
+@import url(./_unauth/header__login_unauth.css);
 
 .header__login {
     height: 48px;

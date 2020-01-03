@@ -12,6 +12,11 @@
     z-index: 2;
 }
 
+.card__bookmark_saved {
+    fill: #2f71e5;
+    stroke: #2f71e5;
+}
+
 
 .card__saver:hover {
     cursor: pointer;

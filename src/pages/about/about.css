@@ -1,5 +1,7 @@
 @import url(../../vendor/normalize.css);
 @import url(../../css/root/root.css);
+@import url(../../css/popup/popup.css);
+@import url(../../css/mini-popup/mini-popup.css);
 @import url(../../css/menumobile/menumobile.css);
 @import url(../../css/button/button.css);
 @import url(../../css/header-section/header-section.css);

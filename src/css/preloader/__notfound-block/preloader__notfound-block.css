@@ -1,4 +1,5 @@
 .preloader__notfound-block {
+	display: none;
 	flex-direction: column;
 	margin-top: 86px;
 	margin-bottom: 80px;

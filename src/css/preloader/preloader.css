@@ -3,10 +3,12 @@
 @import url(./__notfound-text/preloader__notfound-text.css);
 @import url(./__notfound-img/preloader__notfound-img.css);
 @import url(./__notfound-block/preloader__notfound-block.css);
+@import url(./__await-block/preloader__await-block.css);
 @import url(./__circle/preloader__circle.css);
 
 .preloader {
-	display: flex;
+	/* display: flex; */
+	display: none;
 	flex-direction: column-reverse;
 	align-items: center;
 	position: relative;

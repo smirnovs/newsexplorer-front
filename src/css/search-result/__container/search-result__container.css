@@ -1,6 +1,7 @@
 .search-result__container {
     padding: 80px 104px 0px;
-    display: flex;
+    display: none;
+    /* display: flex; */
     flex-direction: column;
 }
 

@@ -1,3 +1,5 @@
+@import url(./_auth/popup__error_auth.css);
+
 .popup__error {
   position: absolute;
   height: 11px;
@@ -7,9 +9,16 @@
 }
 
 .popup__error_email {
+  display: none;
   top: 58px;
 }
 
 .popup__error_user {
+  display: none;
   bottom: 99px;
+}
+
+.popup__error_pwd {
+  display: none;
+  bottom: 129px;
 }

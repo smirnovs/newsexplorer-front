@@ -1,0 +1,10 @@
+.mini-popup__enter {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    text-decoration: none;
+    color: #2f71e5;
+    cursor: pointer;
+}

@@ -1,12 +1,12 @@
 .card__nologin {
     position: absolute;
+    display: none;
     width: 162px;
     height: 40px;
     font-style: normal;
     font-weight: 600;
     font-size: 10px;
     line-height: 12px;
-    display: flex;
     align-items: center;
     text-align: center;
     color: #000;
@@ -26,3 +26,4 @@
         right: 54px;
     }
 }
+

@@ -20,12 +20,16 @@
                         <nav class="header__menu header__menu_white">
                             <a href="index.html" class="header__link header__link_inactive">Главная</a>
                             <a href="about.html" class="header__link header__link_active">О проекте</a>
-                            <a href="saved.html" class="header__link header__link_inactive">Сохраненные статьи</a>
-                            <button class="header__login header__login_black header__login_logged">Грета <svg width="24"
-                                    height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <a href="saved.html"
+                                class="header__link header__link_inactive header__link_saved">Сохраненные статьи</a>
+                            <button
+                                class="header__login header__login_black header__login_unauth">Авторизоваться</button>
+                            <button class="header__login header__login_black header__login_auth"><span
+                                    class="header__login_name">Грета</span> <svg width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd"
                                         d="M10 6L6 6L6 18H10V20H6C4.89543 20 4 19.1046 4 18V6C4 4.89543 4.89543 4 6 4H10V6ZM17.5856 13L13.2927 17.1339L14.707 18.4958L21.4141 12.0371L14.707 5.57837L13.2927 6.9402L17.5856 11.0741H8V13H17.5856Z"
-                                        fill="white" class="header__logout-black" />
+                                        fill="#000" />
                                 </svg>
                             </button>
                         </nav>
@@ -112,53 +116,6 @@
                 <div class="glide">
                     <div data-glide-el="track" class="glide__track">
                         <ul class="glide__slides">
-                            <li class="glide__slide">
-                                <div class="glide__date">14 августа, 2019</div>
-                                <div class="glide__author-block">
-                                    <div class="glide__author">
-                                        <img src=<%=require("../../images/anton.png")%> alt="Автор коммита"
-                                            class="glide__img">
-                                        <div class="glide__author-contacts">
-                                            <div class="glide__name">Антон Долинин</div>
-                                            <div class="glide__email">anton@yandex.ru</div>
-                                        </div>
-                                    </div>
-                                    <p class="glide__description">Emmet (formerly Zen Coding) is a web-
-                                        developer’s toolkit that can greatly improve your HTML & CSS workflow.</p>
-                                </div>
-                            </li>
-                            <li class="glide__slide">
-                                <div class="glide__date">14 августа, 2019</div>
-                                <div class="glide__author-block">
-                                    <div class="glide__author">
-                                        <img src=<%=require("../../images/maria.png")%> alt="Автор коммита"
-                                            class="glide__img">
-                                        <div class="glide__author-contacts">
-                                            <div class="glide__name">Мария Фёдорова</div>
-                                            <div class="glide__email">mariiifed@yandex.ru</div>
-                                        </div>
-                                    </div>
-                                    <p class="glide__description">You can install this plugin directly from NetBeans
-                                        Plugin Portal: in NetBeans, open <span class="glide__description-bg"> Tools >
-                                            Plugins > Available plugins</span> and find and install Emmet plugin.</p>
-                                </div>
-                            </li>
-                            <li class="glide__slide">
-                                <div class="glide__date">14 августа, 2019</div>
-                                <div class="glide__author-block">
-                                    <div class="glide__author">
-                                        <img src=<%=require("../../images/inga.png")%> alt="Автор коммита"
-                                            class="glide__img">
-                                        <div class="glide__author-contacts">
-                                            <div class="glide__name">Инга Иванова</div>
-                                            <div class="glide__email">ingaiva@yandex.ru</div>
-                                        </div>
-                                    </div>
-                                    <p class="glide__description">With Emmet, you can type CSS-like expressions
-                                        that can be dynamically parsed, and produce
-                                        output depending on what you type in the abb...</p>
-                                </div>
-                            </li>
                         </ul>
                     </div>
                     <div class="glide__arrows" data-glide-el="controls">
@@ -196,12 +153,56 @@
                 </nav>
             </footer>
         </section>
+        <div class="popup">
+            <div class="popup__content">
+                <img src=<%=require("../../images/close.svg")%> alt="" class="popup__close" />
+                <h3 class="popup__title">Вход</h3>
+                <form class="popup__form" name="logincontrol">
+                    <span class="popup__subtitle">Email</span>
+                    <input type="text" name="usermail" class="popup__input" placeholder="Введите почту" />
+                    <span class="popup__error popup__error_email">Неправильный формат email</span>
+                    <span class="popup__subtitle">Пароль</span>
+                    <input type="password" name="userpwd" class="popup__input" placeholder="Введите пароль"
+                        minLength="6" maxLength="30" />
+                    <span class="popup__error popup__error_pwd">Пароль слишком короткий</span>
+                    <span class="popup__subtitle popup__input_name-sbt">Имя</span>
+                    <input type="text" name="username" class="popup__input popup__input_name"
+                        placeholder="Введите свое имя" minlength="3" maxlength="10" />
+                    <span class="popup__error popup__error_user">Слишком короткое имя</span>
+                    <span class="popup__error popup__error_auth"></span>
+                    <button class="button popup__button popup__button_enter">
+                        Войти
+                    </button>
+                    <button class="button popup__button popup__button_reg">
+                        Зарегистрироваться
+                    </button>
+                </form>
+                <span class="popup__offer">Или <span class="popup__reg">Зарегистрироваться</span><span
+                        class="popup__auth">Войти</span></span>
+            </div>
+        </div>
+        <div class="mini-popup">
+            <div class="mini-popup__content">
+                <img src=<%=require("../../images/close.svg")%> alt="" class="mini-popup__close" />
+                <h3 class="mini-popup__title">Пользователь успешно зарегистрирован!</h3>
+                <p class="mini-popup__enter">Выполнить вход</p>
+            </div>
+        </div>
         <nav class="menumobile">
             <div class="menumobile__links menumobile__links_white">
                 <a href="index.html" class="menumobile__link menumobile__link_black">Главная</a>
                 <a href="about.html" class="menumobile__link menumobile__link_black">О проекте</a>
-                <a href="saved.html" class="menumobile__link menumobile__link_black">Сохраненные статьи</a>
-                <button class="menumobile__login menumobile__login_black">Авторизоваться</button>
+                <a href="saved.html" class="menumobile__link menumobile__link_black menumobile__link_saved">Сохраненные
+                    статьи</a>
+                <button
+                    class="menumobile__login menumobile__login_black menumobile__login_unauth">Авторизоваться</button>
+                <button class="menumobile__login menumobile__login_black menumobile__login_auth"><span
+                        class="menumobile__login_name"></span> <svg width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M10 6L6 6L6 18H10V20H6C4.89543 20 4 19.1046 4 18V6C4 4.89543 4.89543 4 6 4H10V6ZM17.5856 13L13.2927 17.1339L14.707 18.4958L21.4141 12.0371L14.707 5.57837L13.2927 6.9402L17.5856 11.0741H8V13H17.5856Z"
+                            fill="#000" />
+                    </svg></button>
             </div>
         </nav>
     </div>
