@@ -1,4 +1,4 @@
-import { PopupValidate, userMail, userPwd, userName, shortPwdError } from '../popup/popup-validate.js';
+import { userMail, userPwd, userName, shortPwdError } from '../popup/popup-validate.js';
 
 const authButton = document.querySelector('.header__login_unauth');
 const popupCloseButton = document.querySelector('.popup__close');
@@ -16,20 +16,24 @@ export const miniPopup = document.querySelector('.mini-popup');
 
 
 export class Popup {
-    constructor() {
-        this.addListeners();
+    constructor(validate) {
+        this.validate = validate;
+        this.open = this.open.bind(this);
+        this.close = this.close.bind(this);
+        this._toregister = this._toregister.bind(this);
+        this.tologin = this.tologin.bind(this);
     }
 
     open() {
         popUp.classList.toggle('popup_is-opened');
-        validate.disableButton();
+        this.validate.disableButton();
     }
     close() {
         popUp.classList.toggle('popup_is-opened');
-        validate.clearFields();
+        this.validate.clearFields();
     }
 
-    toregister() {
+    _toregister() {
         shortPwdError.style.bottom = '180px';
         popupTitle.textContent = 'Регистрация';
         toRegister.style.display = 'none'
@@ -37,7 +41,7 @@ export class Popup {
         popupReg.style.display = 'inline-block'
         toLogin.style.display = 'inline-block';
         wrongData.style.display = 'none'
-        validate.clearFields();
+        this.validate.clearFields();
         display('inline-block');
     }
     tologin() {
@@ -48,22 +52,22 @@ export class Popup {
         toLogin.style.display = 'none';
         popupReg.style.display = 'none'
         popupEnter.style.display = 'inline-block'
-        validate.clearFields();
+        this.validate.clearFields();
         display('none');
     }
     addListeners() {
         authButton.addEventListener('click', this.open);
         mobileAuth.addEventListener('click', this.open);
         popupCloseButton.addEventListener('click', this.close);
-        toRegister.addEventListener('click', this.toregister);
+        toRegister.addEventListener('click', this._toregister);
         toLogin.addEventListener('click', this.tologin);
-        userMail.addEventListener('input', validate.isMail);
-        userPwd.addEventListener('input', validate.isPwd);
-        userName.addEventListener('input', validate.isName);
+        userMail.addEventListener('input', this.validate.isMail);
+        userPwd.addEventListener('input', this.validate.isPwd);
+        userName.addEventListener('input', this.validate.isName);
 
     }
 }
-const validate = new PopupValidate();
+
 const display = (status) => {
     popupInputNameSbt.style.display = status;
     popupInputName.style.display = status;

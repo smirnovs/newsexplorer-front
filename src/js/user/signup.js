@@ -1,28 +1,21 @@
-import { Api } from '../api/api.js'
-import { Popup, popupReg, miniPopup } from '../popup/popup.js';
+import { popupReg, miniPopup } from '../popup/popup.js';
 import { userMail, userPwd, userName, notMailError } from '../popup/popup-validate.js';
-import { NEWSAPI_URL } from '../helpers/messages.js';
-import { Minipopup } from '../popup/mini-popup.js';
 
 export class Signup {
-    constructor() {
-        this.addListener();
+    constructor(popup, miniPopupCallback, api) {
+        this.popup = popup;
+        this.miniPopupCallback = miniPopupCallback;
+        this.api = api;
+        this._signup = this._signup.bind(this);
     }
-    signup() {
+    _signup() {
         event.preventDefault();
-        api.createUser(userMail.value, userPwd.value, userName.value)
-            .then(res => {
-                if (res.ok) {
-                    return Promise.resolve(res);
-                } else {
-                    return Promise.resolve(res.json());
-                }
-            })
+        this.api.createUser(userMail.value, userPwd.value, userName.value)
             .then(res => {
                 if (res.status === 201) {
                     miniPopup.classList.add('mini-popup_is-opened');
-                    popup.close();
-                    new Minipopup();
+                    this.popup.close();
+                    this.miniPopupCallback(this.popup);
                 } else {
                     notMailError.style.display = 'inline-block'
                     notMailError.textContent = res.message;
@@ -32,15 +25,6 @@ export class Signup {
             });
     }
     addListener() {
-        popupReg.addEventListener('click', this.signup)
+        popupReg.addEventListener('click', this._signup)
     }
 }
-
-const popup = new Popup();
-
-const api = new Api({
-    baseUrl: NEWSAPI_URL,
-    headers: {
-        'Content-Type': 'application/json'
-    }
-});

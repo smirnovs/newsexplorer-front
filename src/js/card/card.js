@@ -1,10 +1,7 @@
-import { NEWSAPI_URL, CARD_DELETE, CARD_BOOKMARK } from '../helpers/messages.js';
-// import { MAIN_PAGE, NEWSAPI_URL } from './helpers/messages';
-// import { api } from '../api/api.js';
-import { Api } from '../api/api.js';
+import { CARD_DELETE, CARD_BOOKMARK } from '../helpers/messages.js';
 
 export class Card {
-    constructor(isLoggedIn, isSaved, isExist, pseudoId, keyword, link, imgUrl, date, title, text, source, id) {
+    constructor(api, isLoggedIn, isSaved, isExist, pseudoId, keyword, link, imgUrl, date, title, text, source, id) {
         this.id = id;
         this.isLoggedIn = isLoggedIn;
         this.isSaved = isSaved;
@@ -17,24 +14,21 @@ export class Card {
         this.title = title;
         this.text = text;
         this.source = source;
-        this.saveCard = this.saveCard.bind(this);
-        this.deleteCard = this.deleteCard.bind(this);
-        this.cardElement = this.create();
-        this.addListeners();
+        this.api = api;
+        this._saveCard = this._saveCard.bind(this);
+        this._deleteCard = this._deleteCard.bind(this);
+        this.cardElement = this._create();
+        this.cardElement.addEventListener('click', this._saveCard);
+        this.cardElement.addEventListener('click', this._deleteCard);
     }
-    addListeners() {
-        this.cardElement.addEventListener('click', this.saveCard);
-        this.cardElement.addEventListener('click', this.deleteCard);
-    }
-
-    saveCard() {
+    _saveCard() {
         if (event.target.classList.contains('card__saver') || event.target.classList.contains('card__svg-bookmark') || event.target.classList.contains('card__bookmark')) {
             if (!this.isLoggedIn) {
                 console.log('Надо залогиниться')
             } else {
                 if (!this.isExist) {
                     const iconSvg = event.currentTarget.querySelector('.card__bookmark');
-                    api.saveCard(this.pseudoId, this.keyword, this.title, this.text, this.date, this.source, this.link, this.imgUrl)
+                    this.api.saveCard(this.pseudoId, this.keyword, this.title, this.text, this.date, this.source, this.link, this.imgUrl)
                         .then((res) => {
                             iconSvg.setAttribute('fill', '#2f71e5');
                             iconSvg.setAttribute('stroke', '#2f71e5');
@@ -50,28 +44,28 @@ export class Card {
                 } else {
                     const iconSvg = event.currentTarget.querySelector('.card__bookmark');
 
-                    api.deleteCard(this.id)
+                    this.api.deleteCard(this.id)
                         .then(() => {
                             iconSvg.setAttribute('fill', 'none');
                             iconSvg.setAttribute('stroke', '#B6BCBF');
                             iconSvg.classList.remove('card__bookmark_saved');
                             this.isExist = !this.isExist;
-                        });
+                        })
+                        .catch();
                 }
             }
         }
     }
-    deleteCard() {
+    _deleteCard() {
         if (event.target.classList.contains('card__deleter') || event.target.classList.contains('card__svg-deleter') || event.target.classList.contains('card__delete')) {
-            api.deleteCard(this.id).then(event.target.closest('.card').remove()).catch(() => {
+            this.api.deleteCard(this.id).then(event.target.closest('.card').remove()).catch(() => {
                 console.log('не удалено')
             })
         }
     }
-    createIcon(cardBookmark) {
+    _createIcon(cardBookmark) {
         const cardSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         const svgPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        // const cardBookmark = document.createElement('div');
         if (this.isSaved) {
             cardBookmark.classList.add('card__deleter');
             cardSvg.classList.add('card__svg-deleter');
@@ -107,7 +101,7 @@ export class Card {
         cardSvg.appendChild(svgPath);
     }
 
-    dateFormat(date, cardDate) {
+    _dateFormat(date, cardDate) {
         date = date.slice(0, 10);
         date = date.replace(/-/g, ', ');
         const publicDate = new Date(date);
@@ -120,8 +114,7 @@ export class Card {
         cardDate.textContent = date;
 
     }
-    create() {
-
+    _create() {
         const newCard = document.createElement('div');
         newCard.classList.add('card');
 
@@ -133,16 +126,14 @@ export class Card {
         cardImg.alt = this.title
 
         const cardBookmark = document.createElement('div');
-        // cardBookmark.classList.add('card__saver');
 
-        this.createIcon(cardBookmark);
+        this._createIcon(cardBookmark);
         imgBlock.appendChild(cardImg);
         imgBlock.appendChild(cardBookmark);
         if (!this.isLoggedIn) {
             const cardNologin = document.createElement('div');
             cardNologin.classList.add('card__nologin');
             cardNologin.textContent = 'Войдите, чтобы сохранять статьи';
-            // cardNologin.style.border = ".5px solid #000";
             imgBlock.appendChild(cardNologin);
         }
 
@@ -158,10 +149,7 @@ export class Card {
 
         const cardDate = document.createElement('div');
         cardDate.classList.add('card__date');
-        this.dateFormat(this.date, cardDate);
-        // const cardDate = document.createElement('div');
-        // cardDate.classList.add('card__date');
-        // cardDate.textContent = this.date
+        this._dateFormat(this.date, cardDate);
 
         const cardNews = document.createElement('div');
         cardNews.classList.add('card__news');
@@ -178,16 +166,7 @@ export class Card {
         cardSource.classList.add('card__source');
         cardSource.textContent = this.source;
 
-        // cardList.appendChild(newCard);
-
         newCard.appendChild(imgBlock);
-
-
-
-
-        // cardBookmark.appendChild(cardSvg);
-        // cardSvg.appendChild(svgPath);
-
 
         newCard.appendChild(textBlock);
 
@@ -203,21 +182,3 @@ export class Card {
 
     }
 }
-
-const api = new Api({
-    baseUrl: NEWSAPI_URL,
-    headers: {
-        // authorization: '67fcbb6d7e14456f995c19d4a0f3cfbc',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    }
-});
-
-// const api = new Api({
-//     baseUrl: textHelper.NEWSAPI_URL,
-//     headers: {
-//         // authorization: document.cookie,
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json'
-//     }
-// });

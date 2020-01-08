@@ -9,7 +9,6 @@ export class Mobileheader {
         const { isLoggedIn, userLogin } = props;
         this.isLoggedIn = isLoggedIn;
         this.userLogin = userLogin;
-        this.render();
     }
     render() {
         if (this.isLoggedIn) {

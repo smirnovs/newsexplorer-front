@@ -5,20 +5,14 @@ const mobileMenuButton = document.querySelector('.header__mobileico');
 
 export class Mobilemenu {
     constructor(iconColor, isOpenMenu, isHeader, headerColor) {
-        this.action = this.action.bind(this);
-        this.header = this.header.bind(this);
+        this._action = this._action.bind(this);
+        this._header = this._header.bind(this);
         this.iconColor = iconColor;
         this.headerColor = headerColor;
         this.isOpenMenu = isOpenMenu;
         this.isHeader = isHeader;
-        this.addListeners();
-
     }
-    resize() {
-        mobileMenu.classList.remove('menumobile__isopened');
-        mobileMenuButton.classList.remove(this.iconColor);
-    }
-    header() {
+    _header() {
         if (window.innerWidth > 720 && this.isOpenMenu == true && this.isHeader) {
             this.isOpenMenu = false;
             mobileMenu.classList.remove('menumobile__isopened');
@@ -31,7 +25,7 @@ export class Mobilemenu {
             mobileMenuButton.classList.remove(this.iconColor);
         }
     }
-    action() {
+    _action() {
         if (!this.isOpenMenu && this.isHeader) {
             mobileMenuButton.classList.toggle(this.iconColor);
             mobileMenu.classList.toggle('menumobile__isopened');
@@ -50,8 +44,8 @@ export class Mobilemenu {
         }
     }
     addListeners() {
-        mobileMenuButton.addEventListener('click', this.action);
-        window.addEventListener('resize', this.header);
+        mobileMenuButton.addEventListener('click', this._action);
+        window.addEventListener('resize', this._header);
     }
 }
 

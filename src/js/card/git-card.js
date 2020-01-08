@@ -1,15 +1,11 @@
-
-const slideBlock = document.querySelector('.glide__slides');
-
-
 export class GitCard {
-    constructor(name, email, date, message, avatar) {
+    constructor(name, email, date, message, avatar, slideBlock) {
         this.name = name;
         this.email = email;
         this.date = date;
         this.message = message;
         this.avatar = avatar;
-        this.createCard();
+        this.slideBlock = slideBlock;
     }
     createCard() {
         const newCard = document.createElement('li');
@@ -57,6 +53,6 @@ export class GitCard {
         cardAuthorContacts.appendChild(cardAuthorName);
         cardAuthorContacts.appendChild(cardAuthorEmail);
 
-        slideBlock.appendChild(newCard)
+        this.slideBlock.appendChild(newCard)
     }
 }

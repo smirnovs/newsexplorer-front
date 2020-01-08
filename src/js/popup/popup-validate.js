@@ -30,7 +30,7 @@ export class PopupValidate {
         popupReg.setAttribute('disabled', true);
         popupReg.classList.add('popup__button_disabled')
     }
-    enableButton(button) {
+    _enableButton(button) {
         button.removeAttribute('disabled');
         button.classList.remove('popup__button_disabled')
     }
@@ -43,10 +43,10 @@ export class PopupValidate {
         } else {
             notMailError.style.display = 'none'
             if (userPwd.value.length >= 6 && userName.value.length >= 3) {
-                this.enableButton(popupReg);
+                this._enableButton(popupReg);
             }
             if (userPwd.value.length >= 6) {
-                this.enableButton(popupEnter);
+                this._enableButton(popupEnter);
                 return true;
             } else {
                 this.disableButton();
@@ -62,10 +62,10 @@ export class PopupValidate {
         } else {
             shortPwdError.style.display = 'none';
             if (isEmail(userMail.value) && userName.value.length >= 3) {
-                this.enableButton(popupReg);
+                this._enableButton(popupReg);
             }
             if (isEmail(userMail.value)) {
-                this.enableButton(popupEnter)
+                this._enableButton(popupEnter)
                 return true;
             } else {
                 this.disableButton();
@@ -80,7 +80,7 @@ export class PopupValidate {
         } else {
             shortNameError.style.display = 'none';
             if (isEmail(userMail.value) && userPwd.value.length >= 6) {
-                this.enableButton(popupReg);
+                this._enableButton(popupReg);
             } else {
                 this.disableButton();
             }

@@ -1,33 +1,27 @@
-import { Api } from '../api/api.js'
-import { Popup, popupEnter } from '../popup/popup.js';
+import { popupEnter } from '../popup/popup.js';
 import { userMail, userPwd } from '../popup/popup-validate.js';
-import { Header } from '../header/header.js';
-import { NEWSAPI_URL } from '../helpers/messages.js';
-import { Mobileheader } from '../header/mobileheader.js';
 
 
 const errorAuth = document.querySelector('.popup__error_auth');
 
 export class Signin {
-    constructor() {
-        this.addListener();
+    constructor(popup, headerCallback, api) {
+        this.popup = popup;
+        this.headerCallback = headerCallback;
+        this.api = api;
+        this._signin = this._signin.bind(this);
     }
-    signin() {
+    _signin() {
         event.preventDefault();
-        api.loginUser(userMail.value, userPwd.value).then((res) => {
+        
+        this.api.loginUser(userMail.value, userPwd.value).then((res) => {
             if (res.ok) {
-                api.checkAuth().then(res => {
-                    if (res.ok) {
-                        return Promise.resolve(res.json());
-                    } else {
-                        return Promise.reject(res.status);
-                    }
-                }).then((user) => {
+                this.api.checkAuth()
+                .then((user) => {
                     const isLoggedIn = true;
                     const userLogin = user.name;
-                    new Header({ isLoggedIn, userLogin });
-                    new Mobileheader({ isLoggedIn, userLogin });
-                    popup.close();
+                    this.headerCallback({ isLoggedIn, userLogin });
+                    this.popup.close();
                     if (document.querySelector('.search-result__container')) {
                         const searchResult = document.querySelector('.search-result__container')
                         searchResult.style.display = 'none';
@@ -52,16 +46,6 @@ export class Signin {
         });
     }
     addListener() {
-        popupEnter.addEventListener('click', this.signin);
+        popupEnter.addEventListener('click', this._signin);
     }
 }
-
-const popup = new Popup();
-
-const api = new Api({
-    baseUrl: NEWSAPI_URL,
-    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-    }
-});

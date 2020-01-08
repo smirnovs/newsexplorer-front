@@ -1,25 +1,24 @@
-import { Popup, miniPopup } from '../popup/popup.js';
+import { miniPopup } from '../popup/popup.js';
 
 const miniPopupEnter = document.querySelector('.mini-popup__enter');
 const miniPopupClose = document.querySelector('.mini-popup__close');
 
 export class Minipopup {
-    constructor(){
-        this.addListeners();
+    constructor(popup){
+        this.popup = popup;
+        this._gotoenter = this._gotoenter.bind(this);
+        this._close = this._close.bind(this);
     }
-   gotoenter(){
+   _gotoenter(){
         miniPopup.classList.toggle('mini-popup_is-opened');
-        popup.open();
-        popup.tologin();
+        this.popup.open();
+        this.popup.tologin();
     }
-    close() {
+    _close() {
         miniPopup.classList.toggle('mini-popup_is-opened');
     }
     addListeners() {
-        miniPopupEnter.addEventListener('click', this.gotoenter);
-        miniPopupClose.addEventListener('click', this.close);
+        miniPopupEnter.addEventListener('click', this._gotoenter);
+        miniPopupClose.addEventListener('click', this._close);
     }
 }
-
-const popup = new Popup();
-
