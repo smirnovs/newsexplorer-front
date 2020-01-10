@@ -23,5 +23,12 @@ module.exports = {
     dateLength: 10,
     pseudoIdLength: 19,
     goodStatus: 201,
-    windowWidth: 720
+    windowWidth: 720,
+    noArticles: 'У вас нет ключевых слов',
+    NO: 'нет',
+    NO_KEYWORD_ERR: 'Ошибка! Необходимо ввести хотя бы одно ключевое слово!',
+    NOTHING_FIND: 'Ничего не найдено',
+    NOTHING_FIND_SORRY: 'К сожалению по вашему запросу ничего не найдено.',
+    SOME_ERROR: 'Произошла ошибка. Повторите попытку поиска.'
+
 }

@@ -1,4 +1,4 @@
-import { maxShowed, firstElement, dateLength, count } from '../helpers/messages.js';
+import { maxShowed, firstElement, dateLength, count, NO_KEYWORD_ERR, NOTHING_FIND, NOTHING_FIND_SORRY, SOME_ERROR } from '../helpers/messages.js';
 
 const searchInput = document.forms.search;
 const question = searchInput.elements.question;
@@ -85,7 +85,7 @@ export class Search {
         const myQuestion = question.value;
         if (myQuestion.length === firstElement) {
             preloaderNotfound.style.display = 'flex';
-            notFoundTitle.textContent = 'Ошибка! Необходимо ввести хотя бы одно ключевое слово!'
+            notFoundTitle.textContent = NO_KEYWORD_ERR;
             preloaderAwait.style.display = 'none';
             notFoundText.textContent = '';
             this._activateForm();
@@ -94,8 +94,8 @@ export class Search {
                 if (cards.totalResults === firstElement) {
                     preloaderAwait.style.display = 'none';
                     preloaderNotfound.style.display = 'flex';
-                    notFoundTitle.textContent = 'Ничего не найдено';
-                    notFoundText.textContent = 'К сожалению по вашему запросу ничего не найдено.';
+                    notFoundTitle.textContent = NOTHING_FIND;
+                    notFoundText.textContent = NOTHING_FIND_SORRY;
                     searchResult.style.display = 'none';
                     this._activateForm();
                 } else {
@@ -110,7 +110,7 @@ export class Search {
                 preloaderAwait.style.display = 'none';
                 preloaderNotfound.style.display = 'flex';
                 notFoundTitle.textContent = ''
-                notFoundText.textContent = 'Произошла ошибка. Повторите попытку поиска.'
+                notFoundText.textContent = SOME_ERROR;
                 this._activateForm();
             });
         }

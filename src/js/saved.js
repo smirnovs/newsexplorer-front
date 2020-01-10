@@ -2,7 +2,7 @@ import "../pages/saved/saved.css";
 import { Mobilemenu } from './helpers/mobilemenu.js';
 import { Api } from "./api/api.js";
 import { Card } from './card/card.js';
-import { MAIN_PAGE, ICON_COLOR_BLACK, NEWSAPI_URL, firstElement, secondElement, thirdElement, maxShowed } from './helpers/messages';
+import { MAIN_PAGE, ICON_COLOR_BLACK, NEWSAPI_URL, firstElement, secondElement, thirdElement, maxShowed, noArticles, NO } from './helpers/messages';
 
 const userName = document.querySelector('.header__login_name');
 const authButton = document.querySelector('.header__login_logged');
@@ -29,34 +29,18 @@ const cardCounter = () => {
     const cardsTotal = document.querySelectorAll('.card');
     const cardsCount = cardsTotal.length;
     if(cardsCount === firstElement) {
-        newsCount.textContent = 'нет'
+        newsCount.textContent =  NO;
     } else {
         newsCount.textContent = cardsCount;
     }
 }
 
-const mobilemenu = new Mobilemenu(mobileMenu, ICON_COLOR_BLACK, isOpenMenu);
-
-mobilemenu.addListeners();
-
-authButton.addEventListener('click', () => {
+const unAuthCallback = () => {
     api.unAuth().then(res => {
         if (res.ok) {
-            window.location.replace(MAIN_PAGE);
-            return Promise.resolve(res.json());
-        } else {
-            return Promise.reject(res.status);
-        }
-
-    });
-})
-
-
-mobileAuthButton.addEventListener('click', () => {
-    api.unAuth().then(res => {
-        if (res.ok) {
-            window.location.replace(MAIN_PAGE);
-            return Promise.resolve(res.json());
+            const isLoggedIn = false;
+            const userLogin = '';
+            headerCallback({ isLoggedIn, userLogin });
         } else {
             return Promise.reject(res.status);
         }
@@ -64,7 +48,16 @@ mobileAuthButton.addEventListener('click', () => {
     }).catch(err => {
         console.log(err);
     });
-})
+}
+
+const mobilemenu = new Mobilemenu(mobileMenu, ICON_COLOR_BLACK, isOpenMenu);
+
+mobilemenu.addListeners();
+
+authButton.addEventListener('click', unAuthCallback)
+
+
+mobileAuthButton.addEventListener('click', unAuthCallback)
 
 api.checkAuth()
     .then((user) => {
@@ -125,12 +118,12 @@ api.getSavedCards()
             const keyPhrase = `${keysFinal[firstElement]}, ${keysFinal[secondElement]} и ${otherKeys} других`
             keywordKeys.textContent = keyPhrase;
         } else if (keysSort.length === firstElement || typeof card.keyword === 'undefined') {
-            const keyPhrase = 'У вас нет ключевых слов'
+            const keyPhrase = noArticles;
             keywordKeys.textContent = keyPhrase;
         }
 
     }).catch(err => {
         allCardsContainer.style.display = 'none'
         keyWords.style.display = 'none'
-        newsCount.textContent = 'нет'
+        newsCount.textContent = NO;
     })
