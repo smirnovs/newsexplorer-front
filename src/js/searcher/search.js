@@ -1,6 +1,7 @@
+import { maxShowed, firstElement, dateLength, count } from '../helpers/messages.js';
+
 const searchInput = document.forms.search;
 const question = searchInput.elements.question;
-const searchButton = document.querySelector('.search__button');
 const preloader = document.querySelector('.preloader')
 const preloaderAwait = document.querySelector('.preloader__await-block');
 const preloaderNotfound = document.querySelector('.preloader__notfound-block');
@@ -10,19 +11,42 @@ const notFoundTitle = document.querySelector('.preloader__notfound-title');
 const notFoundText = document.querySelector('.preloader__notfound-text');
 
 export class Search {
-    constructor(api, newsloader, load, showMoreCallback) {
+    constructor(api, newsloader, load, showMoreCallback, searchButton) {
         this.api = api;
         this.newsloader = newsloader;
         this.load = load;
         this.showMoreCallback = showMoreCallback;
-        this._checkAuth = this._checkAuth.bind(this);
-        
-        searchButton.addEventListener('click', this._checkAuth);
+        this.searchButton = searchButton;
+        this.checkAuth = this.checkAuth.bind(this);
+        this._startSearchStyling = this._startSearchStyling.bind(this);
+    }
+    _activateForm() {
+        this.searchButton.removeAttribute('disabled');
+        this.searchButton.classList.remove('search__button_disabled');
+        question.readOnly = false;
+        question.classList.remove('readonly');
+    }
+    _startSearchStyling() {
+        while (cardContainer.hasChildNodes()) {
+            cardContainer.removeChild(cardContainer.lastChild);
+        }
+        preloaderNotfound.style.display = 'none';
+        if (document.querySelector('.search-result__button')) {
+            const showMore = document.querySelector('.search-result__button');
+            showMore.parentNode.removeChild(showMore);
+        }
+        preloader.style.display = 'flex';
+        preloaderAwait.style.display = 'flex';
+        this.searchButton.setAttribute('disabled', true);
+        this.searchButton.classList.add('search__button_disabled');
+        question.readOnly = true;
+        question.classList.add('readonly');
     }
     _successSearchStyling(cards) {
         preloader.style.display = 'none';
         searchResult.style.display = 'flex';
-        if (cards.totalResults > 3) {
+        this._activateForm();
+        if (cards.totalResults > maxShowed) {
             this._showmorebutton();
         }
     }
@@ -36,7 +60,7 @@ export class Search {
     _showMoreLogic(showButton, cards, myQuestion, isLoggedIn) {
         this.showMoreCallback(showButton, cards, myQuestion, isLoggedIn, this.load);
     }
-    _checkAuth() {
+    checkAuth() {
         event.preventDefault();
         this.api.checkAuth()
             .then(() => {
@@ -49,38 +73,34 @@ export class Search {
             });
     }
     _find(isLoggedIn) {
-        startSearchStyling();
-        const week = 6;
+        this._startSearchStyling();
+        const week = count;
         let today = new Date();
         let weekAgo = new Date();
         weekAgo.setDate(today.getDate() - week);
 
-        today = today.toISOString().slice(0, 10)
-        weekAgo = weekAgo.toISOString().slice(0, 10)
+        today = today.toISOString().slice(firstElement, dateLength)
+        weekAgo = weekAgo.toISOString().slice(firstElement, dateLength)
 
         const myQuestion = question.value;
-        if (myQuestion.length === 0) {
+        if (myQuestion.length === firstElement) {
             preloaderNotfound.style.display = 'flex';
-            notFoundTitle.textContent = 'Введите хотя бы одно ключевое слово'
+            notFoundTitle.textContent = 'Ошибка! Необходимо ввести хотя бы одно ключевое слово!'
             preloaderAwait.style.display = 'none';
-            notFoundText.textContent = ''
+            notFoundText.textContent = '';
+            this._activateForm();
         } else {
             this.newsloader.getCards(myQuestion, weekAgo, today).then(cards => {
-                if (cards.totalResults === 0) {
+                if (cards.totalResults === firstElement) {
                     preloaderAwait.style.display = 'none';
                     preloaderNotfound.style.display = 'flex';
-                    notFoundTitle.textContent = 'Ничего не найдено'
-                    notFoundText.textContent = 'К сожалению по вашему запросу ничего не найдено.'
-                    searchResult.style.display = 'none'
+                    notFoundTitle.textContent = 'Ничего не найдено';
+                    notFoundText.textContent = 'К сожалению по вашему запросу ничего не найдено.';
+                    searchResult.style.display = 'none';
+                    this._activateForm();
                 } else {
                     this._successSearchStyling(cards);
-                    if (cards.articles.length < 3) {
-                        const count = cards.articles.length
-                        this.load.render(0, count, cards, myQuestion, isLoggedIn);
-                    } else {
-                        const count = 3
-                        this.load.render(0, count, cards, myQuestion, isLoggedIn);
-                    }
+                    this.load.render(cards, myQuestion, isLoggedIn);
                     if (document.querySelector('.search-result__button')) {
                         const showMore = document.querySelector('.search-result__button');
                         this._showMoreLogic(showMore, cards, myQuestion, isLoggedIn);
@@ -89,22 +109,12 @@ export class Search {
             }).catch(() => {
                 preloaderAwait.style.display = 'none';
                 preloaderNotfound.style.display = 'flex';
+                notFoundTitle.textContent = ''
+                notFoundText.textContent = 'Произошла ошибка. Повторите попытку поиска.'
+                this._activateForm();
             });
         }
     }
 }
-
-const startSearchStyling = () => {
-    while (cardContainer.hasChildNodes()) {
-        cardContainer.removeChild(cardContainer.lastChild);
-    }
-    preloaderNotfound.style.display = 'none';
-    if (document.querySelector('.search-result__button')) {
-        const showMore = document.querySelector('.search-result__button');
-        showMore.parentNode.removeChild(showMore);
-    }
-    preloader.style.display = 'flex';
-    preloaderAwait.style.display = 'flex';
-};
 
 

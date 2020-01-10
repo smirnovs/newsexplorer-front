@@ -12,5 +12,15 @@ module.exports = {
     SEARCH_NEWS: 'https://newsapi.org/v2/everything?pageSize=100&q=',
     GIT_API: 'https://api.github.com/repos/smirnovs/newsexplorer-front/commits',
     // MAIN_PAGE: 'https://smirnovs.github.io/newsexplorer-front'
-    MAIN_PAGE: 'http://localhost:8080/'
+    MAIN_PAGE: 'http://localhost:8080/',
+    GH_PAGE: 'https://github.com/smirnovs',
+    firstElement: 0,
+    secondElement: 1,
+    thirdElement: 2,
+    maxShowed: 3,
+    count: 6,
+    dateLength: 10,
+    pseudoIdLength: 19,
+    goodStatus: 201,
+    windowWidth: 720
 }

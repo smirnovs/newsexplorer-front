@@ -7,14 +7,14 @@ export class GitCommitLoader {
     getGitCards() {
         this.gitapi.getGit()
             .then(res => {
-                for (let i = 0; i < res.length; i++) {
-                    const name = res[i].commit.committer.name;
-                    const email = res[i].commit.committer.email;
-                    const date = res[i].commit.committer.date;
-                    const message = res[i].commit.message;
-                    const url = res[i].author.avatar_url;
+                res.forEach(item => {
+                    const name = item.commit.committer.name;
+                    const email = item.commit.committer.email;
+                    const date = item.commit.committer.date;
+                    const message = item.commit.message;
+                    const url = item.author.avatar_url;
                     this.createCardCallback(name, email, date, message, url);
-                }
+                })
             }).then(() => {
                 this.glide.mount();
             }).catch(err => {

@@ -1,3 +1,4 @@
+import { windowWidth } from '../helpers/messages.js';
 
 const header = document.querySelector('.header');
 const mobileMenu = document.querySelector('.menumobile');
@@ -13,13 +14,13 @@ export class Mobilemenu {
         this.isHeader = isHeader;
     }
     _header() {
-        if (window.innerWidth > 720 && this.isOpenMenu == true && this.isHeader) {
+        if (window.innerWidth > windowWidth && this.isOpenMenu == true && this.isHeader) {
             this.isOpenMenu = false;
             mobileMenu.classList.remove('menumobile__isopened');
             mobileMenuButton.classList.remove(this.iconColor);
             header.style.backgroundColor = 'transparent'
         }
-        else if (window.innerWidth > 720 && this.isOpenMenu == true && typeof (this.isHeader) == 'undefined') {
+        else if (window.innerWidth > windowWidth && this.isOpenMenu == true && typeof (this.isHeader) == 'undefined') {
             this.isOpenMenu = false;
             mobileMenu.classList.remove('menumobile__isopened');
             mobileMenuButton.classList.remove(this.iconColor);

@@ -1,30 +1,39 @@
-import { popupReg, miniPopup } from '../popup/popup.js';
-import { userMail, userPwd, userName, notMailError } from '../popup/popup-validate.js';
+import { goodStatus } from '../helpers/messages.js';
 
 export class Signup {
-    constructor(popup, miniPopupCallback, api) {
+    constructor(popup, popupElement, miniPopup, miniPopupCallback, api, validate) {
         this.popup = popup;
+        this.popupElement = popupElement;
         this.miniPopupCallback = miniPopupCallback;
         this.api = api;
+        this.validate = validate;
+        this.miniPopup = miniPopup;
         this._signup = this._signup.bind(this);
+        this.popupReg = this.popupElement.querySelector('.popup__button_reg');
+        this.notMailError = this.popupElement.querySelector('.popup__error_email');
+        this.popupForm = this.popupElement.querySelector('.popup__form');
+        this.userMail = this.popupForm.elements.usermail;
+        this.userPwd = this.popupForm.elements.userpwd;
+        this.userName = this.popupForm.elements.username;
     }
     _signup() {
         event.preventDefault();
-        this.api.createUser(userMail.value, userPwd.value, userName.value)
+        this.validate.disableInputs();
+        this.api.createUser(this.userMail.value, this.userPwd.value, this.userName.value)
             .then(res => {
-                if (res.status === 201) {
-                    miniPopup.classList.add('mini-popup_is-opened');
+                if (res.status === goodStatus) {
+                    this.miniPopup.classList.add('mini-popup_is-opened');
                     this.popup.close();
                     this.miniPopupCallback(this.popup);
                 } else {
-                    notMailError.style.display = 'inline-block'
-                    notMailError.textContent = res.message;
+                    this.notMailError.style.display = 'inline-block'
+                    this.notMailError.textContent = res.message;
                 }
             }).catch(err => {
                 console.log(err);
             });
     }
     addListener() {
-        popupReg.addEventListener('click', this._signup)
+        this.popupReg.addEventListener('click', this._signup)
     }
 }

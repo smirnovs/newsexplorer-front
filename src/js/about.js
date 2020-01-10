@@ -1,6 +1,6 @@
 import '../pages/about/about.css';
 import { Mobilemenu } from './helpers/mobilemenu.js';
-import { MAIN_PAGE, NEWSAPI_URL, GIT_API } from './helpers/messages';
+import { NEWSAPI_URL, GIT_API, GH_PAGE } from './helpers/messages';
 import { GitApi } from './api/git-api.js';
 import { Api } from './api/api.js';
 import { Header, authButton } from './header/header.js';
@@ -14,14 +14,14 @@ import { glide } from './glider/glide.js';
 import { PopupValidate } from './popup/popup-validate.js';
 import { Minipopup } from './popup/mini-popup.js';
 
+const popupElement = document.querySelector('.popup');
 const ICON_COLOR = 'header__mobileico_black-closed';
 const ghButton = document.querySelector('.github__button');
 const mobileAuthButton = document.querySelector('.menumobile__login_auth');
 const slideBlock = document.querySelector('.glide__slides');
+const miniAuthPopup = document.querySelector('.mini-popup');
 
 const isOpenMenu = false;
-const mobilemenu = new Mobilemenu(ICON_COLOR, isOpenMenu);
-mobilemenu.addListeners();
 
 const api = new Api({
     baseUrl: NEWSAPI_URL,
@@ -31,27 +31,6 @@ const api = new Api({
     }
 });
 
-const validate = new PopupValidate();
-const popup = new Popup(validate);
-popup.addListeners();
-
-const headerCallback = ({ isLoggedIn, userLogin }) => {
-    const header = new Header({ isLoggedIn, userLogin });
-    const mobileheader = new Mobileheader({ isLoggedIn, userLogin });
-    header.render();
-    mobileheader.render();
-}
-
-const signin = new Signin(popup, headerCallback, api);
-signin.addListener();
-
-const miniPopupCallback = (popup) => {
-    const miniPopup = new Minipopup(popup);
-    miniPopup.addListeners();
-}
-const signup = new Signup(popup, miniPopupCallback, api);
-signup.addListener();
-
 const gitapi = new GitApi({
     baseUrl: GIT_API,
     headers: {
@@ -60,12 +39,44 @@ const gitapi = new GitApi({
     }
 });
 
+const headerCallback = ({ isLoggedIn, userLogin }) => {
+    const header = new Header({ isLoggedIn, userLogin });
+    const mobileheader = new Mobileheader({ isLoggedIn, userLogin });
+    header.render();
+    mobileheader.render();
+}
+
+const miniPopupCallback = (popup) => {
+    const miniPopup = new Minipopup(popup, miniAuthPopup);
+    miniPopup.addListeners();
+}
+
 const createCardCallback = (name, email, date, message, url) => {
     const gitcard = new GitCard(name, email, date, message, url, slideBlock);
     gitcard.createCard();
 }
+
+const unAuthCallback = () => {
+    api.unAuth().then(res => {
+        if (res.ok) {
+            const isLoggedIn = false;
+            const userLogin = '';
+            headerCallback({ isLoggedIn, userLogin });
+        } else {
+            return Promise.reject(res.status);
+        }
+
+    }).catch(err => {
+        console.log(err);
+    });
+}
+
+const mobilemenu = new Mobilemenu(ICON_COLOR, isOpenMenu);
+const validate = new PopupValidate(popupElement);
+const popup = new Popup(validate, popupElement);
+const signin = new Signin(popup, popupElement, headerCallback, api, validate);
+const signup = new Signup(popup, popupElement, miniAuthPopup, miniPopupCallback, api, validate);
 const gitLoader = new GitCommitLoader(gitapi, createCardCallback, glide);
-gitLoader.getGitCards();
 
 api.checkAuth()
     .then((user) => {
@@ -76,41 +87,20 @@ api.checkAuth()
         console.log('Посетитель не авторизован');
     });
 
+mobilemenu.addListeners();
+popup.addListeners();
+signin.addListener();
+signup.addListener();
+gitLoader.getGitCards();
 
-authButton.addEventListener('click', () => {
-    api.unAuth().then(res => {
-        if (res.ok) {
-            const isLoggedIn = false;
-            const userLogin = '';
-            headerCallback({ isLoggedIn, userLogin });
-        } else {
-            return Promise.reject(res.status);
-        }
-
-    }).catch(err => {
-        console.log(err);
-    });
-})
+authButton.addEventListener('click', unAuthCallback)
 
 
-mobileAuthButton.addEventListener('click', () => {
-    api.unAuth().then(res => {
-        if (res.ok) {
-            const isLoggedIn = false;
-            const userLogin = '';
-            headerCallback({ isLoggedIn, userLogin });
-        } else {
-            return Promise.reject(res.status);
-        }
+mobileAuthButton.addEventListener('click', unAuthCallback)
 
-    }).catch(err => {
-        console.log(err);
-    });
-})
-
-ghButton.addEventListener('click', () => {
+ghButton.addEventListener('click', function openGhHandler() {
     window.open(
-        MAIN_PAGE,
+        GH_PAGE,
         '_blank'
     )
 });

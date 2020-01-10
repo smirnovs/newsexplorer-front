@@ -1,4 +1,4 @@
-import { CARD_DELETE, CARD_BOOKMARK } from '../helpers/messages.js';
+import { CARD_DELETE, CARD_BOOKMARK, firstElement, dateLength } from '../helpers/messages.js';
 
 export class Card {
     constructor(api, isLoggedIn, isSaved, isExist, pseudoId, keyword, link, imgUrl, date, title, text, source, id) {
@@ -15,13 +15,20 @@ export class Card {
         this.text = text;
         this.source = source;
         this.api = api;
-        this._saveCard = this._saveCard.bind(this);
-        this._deleteCard = this._deleteCard.bind(this);
-        this.cardElement = this._create();
-        this.cardElement.addEventListener('click', this._saveCard);
-        this.cardElement.addEventListener('click', this._deleteCard);
+        this.saveCard = this.saveCard.bind(this);
+        this.deleteCard = this.deleteCard.bind(this);
     }
-    _saveCard() {
+    addListeners(card) {
+        card.addEventListener('click', this.saveCard);
+        card.addEventListener('click', this.deleteCard);
+    }
+    _deleteListeners() {
+        const card = event.currentTarget;
+        card.removeEventListener('click', this.saveCard, false);
+        card.removeEventListener('click', this.deleteCard, false);
+        card.remove();
+    }
+    saveCard() {
         if (event.target.classList.contains('card__saver') || event.target.classList.contains('card__svg-bookmark') || event.target.classList.contains('card__bookmark')) {
             if (!this.isLoggedIn) {
                 console.log('Надо залогиниться')
@@ -37,8 +44,6 @@ export class Card {
                             return Promise.resolve(res.json());
                         }).then((res) => {
                             this.id = res.data._id;
-                            // this.currentCard(this.id)
-                            // return this.id
                         })
 
                 } else {
@@ -56,11 +61,13 @@ export class Card {
             }
         }
     }
-    _deleteCard() {
+    deleteCard() {
+        // debugger;
         if (event.target.classList.contains('card__deleter') || event.target.classList.contains('card__svg-deleter') || event.target.classList.contains('card__delete')) {
-            this.api.deleteCard(this.id).then(event.target.closest('.card').remove()).catch(() => {
-                console.log('не удалено')
-            })
+            this.api.deleteCard(this.id).then(this._deleteListeners())
+                .catch(() => {
+                    console.log('не удалено')
+                })
         }
     }
     _createIcon(cardBookmark) {
@@ -102,7 +109,7 @@ export class Card {
     }
 
     _dateFormat(date, cardDate) {
-        date = date.slice(0, 10);
+        date = date.slice(firstElement, dateLength);
         date = date.replace(/-/g, ', ');
         const publicDate = new Date(date);
         const formatter = new Intl.DateTimeFormat("ru", {
@@ -114,7 +121,7 @@ export class Card {
         cardDate.textContent = date;
 
     }
-    _create() {
+    create() {
         const newCard = document.createElement('div');
         newCard.classList.add('card');
 

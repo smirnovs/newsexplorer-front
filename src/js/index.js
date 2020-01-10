@@ -15,6 +15,13 @@ import { Render } from './searcher/render.js'
 import { Showmore } from './searcher/showmore.js'
 import { Card } from './card/card.js';
 
+const popupElement = document.querySelector('.popup');
+const searchButton = document.querySelector('.search__button');
+const miniAuthPopup = document.querySelector('.mini-popup');
+
+const isOpenMenu = false;
+const isHeader = true;
+
 const api = new Api({
     baseUrl: NEWSAPI_URL,
     headers: {
@@ -30,29 +37,17 @@ const newsloader = new NewsLoaderApi({
     }
 })
 
-const isOpenMenu = false;
-const isHeader = true;
-
-const createCardCallback = (api, cardContainer, isLoggedIn, isSaved, isExist, pseudoId, myQuestion, url, urlToImage, publishedAt, title, description, source, id) =>{
-    const { cardElement } = new Card(api, isLoggedIn, isSaved, isExist, pseudoId, myQuestion, url, urlToImage, publishedAt, title, description, source, id);
-    cardContainer.appendChild(cardElement);
+const createCardCallback = (api, cardContainer, isLoggedIn, isSaved, isExist, pseudoId, myQuestion, url, urlToImage, publishedAt, title, description, source, id) => {
+    const cardElement = new Card(api, isLoggedIn, isSaved, isExist, pseudoId, myQuestion, url, urlToImage, publishedAt, title, description, source, id);
+    const card = cardElement.create();
+    cardElement.addListeners(card);
+    cardContainer.appendChild(card);
 }
-
-const load = new Render(api, createCardCallback);
 
 const showMoreCallback = (showButton, cards, myQuestion, isLoggedIn, render) => {
     const btnLogic = new Showmore({ cards, myQuestion, showButton, isLoggedIn, render });
     showButton.addEventListener('click', function () { btnLogic.showcards() });
 }
-
-new Search(api, newsloader, load, showMoreCallback);
-
-const mobilemenu = new Mobilemenu(ICON_MOBILE_WHITE_CLOSED, isOpenMenu, isHeader, HEADER_COLOR);
-mobilemenu.addListeners();
-
-const validate = new PopupValidate();
-const popup = new Popup(validate);
-popup.addListeners();
 
 const headerCallback = ({ isLoggedIn, userLogin }) => {
     const header = new Header({ isLoggedIn, userLogin });
@@ -61,15 +56,33 @@ const headerCallback = ({ isLoggedIn, userLogin }) => {
     mobileheader.render();
 }
 
-const signin = new Signin(popup, headerCallback, api);
-signin.addListener();
-
 const miniPopupCallback = (popup) => {
-    const miniPopup = new Minipopup(popup);
+    const miniPopup = new Minipopup(popup, miniAuthPopup);
     miniPopup.addListeners();
 }
-const signup = new Signup(popup, miniPopupCallback, api);
-signup.addListener();
+
+const unAuthCallback = () => {
+    api.unAuth().then(res => {
+        if (res.ok) {
+            const isLoggedIn = false;
+            const userLogin = '';
+            headerCallback({ isLoggedIn, userLogin });
+        } else {
+            return Promise.reject(res.status);
+        }
+
+    }).catch(err => {
+        console.log(err);
+    });
+}
+
+const load = new Render(api, createCardCallback);
+const search = new Search(api, newsloader, load, showMoreCallback, searchButton);
+const mobilemenu = new Mobilemenu(ICON_MOBILE_WHITE_CLOSED, isOpenMenu, isHeader, HEADER_COLOR);
+const validate = new PopupValidate(popupElement);
+const popup = new Popup(validate, popupElement);
+const signin = new Signin(popup, popupElement, headerCallback, api, validate);
+const signup = new Signup(popup, popupElement, miniAuthPopup, miniPopupCallback, api, validate);
 
 api.checkAuth().then((user) => {
     const isLoggedIn = true;
@@ -79,35 +92,12 @@ api.checkAuth().then((user) => {
     console.log('Посетитель не авторизован');
 });
 
+searchButton.addEventListener('click', search.checkAuth);
+mobilemenu.addListeners();
+popup.addListeners();
+signin.addListener();
+signup.addListener();
 
-authButton.addEventListener('click', () => {
-    api.unAuth().then(res => {
-        if (res.ok) {
-            const isLoggedIn = false;
-            const userLogin = '';
-            headerCallback({ isLoggedIn, userLogin });
-            searchResult.style.display = 'none';
-        } else {
-            return Promise.reject(res.status);
-        }
+authButton.addEventListener('click', unAuthCallback)
 
-    }).catch(err => {
-        console.log(err);
-    });
-})
-
-mobileAuthButton.addEventListener('click', () => {
-    api.unAuth().then(res => {
-        if (res.ok) {
-            const isLoggedIn = false;
-            const userLogin = '';
-            headerCallback({ isLoggedIn, userLogin });
-            searchResult.style.display = 'none';
-        } else {
-            return Promise.reject(res.status);
-        }
-
-    }).catch(err => {
-        console.log(err);
-    });
-})
+mobileAuthButton.addEventListener('click', unAuthCallback)
