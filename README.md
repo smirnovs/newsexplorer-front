@@ -1,7 +1,7 @@
 # newsexplorer-front
 
 Работа по дипломному проекту news-explorer
-DEMO: https://smirnovs.github.io/newsexplorer-front/
+Сайт: https://myedudomen.ml/.
 
 В работе использовались:
 HTML, CSS, JS, Webpack, npm.
