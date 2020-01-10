@@ -13,6 +13,8 @@ const greetingsName = document.querySelector('.user-greetings__username');
 const newsCount = document.querySelector('.user-greetings__newscount');
 const keywordKeys = document.querySelector('.user-greetings__keywords-keys');
 const mobileAuthButton = document.querySelector('.menumobile__login_logged');
+const mobileMenu = document.querySelector('.menumobile');
+
 const isOpenMenu = false;
 
 const api = new Api({
@@ -23,7 +25,17 @@ const api = new Api({
     }
 });
 
-const mobilemenu = new Mobilemenu(ICON_COLOR_BLACK, isOpenMenu);
+const cardCounter = () => {
+    const cardsTotal = document.querySelectorAll('.card');
+    const cardsCount = cardsTotal.length;
+    if(cardsCount === firstElement) {
+        newsCount.textContent = 'нет'
+    } else {
+        newsCount.textContent = cardsCount;
+    }
+}
+
+const mobilemenu = new Mobilemenu(mobileMenu, ICON_COLOR_BLACK, isOpenMenu);
 
 mobilemenu.addListeners();
 
@@ -71,7 +83,7 @@ api.getSavedCards()
         newsCount.textContent = cards.data.length;
         const keys = []
         cards.data.forEach((card) => {
-            const cardElement = new Card(api, isLoggedIn, isSaved, isExist, card.pseudoId, card.keyword, card.link, card.image, card.date, card.title, card.text, card.source, card._id);
+            const cardElement = new Card(api, isLoggedIn, isSaved, isExist, card.pseudoId, card.keyword, card.link, card.image, card.date, card.title, card.text, card.source, card._id, cardCounter);
             const currentCard = cardElement.create();
             cardElement.addListeners(currentCard);
             cardContainer.appendChild(currentCard);

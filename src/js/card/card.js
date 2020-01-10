@@ -1,7 +1,7 @@
 import { CARD_DELETE, CARD_BOOKMARK, firstElement, dateLength } from '../helpers/messages.js';
 
 export class Card {
-    constructor(api, isLoggedIn, isSaved, isExist, pseudoId, keyword, link, imgUrl, date, title, text, source, id) {
+    constructor(api, isLoggedIn, isSaved, isExist, pseudoId, keyword, link, imgUrl, date, title, text, source, id, cardCounter) {
         this.id = id;
         this.isLoggedIn = isLoggedIn;
         this.isSaved = isSaved;
@@ -15,6 +15,7 @@ export class Card {
         this.text = text;
         this.source = source;
         this.api = api;
+        this.cardCounter = cardCounter;
         this.saveCard = this.saveCard.bind(this);
         this.deleteCard = this.deleteCard.bind(this);
     }
@@ -22,11 +23,12 @@ export class Card {
         card.addEventListener('click', this.saveCard);
         card.addEventListener('click', this.deleteCard);
     }
-    _deleteListeners() {
+    _deleteCard() {
         const card = event.currentTarget;
         card.removeEventListener('click', this.saveCard, false);
-        card.removeEventListener('click', this.deleteCard, false);
+        card.removeEventListener('click', this.deleteCard, false);        
         card.remove();
+        this.cardCounter();
     }
     saveCard() {
         if (event.target.classList.contains('card__saver') || event.target.classList.contains('card__svg-bookmark') || event.target.classList.contains('card__bookmark')) {
@@ -62,9 +64,9 @@ export class Card {
         }
     }
     deleteCard() {
-        // debugger;
+        // debugger;this._deleteListeners()
         if (event.target.classList.contains('card__deleter') || event.target.classList.contains('card__svg-deleter') || event.target.classList.contains('card__delete')) {
-            this.api.deleteCard(this.id).then(this._deleteListeners())
+            this.api.deleteCard(this.id).then(this._deleteCard())
                 .catch(() => {
                     console.log('не удалено')
                 })

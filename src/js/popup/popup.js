@@ -39,7 +39,7 @@ export class Popup {
     }
     close() {
         this.popupElement.classList.toggle('popup_is-opened');
-        document.body.style.overflow = 'scroll';
+        document.body.style.overflow = 'overlay';
         this.validate.clearFields();
     }
     clickClose() {

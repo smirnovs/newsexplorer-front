@@ -18,6 +18,7 @@ import { Card } from './card/card.js';
 const popupElement = document.querySelector('.popup');
 const searchButton = document.querySelector('.search__button');
 const miniAuthPopup = document.querySelector('.mini-popup');
+const mobileMenu = document.querySelector('.menumobile');
 
 const isOpenMenu = false;
 const isHeader = true;
@@ -59,6 +60,7 @@ const headerCallback = ({ isLoggedIn, userLogin }) => {
 const miniPopupCallback = (popup) => {
     const miniPopup = new Minipopup(popup, miniAuthPopup);
     miniPopup.addListeners();
+    document.body.style.overflow = 'hidden';
 }
 
 const unAuthCallback = () => {
@@ -78,7 +80,7 @@ const unAuthCallback = () => {
 
 const load = new Render(api, createCardCallback);
 const search = new Search(api, newsloader, load, showMoreCallback, searchButton);
-const mobilemenu = new Mobilemenu(ICON_MOBILE_WHITE_CLOSED, isOpenMenu, isHeader, HEADER_COLOR);
+const mobilemenu = new Mobilemenu(mobileMenu, ICON_MOBILE_WHITE_CLOSED, isOpenMenu, isHeader, HEADER_COLOR);
 const validate = new PopupValidate(popupElement);
 const popup = new Popup(validate, popupElement);
 const signin = new Signin(popup, popupElement, headerCallback, api, validate);

@@ -54,6 +54,7 @@ export class PopupValidate {
         button.classList.remove('popup__button_disabled')
     }
     isMail() {
+        this.wrongData.style.display = 'none'
         this.notMailError.textContent = 'Неправильный формат email';
         if (!isEmail(this.userMail.value)) {
             this.notMailError.style.display = 'inline-block'
@@ -74,6 +75,7 @@ export class PopupValidate {
         }
     }
     isPwd() {
+        this.wrongData.style.display = 'none'
         if (this.userPwd.validity.tooShort) {
             this.shortPwdError.style.display = 'inline-block'
             this.disableButton();
@@ -93,6 +95,7 @@ export class PopupValidate {
         }
     }
     isName() {
+        this.wrongData.style.display = 'none'
         if (this.userName.validity.tooShort) {
             this.shortNameError.style.display = 'inline-block';
             this.disableButton();

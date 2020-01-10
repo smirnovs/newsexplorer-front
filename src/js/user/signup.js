@@ -28,6 +28,7 @@ export class Signup {
                 } else {
                     this.notMailError.style.display = 'inline-block'
                     this.notMailError.textContent = res.message;
+                    this.validate.enableInputs();
                 }
             }).catch(err => {
                 console.log(err);

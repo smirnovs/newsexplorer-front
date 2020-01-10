@@ -20,6 +20,7 @@ const ghButton = document.querySelector('.github__button');
 const mobileAuthButton = document.querySelector('.menumobile__login_auth');
 const slideBlock = document.querySelector('.glide__slides');
 const miniAuthPopup = document.querySelector('.mini-popup');
+const mobileMenu = document.querySelector('.menumobile');
 
 const isOpenMenu = false;
 
@@ -49,6 +50,7 @@ const headerCallback = ({ isLoggedIn, userLogin }) => {
 const miniPopupCallback = (popup) => {
     const miniPopup = new Minipopup(popup, miniAuthPopup);
     miniPopup.addListeners();
+    document.body.style.overflow = 'hidden';
 }
 
 const createCardCallback = (name, email, date, message, url) => {
@@ -71,7 +73,7 @@ const unAuthCallback = () => {
     });
 }
 
-const mobilemenu = new Mobilemenu(ICON_COLOR, isOpenMenu);
+const mobilemenu = new Mobilemenu(mobileMenu, ICON_COLOR, isOpenMenu);
 const validate = new PopupValidate(popupElement);
 const popup = new Popup(validate, popupElement);
 const signin = new Signin(popup, popupElement, headerCallback, api, validate);
