@@ -33,11 +33,13 @@ export class Popup {
     }
     open() {
         this.popupElement.classList.toggle('popup_is-opened');
+        document.body.style.overflow = 'hidden';
         this.validate.disableButton();
         this.validate.enableInputs();
     }
     close() {
         this.popupElement.classList.toggle('popup_is-opened');
+        document.body.style.overflow = 'scroll';
         this.validate.clearFields();
     }
     clickClose() {
