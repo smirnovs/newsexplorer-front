@@ -28,8 +28,8 @@ const api = new Api({
 const cardCounter = () => {
     const cardsTotal = document.querySelectorAll('.card');
     const cardsCount = cardsTotal.length;
-    if(cardsCount === firstElement) {
-        newsCount.textContent =  NO;
+    if (cardsCount === firstElement) {
+        newsCount.textContent = NO;
     } else {
         newsCount.textContent = cardsCount;
     }
@@ -38,9 +38,7 @@ const cardCounter = () => {
 const unAuthCallback = () => {
     api.unAuth().then(res => {
         if (res.ok) {
-            const isLoggedIn = false;
-            const userLogin = '';
-            headerCallback({ isLoggedIn, userLogin });
+            window.location.replace(MAIN_PAGE);
         } else {
             return Promise.reject(res.status);
         }
@@ -49,6 +47,8 @@ const unAuthCallback = () => {
         console.log(err);
     });
 }
+
+
 
 const mobilemenu = new Mobilemenu(mobileMenu, ICON_COLOR_BLACK, isOpenMenu);
 
