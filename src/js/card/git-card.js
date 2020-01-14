@@ -1,3 +1,5 @@
+import { firstElement, dateLength } from '../helpers/messages.js';
+
 export class GitCard {
     constructor(name, email, date, message, avatar, slideBlock) {
         this.name = name;
@@ -7,13 +9,27 @@ export class GitCard {
         this.avatar = avatar;
         this.slideBlock = slideBlock;
     }
+    _dateFormat(date, cardDate) {
+        date = date.slice(firstElement, dateLength);
+        date = date.replace(/-/g, ',');
+        const publicDate = new Date(date);
+        const formatter = new Intl.DateTimeFormat("ru", {
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        });
+        date = formatter.format(publicDate);
+        cardDate.textContent = date;
+
+    }
     createCard() {
         const newCard = document.createElement('li');
         newCard.classList.add('glide__slide');
 
-        const carDate = document.createElement('div');
-        carDate.classList.add('glide__date');
-        carDate.textContent = this.date;
+        const cardDate = document.createElement('div');
+        cardDate.classList.add('glide__date');
+        this._dateFormat(this.date, cardDate);
+        // carDate.textContent = this.date;
 
         const cardAuthorBlock = document.createElement('div');
         cardAuthorBlock.classList.add('glide__author-block');
@@ -41,7 +57,7 @@ export class GitCard {
         cardDescription.classList.add('glide__description');
         cardDescription.textContent = this.message;
 
-        newCard.appendChild(carDate);
+        newCard.appendChild(cardDate);
         newCard.appendChild(cardAuthorBlock);
 
         cardAuthorBlock.appendChild(cardAuthor);
