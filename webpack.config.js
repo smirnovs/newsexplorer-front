@@ -92,13 +92,13 @@ module.exports = {
             inject: false,
             hash: true,
             template: './src/pages/saved/index.html',
-            filename: 'saved.html'
+            filename: 'saved/index.html'
         }),
         new HtmlWebpackPlugin({
             inject: false,
             hash: true,
             template: './src/pages/about/index.html',
-            filename: 'about.html'
+            filename: 'about/index.html'
         }),
         new WebpackMd5Hash(),
         new webpack.DefinePlugin({
