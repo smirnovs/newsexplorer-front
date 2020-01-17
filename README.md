@@ -5,7 +5,7 @@
 Сайт: https://myedudomen.ml/.
 
 В работе использовались:
-HTML, CSS, JS, Webpack, npm.
+HTML, CSS (Grid, Flexbox), JS (OOP), Webpack, npm, Node.JS, express, асинхронные запросы (промисы).
 
 Установка проекта
 * Создайте папку на локальном компьютере.
