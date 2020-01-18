@@ -46,7 +46,7 @@ export class Card {
                             return Promise.resolve(res.json());
                         }).then((res) => {
                             this.id = res.data._id;
-                        })
+                        }).catch();
 
                 } else {
                     const iconSvg = event.currentTarget.querySelector('.card__bookmark');
@@ -64,7 +64,6 @@ export class Card {
         }
     }
     deleteCard() {
-        // debugger;this._deleteListeners()
         if (event.target.classList.contains('card__deleter') || event.target.classList.contains('card__svg-deleter') || event.target.classList.contains('card__delete')) {
             this.api.deleteCard(this.id).then(this._deleteCard())
                 .catch(() => {

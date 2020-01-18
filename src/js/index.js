@@ -1,7 +1,7 @@
 import "../pages/index/index.css";
 import { Popup } from './popup/popup.js';
 import { Mobilemenu } from './helpers/mobilemenu.js';
-import { Search, searchResult } from './searcher/search.js';
+import { Search } from './searcher/search.js';
 import { Signup } from "./user/signup";
 import { Signin } from "./user/signin";
 import { Api } from "./api/api.js";

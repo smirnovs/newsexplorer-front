@@ -1,7 +1,6 @@
 import { windowWidth } from '../helpers/messages.js';
 
 const header = document.querySelector('.header');
-// const mobileMenu = document.querySelector('.menumobile');
 const mobileMenuButton = document.querySelector('.header__mobileico');
 
 export class Mobilemenu {
