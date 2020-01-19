@@ -1,7 +1,7 @@
 const authMenu = document.querySelector('.menumobile__link_saved');
 const unauthButton = document.querySelector('.menumobile__login_unauth');
 export const mobileAuthButton = document.querySelector('.menumobile__login_auth');
-const userName = document.querySelector('.menumobile__login_name');
+const userName = document.querySelector('.menumobile__name');
 
 export class Mobileheader {
     constructor(props) {

@@ -4,7 +4,7 @@ import { Api } from "./api/api.js";
 import { Card } from './card/card.js';
 import { MAIN_PAGE, ICON_COLOR_BLACK, NEWSAPI_URL, firstElement, secondElement, thirdElement, maxShowed, noArticles, NO } from './helpers/messages';
 
-const userName = document.querySelector('.header__login_name');
+const userName = document.querySelector('.header__name');
 const authButton = document.querySelector('.header__login_logged');
 const cardContainer = document.querySelector('.saved-news__cards');
 const allCardsContainer = document.querySelector('.saved-news__container');
