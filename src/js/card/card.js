@@ -1,12 +1,11 @@
 import { CARD_DELETE, CARD_BOOKMARK, firstElement, dateLength } from '../helpers/messages.js';
 
 export class Card {
-    constructor(api, isLoggedIn, isSaved, isExist, pseudoId, keyword, link, imgUrl, date, title, text, source, id, cardCounter) {
+    constructor(api, isLoggedIn, isSaved, isExist, keyword, link, imgUrl, date, title, text, source, id, cardCounter) {
         this.id = id;
         this.isLoggedIn = isLoggedIn;
         this.isSaved = isSaved;
         this.isExist = isExist;
-        this.pseudoId = pseudoId;
         this.keyword = keyword;
         this.link = link;
         this.imgUrl = imgUrl;
@@ -26,7 +25,7 @@ export class Card {
     _deleteCard() {
         const card = event.currentTarget;
         card.removeEventListener('click', this.saveCard, false);
-        card.removeEventListener('click', this.deleteCard, false);        
+        card.removeEventListener('click', this.deleteCard, false);
         card.remove();
         this.cardCounter();
     }
@@ -37,8 +36,9 @@ export class Card {
             } else {
                 if (!this.isExist) {
                     const iconSvg = event.currentTarget.querySelector('.card__bookmark');
-                    this.api.saveCard(this.pseudoId, this.keyword, this.title, this.text, this.date, this.source, this.link, this.imgUrl)
+                    this.api.saveCard(this.keyword, this.title, this.text, this.date, this.source, this.link, this.imgUrl)
                         .then((res) => {
+                            console.log(this.date)
                             iconSvg.setAttribute('fill', '#2f71e5');
                             iconSvg.setAttribute('stroke', '#2f71e5');
                             iconSvg.classList.add('card__bookmark_saved');

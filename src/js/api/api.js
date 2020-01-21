@@ -52,19 +52,18 @@ export class Api {
             }
         })
     }
-    checkCard(pseudoId) {
-        return fetch(`${this.url}/articles/${pseudoId}`, {
+    checkCard(date) {
+        return fetch(`${this.url}/articles/${date}`, {
             headers: this.headers,
             credentials: 'include',
         })
     }
-    saveCard(pseudoId, keyword, title, text, date, source, link, image) {
+    saveCard(keyword, title, text, date, source, link, image) {
         return fetch(`${this.url}/articles`, {
             method: 'POST',
             headers: this.headers,
             credentials: 'include',
             body: JSON.stringify({
-                pseudoId,
                 keyword,
                 title,
                 text,

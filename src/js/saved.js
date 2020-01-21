@@ -76,7 +76,8 @@ api.getSavedCards()
         newsCount.textContent = cards.data.length;
         const keys = []
         cards.data.forEach((card) => {
-            const cardElement = new Card(api, isLoggedIn, isSaved, isExist, card.pseudoId, card.keyword, card.link, card.image, card.date, card.title, card.text, card.source, card._id, cardCounter);
+            console.log(card.date)
+            const cardElement = new Card(api, isLoggedIn, isSaved, isExist, card.keyword, card.link, card.image, card.date, card.title, card.text, card.source, card._id, cardCounter);
             const currentCard = cardElement.create();
             cardElement.addListeners(currentCard);
             cardContainer.appendChild(currentCard);

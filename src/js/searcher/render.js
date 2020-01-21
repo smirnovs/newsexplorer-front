@@ -1,5 +1,5 @@
 import { cardContainer } from "./search";
-import { maxShowed, firstElement, thirdElement, pseudoIdLength } from '../helpers/messages.js';
+import { maxShowed, firstElement, thirdElement } from '../helpers/messages.js';
 
 const isSaved = false;
 export class Render {
@@ -12,10 +12,7 @@ export class Render {
         if (isLoggedIn) {
             cards.articles.forEach((item, index) => {
                 if (index < maxShowed) {
-                    let pseudoId = item.publishedAt.slice(firstElement, pseudoIdLength)
-                    pseudoId = pseudoId.replace(/-/g, '');
-                    pseudoId = pseudoId.replace(/:/g, '');
-                    this.api.checkCard(pseudoId).then(res => {
+                    this.api.checkCard(item.publishedAt).then(res => {
                         if (res.ok) {
                             return Promise.resolve(res.json());
                         }
@@ -25,11 +22,11 @@ export class Render {
                     }).then((res) => {
                         const id = res.data[firstElement]._id;
                         const isExist = true;
-                        this.createCardCallback(this.api, cardContainer, isLoggedIn, isSaved, isExist, pseudoId, myQuestion, item.url, item.urlToImage, item.publishedAt, item.title, item.description, item.source.name, id);
+                        this.createCardCallback(this.api, cardContainer, isLoggedIn, isSaved, isExist, myQuestion, item.url, item.urlToImage, item.publishedAt, item.title, item.description, item.source.name, id);
                     })
                         .catch(() => {
                             const isExist = false;
-                            this.createCardCallback(this.api, cardContainer, isLoggedIn, isSaved, isExist, pseudoId, myQuestion, item.url, item.urlToImage, item.publishedAt, item.title, item.description, item.source.name);
+                            this.createCardCallback(this.api, cardContainer, isLoggedIn, isSaved, isExist, myQuestion, item.url, item.urlToImage, item.publishedAt, item.title, item.description, item.source.name);
                         })
                 }
 
@@ -41,12 +38,9 @@ export class Render {
         } else {
             cards.articles.forEach((item, index) => {
                 if (index < maxShowed) {
-                    let pseudoId = item.publishedAt.slice(firstElement, pseudoIdLength)
-                    pseudoId = pseudoId.replace(/-/g, '');
-                    pseudoId = pseudoId.replace(/:/g, '');
                     const isExist = false;
                     const isSaved = false;
-                    this.createCardCallback(this.api, cardContainer, isLoggedIn, isSaved, isExist, pseudoId, myQuestion, item.url, item.urlToImage, item.publishedAt, item.title, item.description, item.source.name);
+                    this.createCardCallback(this.api, cardContainer, isLoggedIn, isSaved, isExist, myQuestion, item.url, item.urlToImage, item.publishedAt, item.title, item.description, item.source.name);
                 }
             })
             const filtered = cards.articles.filter(function (value, index, arr) {
