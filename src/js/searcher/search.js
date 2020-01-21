@@ -30,6 +30,8 @@ export class Search {
         while (cardContainer.hasChildNodes()) {
             cardContainer.removeChild(cardContainer.lastChild);
         }
+        const searchResultTitle = document.querySelector('.search-result__title');
+        searchResultTitle.style.display = 'none';
         preloaderNotfound.style.display = 'none';
         if (document.querySelector('.search-result__button')) {
             const showMore = document.querySelector('.search-result__button');
@@ -49,6 +51,8 @@ export class Search {
         if (cards.totalResults > maxShowed) {
             this._showmorebutton();
         }
+        const searchResultTitle = document.querySelector('.search-result__title');
+        searchResultTitle.style.display = 'block';
     }
     _showmorebutton() {
         const showMore = document.createElement('button');
