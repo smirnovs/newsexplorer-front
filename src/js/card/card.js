@@ -1,15 +1,11 @@
-import { NEWSAPI_URL, CARD_DELETE, CARD_BOOKMARK } from '../helpers/messages.js';
-// import { MAIN_PAGE, NEWSAPI_URL } from './helpers/messages';
-// import { api } from '../api/api.js';
-import { Api } from '../api/api.js';
+import { CARD_DELETE, CARD_BOOKMARK, firstElement, dateLength } from '../helpers/messages.js';
 
 export class Card {
-    constructor(isLoggedIn, isSaved, isExist, pseudoId, keyword, link, imgUrl, date, title, text, source, id) {
+    constructor(api, isLoggedIn, isSaved, isExist, keyword, link, imgUrl, date, title, text, source, id, cardCounter) {
         this.id = id;
         this.isLoggedIn = isLoggedIn;
         this.isSaved = isSaved;
         this.isExist = isExist;
-        this.pseudoId = pseudoId;
         this.keyword = keyword;
         this.link = link;
         this.imgUrl = imgUrl;
@@ -17,16 +13,22 @@ export class Card {
         this.title = title;
         this.text = text;
         this.source = source;
+        this.api = api;
+        this.cardCounter = cardCounter;
         this.saveCard = this.saveCard.bind(this);
         this.deleteCard = this.deleteCard.bind(this);
-        this.cardElement = this.create();
-        this.addListeners();
     }
-    addListeners() {
-        this.cardElement.addEventListener('click', this.saveCard);
-        this.cardElement.addEventListener('click', this.deleteCard);
+    addListeners(card) {
+        card.addEventListener('click', this.saveCard);
+        card.addEventListener('click', this.deleteCard);
     }
-
+    _deleteCard() {
+        const card = event.currentTarget;
+        card.removeEventListener('click', this.saveCard, false);
+        card.removeEventListener('click', this.deleteCard, false);
+        card.remove();
+        this.cardCounter();
+    }
     saveCard() {
         if (event.target.classList.contains('card__saver') || event.target.classList.contains('card__svg-bookmark') || event.target.classList.contains('card__bookmark')) {
             if (!this.isLoggedIn) {
@@ -34,8 +36,9 @@ export class Card {
             } else {
                 if (!this.isExist) {
                     const iconSvg = event.currentTarget.querySelector('.card__bookmark');
-                    api.saveCard(this.pseudoId, this.keyword, this.title, this.text, this.date, this.source, this.link, this.imgUrl)
+                    this.api.saveCard(this.keyword, this.title, this.text, this.date, this.source, this.link, this.imgUrl)
                         .then((res) => {
+                            console.log(this.date)
                             iconSvg.setAttribute('fill', '#2f71e5');
                             iconSvg.setAttribute('stroke', '#2f71e5');
                             iconSvg.classList.add('card__bookmark_saved');
@@ -43,35 +46,34 @@ export class Card {
                             return Promise.resolve(res.json());
                         }).then((res) => {
                             this.id = res.data._id;
-                            // this.currentCard(this.id)
-                            // return this.id
-                        })
+                        }).catch();
 
                 } else {
                     const iconSvg = event.currentTarget.querySelector('.card__bookmark');
 
-                    api.deleteCard(this.id)
+                    this.api.deleteCard(this.id)
                         .then(() => {
                             iconSvg.setAttribute('fill', 'none');
                             iconSvg.setAttribute('stroke', '#B6BCBF');
                             iconSvg.classList.remove('card__bookmark_saved');
                             this.isExist = !this.isExist;
-                        });
+                        })
+                        .catch();
                 }
             }
         }
     }
     deleteCard() {
         if (event.target.classList.contains('card__deleter') || event.target.classList.contains('card__svg-deleter') || event.target.classList.contains('card__delete')) {
-            api.deleteCard(this.id).then(event.target.closest('.card').remove()).catch(() => {
-                console.log('не удалено')
-            })
+            this.api.deleteCard(this.id).then(this._deleteCard())
+                .catch(() => {
+                    console.log('не удалено')
+                })
         }
     }
-    createIcon(cardBookmark) {
+    _createIcon(cardBookmark) {
         const cardSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         const svgPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        // const cardBookmark = document.createElement('div');
         if (this.isSaved) {
             cardBookmark.classList.add('card__deleter');
             cardSvg.classList.add('card__svg-deleter');
@@ -107,8 +109,8 @@ export class Card {
         cardSvg.appendChild(svgPath);
     }
 
-    dateFormat(date, cardDate) {
-        date = date.slice(0, 10);
+    _dateFormat(date, cardDate) {
+        date = date.slice(firstElement, dateLength);
         date = date.replace(/-/g, ', ');
         const publicDate = new Date(date);
         const formatter = new Intl.DateTimeFormat("ru", {
@@ -121,7 +123,6 @@ export class Card {
 
     }
     create() {
-
         const newCard = document.createElement('div');
         newCard.classList.add('card');
 
@@ -133,16 +134,14 @@ export class Card {
         cardImg.alt = this.title
 
         const cardBookmark = document.createElement('div');
-        // cardBookmark.classList.add('card__saver');
 
-        this.createIcon(cardBookmark);
+        this._createIcon(cardBookmark);
         imgBlock.appendChild(cardImg);
         imgBlock.appendChild(cardBookmark);
         if (!this.isLoggedIn) {
             const cardNologin = document.createElement('div');
             cardNologin.classList.add('card__nologin');
             cardNologin.textContent = 'Войдите, чтобы сохранять статьи';
-            // cardNologin.style.border = ".5px solid #000";
             imgBlock.appendChild(cardNologin);
         }
 
@@ -158,10 +157,7 @@ export class Card {
 
         const cardDate = document.createElement('div');
         cardDate.classList.add('card__date');
-        this.dateFormat(this.date, cardDate);
-        // const cardDate = document.createElement('div');
-        // cardDate.classList.add('card__date');
-        // cardDate.textContent = this.date
+        this._dateFormat(this.date, cardDate);
 
         const cardNews = document.createElement('div');
         cardNews.classList.add('card__news');
@@ -178,16 +174,7 @@ export class Card {
         cardSource.classList.add('card__source');
         cardSource.textContent = this.source;
 
-        // cardList.appendChild(newCard);
-
         newCard.appendChild(imgBlock);
-
-
-
-
-        // cardBookmark.appendChild(cardSvg);
-        // cardSvg.appendChild(svgPath);
-
 
         newCard.appendChild(textBlock);
 
@@ -203,21 +190,3 @@ export class Card {
 
     }
 }
-
-const api = new Api({
-    baseUrl: NEWSAPI_URL,
-    headers: {
-        // authorization: '67fcbb6d7e14456f995c19d4a0f3cfbc',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    }
-});
-
-// const api = new Api({
-//     baseUrl: textHelper.NEWSAPI_URL,
-//     headers: {
-//         // authorization: document.cookie,
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json'
-//     }
-// });

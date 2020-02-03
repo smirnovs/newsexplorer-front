@@ -1,57 +1,66 @@
+import { windowWidth } from '../helpers/messages.js';
 
 const header = document.querySelector('.header');
-const mobileMenu = document.querySelector('.menumobile');
 const mobileMenuButton = document.querySelector('.header__mobileico');
 
 export class Mobilemenu {
-    constructor(iconColor, isOpenMenu, isHeader, headerColor) {
-        this.action = this.action.bind(this);
-        this.header = this.header.bind(this);
+    constructor(mobileMenu, iconColor, isOpenMenu, isHeader, headerColor) {
+        this._action = this._action.bind(this);
+        this._header = this._header.bind(this);
+        this._clickClothe = this._clickClothe.bind(this);
+        this.mobileMenu = mobileMenu;
         this.iconColor = iconColor;
         this.headerColor = headerColor;
         this.isOpenMenu = isOpenMenu;
         this.isHeader = isHeader;
-        this.addListeners();
-
     }
-    resize() {
-        mobileMenu.classList.remove('menumobile__isopened');
-        mobileMenuButton.classList.remove(this.iconColor);
-    }
-    header() {
-        if (window.innerWidth > 720 && this.isOpenMenu == true && this.isHeader) {
+    _header() {
+        if (window.innerWidth > windowWidth && this.isOpenMenu == true && this.isHeader) {
             this.isOpenMenu = false;
-            mobileMenu.classList.remove('menumobile__isopened');
+            this.mobileMenu.classList.remove('menumobile__isopened');
             mobileMenuButton.classList.remove(this.iconColor);
             header.style.backgroundColor = 'transparent'
         }
-        else if (window.innerWidth > 720 && this.isOpenMenu == true && typeof (this.isHeader) == 'undefined') {
+        else if (window.innerWidth > windowWidth && this.isOpenMenu == true && typeof (this.isHeader) == 'undefined') {
             this.isOpenMenu = false;
-            mobileMenu.classList.remove('menumobile__isopened');
+            this.mobileMenu.classList.remove('menumobile__isopened');
             mobileMenuButton.classList.remove(this.iconColor);
         }
     }
-    action() {
+    _action() {
         if (!this.isOpenMenu && this.isHeader) {
             mobileMenuButton.classList.toggle(this.iconColor);
-            mobileMenu.classList.toggle('menumobile__isopened');
+            this.mobileMenu.classList.toggle('menumobile__isopened');
             header.style.backgroundColor = this.headerColor;
             this.isOpenMenu = true;
+            document.body.style.overflow = 'hidden';
         } else if (!this.isOpenMenu && !this.isHeader) {
             mobileMenuButton.classList.toggle(this.iconColor);
-            mobileMenu.classList.toggle('menumobile__isopened');
+            this.mobileMenu.classList.toggle('menumobile__isopened');
             this.isOpenMenu = true;
+            document.body.style.overflow = 'hidden';
         }
         else {
             this.isOpenMenu = false;
             header.style.backgroundColor = 'transparent'
-            mobileMenu.classList.toggle('menumobile__isopened');
+            this.mobileMenu.classList.toggle('menumobile__isopened');
             mobileMenuButton.classList.toggle(this.iconColor);
+            document.body.style.overflow = 'overlay';
+        }
+    }
+    _clickClothe() {
+        if(event.target.classList.contains('menumobile__isopened')|| event.target.classList.contains('menumobile__login')) {
+            this.isOpenMenu = false;
+            header.style.backgroundColor = 'transparent'
+            this.mobileMenu.classList.toggle('menumobile__isopened');
+            mobileMenuButton.classList.toggle(this.iconColor);
+            document.body.style.overflow = 'overlay';
         }
     }
     addListeners() {
-        mobileMenuButton.addEventListener('click', this.action);
-        window.addEventListener('resize', this.header);
+        mobileMenuButton.addEventListener('click', this._action);
+        window.addEventListener('resize', this._header);
+        this.mobileMenu.addEventListener('click', this._clickClothe);
     }
 }
 

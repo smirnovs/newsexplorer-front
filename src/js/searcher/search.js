@@ -1,13 +1,7 @@
-import { Card } from '../card/card.js';
-import { Api } from '../api/api.js';
-import { Showmore } from './showmore.js'
-import { Render } from './render.js'
-import { NEWSAPI_URL, SEARCH_NEWS } from '../helpers/messages.js';
-
+import { maxShowed, firstElement, dateLength, count, NO_KEYWORD_ERR, NOTHING_FIND, NOTHING_FIND_SORRY, SOME_ERROR } from '../helpers/messages.js';
 
 const searchInput = document.forms.search;
 const question = searchInput.elements.question;
-const searchButton = document.querySelector('.search__button');
 const preloader = document.querySelector('.preloader')
 const preloaderAwait = document.querySelector('.preloader__await-block');
 const preloaderNotfound = document.querySelector('.preloader__notfound-block');
@@ -17,124 +11,114 @@ const notFoundTitle = document.querySelector('.preloader__notfound-title');
 const notFoundText = document.querySelector('.preloader__notfound-text');
 
 export class Search {
-    constructor() {
+    constructor(api, newsloader, load, showMoreCallback, searchButton) {
+        this.api = api;
+        this.newsloader = newsloader;
+        this.load = load;
+        this.showMoreCallback = showMoreCallback;
+        this.searchButton = searchButton;
         this.checkAuth = this.checkAuth.bind(this);
-        searchButton.addEventListener('click', this.checkAuth);
+        this._startSearchStyling = this._startSearchStyling.bind(this);
     }
-    successSearchStyling(cards) {
+    _activateForm() {
+        this.searchButton.removeAttribute('disabled');
+        this.searchButton.classList.remove('search__button_disabled');
+        question.readOnly = false;
+        question.classList.remove('readonly');
+    }
+    _startSearchStyling() {
+        while (cardContainer.hasChildNodes()) {
+            cardContainer.removeChild(cardContainer.lastChild);
+        }
+        const searchResultTitle = document.querySelector('.search-result__title');
+        searchResultTitle.style.display = 'none';
+        preloaderNotfound.style.display = 'none';
+        if (document.querySelector('.search-result__button')) {
+            const showMore = document.querySelector('.search-result__button');
+            showMore.parentNode.removeChild(showMore);
+        }
+        preloader.style.display = 'flex';
+        preloaderAwait.style.display = 'flex';
+        this.searchButton.setAttribute('disabled', true);
+        this.searchButton.classList.add('search__button_disabled');
+        question.readOnly = true;
+        question.classList.add('readonly');
+    }
+    _successSearchStyling(cards) {
         preloader.style.display = 'none';
         searchResult.style.display = 'flex';
-        if (cards.totalResults > 3) {
-            this.showmorebutton();
+        this._activateForm();
+        if (cards.totalResults > maxShowed) {
+            this._showmorebutton();
         }
+        const searchResultTitle = document.querySelector('.search-result__title');
+        searchResultTitle.style.display = 'block';
     }
-    showmorebutton() {
+    _showmorebutton() {
         const showMore = document.createElement('button');
         showMore.classList.add('button');
         showMore.classList.add('search-result__button');
         showMore.textContent = 'Показать еще';
         searchResult.appendChild(showMore);
     }
-    showMoreLogic(showButton, cards, myQuestion, isLoggedIn) {
-        const btnLogic = new Showmore({ cards, myQuestion, showButton, isLoggedIn });
-        showButton.addEventListener('click', function () { btnLogic.showcards() });
-    }
-    render(where, count, cards, myQuestion, isLoggedIn) {
-        for (let i = where; i < count; i++) {
-            const { cardElement } = new Card(myQuestion, cards.articles[i].url, cards.articles[i].urlToImage, cards.articles[i].publishedAt, cards.articles[i].title, cards.articles[i].description, cards.articles[i].source.name, isLoggedIn);
-            cardContainer.appendChild(cardElement);
-        }
+    _showMoreLogic(showButton, cards, myQuestion, isLoggedIn) {
+        this.showMoreCallback(showButton, cards, myQuestion, isLoggedIn, this.load);
     }
     checkAuth() {
         event.preventDefault();
-        const check = new Api({
-            baseUrl: NEWSAPI_URL,
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            }
-        });
-        check.checkAuth().then(res => {
-            if (res.ok) {
-                return Promise.resolve(res.json());
-            } else {
-                return Promise.reject(res.status);
-            }
-        }).then(() => {
-            const isLoggedIn = true;
-            this.find(isLoggedIn)
+        this.api.checkAuth()
+            .then(() => {
+                const isLoggedIn = true;
+                this._find(isLoggedIn)
 
-        }).catch(() => {
-            const isLoggedIn = false;
-            this.find(isLoggedIn)
-        });
+            }).catch(() => {
+                const isLoggedIn = false;
+                this._find(isLoggedIn)
+            });
     }
-    find(isLoggedIn) {
-        startSearchStyling();
-        const week = 6;
+    _find(isLoggedIn) {
+        this._startSearchStyling();
+        const week = count;
         let today = new Date();
         let weekAgo = new Date();
         weekAgo.setDate(today.getDate() - week);
 
-        today = today.toISOString().slice(0, 10)
-        weekAgo = weekAgo.toISOString().slice(0, 10)
+        today = today.toISOString().slice(firstElement, dateLength)
+        weekAgo = weekAgo.toISOString().slice(firstElement, dateLength)
 
         const myQuestion = question.value;
-        if (myQuestion.length === 0) {
+        if (myQuestion.length === firstElement) {
             preloaderNotfound.style.display = 'flex';
-            notFoundTitle.textContent = 'Введите хотя бы одно ключевое слово'
+            notFoundTitle.textContent = NO_KEYWORD_ERR;
             preloaderAwait.style.display = 'none';
-            notFoundText.textContent = ''
+            notFoundText.textContent = '';
+            this._activateForm();
         } else {
-            api.getCards(myQuestion, weekAgo, today).then(cards => {
-                if (cards.totalResults === 0) {
+            this.newsloader.getCards(myQuestion, weekAgo, today).then(cards => {
+                if (cards.totalResults === firstElement) {
                     preloaderAwait.style.display = 'none';
                     preloaderNotfound.style.display = 'flex';
-                    notFoundTitle.textContent = 'Ничего не найдено'
-                    notFoundText.textContent = 'К сожалению по вашему запросу ничего не найдено.'
-                    searchResult.style.display = 'none'
+                    notFoundTitle.textContent = NOTHING_FIND;
+                    notFoundText.textContent = NOTHING_FIND_SORRY;
+                    searchResult.style.display = 'none';
+                    this._activateForm();
                 } else {
-                    this.successSearchStyling(cards);
-                    if (cards.articles.length < 3) {
-                        const count = cards.articles.length
-                        load.render(0, count, cards, myQuestion, isLoggedIn);
-                    } else {
-                        const count = 3
-                        load.render(0, count, cards, myQuestion, isLoggedIn);
-                    }
+                    this._successSearchStyling(cards);
+                    this.load.render(cards, myQuestion, isLoggedIn);
                     if (document.querySelector('.search-result__button')) {
                         const showMore = document.querySelector('.search-result__button');
-                        this.showMoreLogic(showMore, cards, myQuestion, isLoggedIn);
+                        this._showMoreLogic(showMore, cards, myQuestion, isLoggedIn);
                     }
                 }
             }).catch(() => {
                 preloaderAwait.style.display = 'none';
                 preloaderNotfound.style.display = 'flex';
+                notFoundTitle.textContent = ''
+                notFoundText.textContent = SOME_ERROR;
+                this._activateForm();
             });
         }
     }
 }
 
-// const search = new Search();
-const load = new Render();
-const startSearchStyling = () => {
-    while (cardContainer.hasChildNodes()) {
-        cardContainer.removeChild(cardContainer.lastChild);
-    }
-    preloaderNotfound.style.display = 'none';
-    if (document.querySelector('.search-result__button')) {
-        const showMore = document.querySelector('.search-result__button');
-        showMore.parentNode.removeChild(showMore);
-    }
-    preloader.style.display = 'flex';
-    preloaderAwait.style.display = 'flex';
-};
-
-const api = new Api({
-    baseUrl: SEARCH_NEWS,
-    headers: {
-        authorization: '67fcbb6d7e14456f995c19d4a0f3cfbc',
-        // 'Content-Type': 'application/json'
-    }
-});
 

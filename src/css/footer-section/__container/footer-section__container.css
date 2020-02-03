@@ -2,6 +2,7 @@
     display: flex;
     padding: 30px 104px 22px;
     justify-content: space-between;
+    align-items: center;
 }
 
 .footer-section__links {grid-area: links;}

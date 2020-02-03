@@ -1,32 +1,13 @@
-// const newsUrl = 'https://newsapi.org/v2/top-headlines?q='
-import textHelper from '../helpers/messages.js';
-
 export class Api {
     constructor({ baseUrl, headers }) {
         this.url = baseUrl;
         this.headers = headers;
-    }
-    getGit() {
-        return fetch(`${this.url}`, {
-            headers: this.headers,
-            // credentials: 'include',
-        })
     }
     deleteCard(id) {
         return fetch(`${this.url}/articles/${id}`, {
             method: 'DELETE',
             headers: this.headers,
             credentials: 'include',
-            // body: JSON.stringify({
-            //     pseudoId,
-            //     keyword,
-            //     title,
-            //     text,
-            //     date,
-            //     source,
-            //     link,
-            //     image
-            // })
         }).then(res => {
             if (res.ok) {
                 return Promise.resolve(res.json());
@@ -45,6 +26,12 @@ export class Api {
         return fetch(`${this.url}/users/me`, {
             headers: this.headers,
             credentials: 'include',
+        }).then(res => {
+            if (res.ok) {
+                return Promise.resolve(res.json());
+            } else {
+                return Promise.reject(res);
+            }
         })
     }
     unAuth() {
@@ -57,17 +44,6 @@ export class Api {
         return fetch(`${this.url}/articles`, {
             headers: this.headers,
             credentials: 'include',
-        })
-    }
-    checkCard(pseudoId) {
-        return fetch(`${this.url}/articles/${pseudoId}`, {
-            headers: this.headers,
-            credentials: 'include',
-        })
-    }
-    getCards(question, weekAgo, today) {
-        return fetch(`${this.url + question}&from=${weekAgo}&to=${today}`, {
-            headers: this.headers
         }).then(res => {
             if (res.ok) {
                 return Promise.resolve(res.json());
@@ -76,13 +52,18 @@ export class Api {
             }
         })
     }
-    saveCard(pseudoId, keyword, title, text, date, source, link, image) {
+    checkCard(date) {
+        return fetch(`${this.url}/articles/${date}`, {
+            headers: this.headers,
+            credentials: 'include',
+        })
+    }
+    saveCard(keyword, title, text, date, source, link, image) {
         return fetch(`${this.url}/articles`, {
             method: 'POST',
             headers: this.headers,
             credentials: 'include',
             body: JSON.stringify({
-                pseudoId,
                 keyword,
                 title,
                 text,
@@ -102,6 +83,12 @@ export class Api {
                 password: userPwd,
                 name: userName
             })
+        }).then(res => {
+            if (res.ok) {
+                return Promise.resolve(res);
+            } else {
+                return Promise.resolve(res.json());
+            }
         });
     }
     loginUser(userMail, userPwd) {
@@ -116,12 +103,3 @@ export class Api {
         });
     }
 }
-
-// export const api = new Api({
-//     baseUrl: textHelper.NEWSAPI_URL,
-//     headers: {
-//         // authorization: '67fcbb6d7e14456f995c19d4a0f3cfbc',
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json'
-//     }
-// });

@@ -1,46 +1,40 @@
-import { Api } from '../api/api.js'
-import { Popup, popupReg, miniPopup } from '../popup/popup.js';
-import { userMail, userPwd, userName, notMailError } from '../popup/popup-validate.js';
-import { NEWSAPI_URL } from '../helpers/messages.js';
-import { Minipopup } from '../popup/mini-popup.js';
+import { goodStatus } from '../helpers/messages.js';
 
 export class Signup {
-    constructor() {
-        this.addListener();
+    constructor(popup, popupElement, miniPopup, miniPopupCallback, api, validate) {
+        this.popup = popup;
+        this.popupElement = popupElement;
+        this.miniPopupCallback = miniPopupCallback;
+        this.api = api;
+        this.validate = validate;
+        this.miniPopup = miniPopup;
+        this._signup = this._signup.bind(this);
+        this.popupReg = this.popupElement.querySelector('.popup__button_reg');
+        this.notMailError = this.popupElement.querySelector('.popup__error_email');
+        this.popupForm = this.popupElement.querySelector('.popup__form');
+        this.userMail = this.popupForm.elements.usermail;
+        this.userPwd = this.popupForm.elements.userpwd;
+        this.userName = this.popupForm.elements.username;
     }
-    signup() {
+    _signup() {
         event.preventDefault();
-        api.createUser(userMail.value, userPwd.value, userName.value)
+        this.validate.disableInputs();
+        this.api.createUser(this.userMail.value, this.userPwd.value, this.userName.value)
             .then(res => {
-                if (res.ok) {
-                    return Promise.resolve(res);
+                if (res.status === goodStatus) {
+                    this.miniPopup.classList.add('mini-popup_is-opened');
+                    this.popup.close();
+                    this.miniPopupCallback(this.popup);
                 } else {
-                    return Promise.resolve(res.json());
-                }
-            })
-            .then(res => {
-                if (res.status === 201) {
-                    miniPopup.classList.add('mini-popup_is-opened');
-                    popup.close();
-                    new Minipopup();
-                } else {
-                    notMailError.style.display = 'inline-block'
-                    notMailError.textContent = res.message;
+                    this.notMailError.style.display = 'inline-block'
+                    this.notMailError.textContent = res.message;
+                    this.validate.enableInputs();
                 }
             }).catch(err => {
                 console.log(err);
             });
     }
     addListener() {
-        popupReg.addEventListener('click', this.signup)
+        this.popupReg.addEventListener('click', this._signup)
     }
 }
-
-const popup = new Popup();
-
-const api = new Api({
-    baseUrl: NEWSAPI_URL,
-    headers: {
-        'Content-Type': 'application/json'
-    }
-});

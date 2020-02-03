@@ -12,6 +12,7 @@
 @import url(../../css/github/github.css);
 @import url(../../css/footer-section/footer-section.css);
 @import url(../../vendor/fonts.css);
+@import url(../../css/readonly/readonly.css);
 
 h1, h2, h3, p {
     margin: 0;

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>News Explorer</title>
     <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.about.css %>" />
-    <link rel="shortcut icon" href="<%=require('../../images/favicon.ico')%>" type="image/x-icon" />
+    <link rel="shortcut icon" href="../<%=require('../../images/favicon.ico')%>" type="image/x-icon" />
 </head>
 
 <body>
@@ -16,17 +16,17 @@
             <header class="header">
                 <div class="header__underline header__underline_black">
                     <div class="header__container">
-                        <a href="index.html" class="header__title">NewsExplorer</a>
+                        <a href="/" class="header__title">NewsExplorer</a>
                         <nav class="header__menu header__menu_white">
-                            <a href="index.html" class="header__link header__link_inactive">Главная</a>
-                            <a href="about.html" class="header__link header__link_active">О проекте</a>
-                            <a href="saved.html"
-                                class="header__link header__link_inactive header__link_saved">Сохраненные статьи</a>
+                            <a href="/" class="header__link header__link_inactive">Главная</a>
+                            <a href="/about/" class="header__link header__link_active">О проекте</a>
+                            <a href="/saved/" class="header__link header__link_inactive header__link_saved">Сохраненные
+                                статьи</a>
                             <button
                                 class="header__login header__login_black header__login_unauth">Авторизоваться</button>
                             <button class="header__login header__login_black header__login_auth"><span
-                                    class="header__login_name">Грета</span> <svg width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    class="header__name">Грета</span> <svg width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd"
                                         d="M10 6L6 6L6 18H10V20H6C4.89543 20 4 19.1046 4 18V6C4 4.89543 4.89543 4 6 4H10V6ZM17.5856 13L13.2927 17.1339L14.707 18.4958L21.4141 12.0371L14.707 5.57837L13.2927 6.9402L17.5856 11.0741H8V13H17.5856Z"
                                         fill="#000" />
@@ -69,40 +69,39 @@
                 <h2 class="techs__title">Используемые технологии</h2>
                 <div class="techs__emblems-container">
                     <div class="techs__emblem">
-                        <h3 class="tech__emblem-title">HTML</h3>
-                        <img src=<%=require("../../images/html.png")%> alt="HTML" class="tech__emblem-img">
+                        <h3 class="techs__emblem-title">HTML</h3>
+                        <img src=../<%=require("../../images/html.png")%> alt="HTML" class="techs__emblem-img">
                     </div>
                     <div class="techs__emblem">
-                        <h3 class="tech__emblem-title">CSS</h3>
-                        <img src=<%=require("../../images/css.png")%> alt="CSS" class="tech__emblem-img">
+                        <h3 class="techs__emblem-title">CSS</h3>
+                        <img src=../<%=require("../../images/css.png")%> alt="CSS" class="techs__emblem-img">
                     </div>
                     <div class="techs__emblem">
-                        <h3 class="tech__emblem-title">Java Script</h3>
-                        <img src=<%=require("../../images/js.png")%> alt="Java Script" class="tech__emblem-img">
+                        <h3 class="techs__emblem-title">Java Script</h3>
+                        <img src=../<%=require("../../images/js.png")%> alt="Java Script" class="techs__emblem-img">
                     </div>
                     <div class="techs__emblem">
-                        <h3 class="tech__emblem-title">Webpack</h3>
-                        <img src=<%=require("../../images/webpack.png")%> alt="Webpack" class="tech__emblem-img">
+                        <h3 class="techs__emblem-title">Webpack</h3>
+                        <img src=../<%=require("../../images/webpack.png")%> alt="Webpack" class="techs__emblem-img">
                     </div>
                 </div>
             </div>
         </section>
         <section class="about-section">
             <div class="about-section__container">
-                <img src=<%=require("../../images/avatar.png")%> alt="Аватар" class="about-section__photo">
+                <img src=../<%=require("../../images/avatar.png")%> alt="Аватар" class="about-section__photo">
                 <div class="about-section__text-block">
                     <h2 class="about-section__title">Об авторе</h2>
                     <div class="about-section__text">
-                        <p class="about-section__paragraph">Это блок с описанием автора проекта. Здесь следует указать,
-                            как вас
-                            зовут, чем вы
-                            занимаетесь, какими
-                            технологиями разработки владеете.</p>
-                        <p class="about-section__paragraph">Также можно рассказать о процессе обучения в Практикуме,
-                            чему вы тут
-                            научились, и
-                            чем можете помочь
-                            потенциальным заказчикам.</p>
+                        <p class="about-section__paragraph">Меня зовут Александр. В настоящий момент я заканчиваю
+                            обучение в Яндекс.Практикуме и это мой финальный проект.</p>
+                        <p class="about-section__paragraph">В этом проекте использовался чистый JS и CSS. Из технологий:
+                            асинхронные запросы, промисы, Webpack, MongoDB. Бэкенд сделан на Node.JS и express.
+                            Вы можете зарегистрировать пользователя, залогиниться, найти новость, сохранить новость и
+                            увидеть сохраненные новости в личном кабинете. Новость можно удалить из личного кабинета и
+                            со страницы поиска.
+
+                        </p>
                     </div>
                 </div>
             </div>
@@ -111,7 +110,9 @@
             <div class="github__container">
                 <div class="github__title-wrapper">
                     <h2 class="github__title">История коммитов из GitHub</h2>
-                    <a href="https://github.com/smirnovs/diplom-frontend" class="github__link">Открыть в Github ></a>
+                    <a href="https://github.com/smirnovs/newsexplorer-front" target="_blank"
+                        class="github__link">Открыть в
+                        Github ></a>
                 </div>
                 <div class="glide">
                     <div data-glide-el="track" class="glide__track">
@@ -141,21 +142,22 @@
             <footer class="footer-section__container">
                 <div class="footer-section__copyright">© 2019 Supersite</div>
                 <nav class="footer-section__links">
-                    <a href="index.html" class="footer-section__link">Главная</a>
-                    <a href="saved.html" class="footer-section__link">О проекте</a>
-                    <a href="https://praktikum.yandex.ru/" class="footer-section__link">Яндекс.Практикум</a>
+                    <a href="/" class="footer-section__link">Главная</a>
+                    <a href="/saved/" class="footer-section__link">О проекте</a>
+                    <a href="https://praktikum.yandex.ru/" target="_blank"
+                        class="footer-section__link">Яндекс.Практикум</a>
                 </nav>
                 <nav class="footer-section__socials">
                     <a href="https://github.com/smirnovs" target="_blank" class="footer-section__social"><img
-                            src=<%=require("../../images/gh.png")%> alt="Иконка гитхаба"></a>
+                            src=../<%=require("../../images/gh.png")%> alt="Иконка гитхаба"></a>
                     <a href="https://www.facebook.com/uzukwert" target="_blank" class="footer-section__social"><img
-                            src=<%=require("../../images/fb.png")%> alt="Иконка фейсбука"></a>
+                            src=../<%=require("../../images/fb.png")%> alt="Иконка фейсбука"></a>
                 </nav>
             </footer>
         </section>
         <div class="popup">
             <div class="popup__content">
-                <img src=<%=require("../../images/close.svg")%> alt="" class="popup__close" />
+                <img src=../<%=require("../../images/close.svg")%> alt="" class="popup__close" />
                 <h3 class="popup__title">Вход</h3>
                 <form class="popup__form" name="logincontrol">
                     <span class="popup__subtitle">Email</span>
@@ -183,22 +185,22 @@
         </div>
         <div class="mini-popup">
             <div class="mini-popup__content">
-                <img src=<%=require("../../images/close.svg")%> alt="" class="mini-popup__close" />
+                <img src=../<%=require("../../images/close.svg")%> alt="" class="mini-popup__close" />
                 <h3 class="mini-popup__title">Пользователь успешно зарегистрирован!</h3>
                 <p class="mini-popup__enter">Выполнить вход</p>
             </div>
         </div>
         <nav class="menumobile">
             <div class="menumobile__links menumobile__links_white">
-                <a href="index.html" class="menumobile__link menumobile__link_black">Главная</a>
-                <a href="about.html" class="menumobile__link menumobile__link_black">О проекте</a>
-                <a href="saved.html" class="menumobile__link menumobile__link_black menumobile__link_saved">Сохраненные
+                <a href="/" class="menumobile__link menumobile__link_black">Главная</a>
+                <a href="/about/" class="menumobile__link menumobile__link_black">О проекте</a>
+                <a href="/saved/" class="menumobile__link menumobile__link_black menumobile__link_saved">Сохраненные
                     статьи</a>
                 <button
                     class="menumobile__login menumobile__login_black menumobile__login_unauth">Авторизоваться</button>
                 <button class="menumobile__login menumobile__login_black menumobile__login_auth"><span
-                        class="menumobile__login_name"></span> <svg width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                        class="menumobile__name"></span> <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M10 6L6 6L6 18H10V20H6C4.89543 20 4 19.1046 4 18V6C4 4.89543 4.89543 4 6 4H10V6ZM17.5856 13L13.2927 17.1339L14.707 18.4958L21.4141 12.0371L14.707 5.57837L13.2927 6.9402L17.5856 11.0741H8V13H17.5856Z"
                             fill="#000" />

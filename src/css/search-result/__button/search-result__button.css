@@ -4,7 +4,7 @@
     height: 64px;
     background: #fff;
     border-radius: 80px;
-    border: 1px solid #fff;
+    border: none;
     align-self: center;
     margin-top: 64px;
     margin-bottom: 80px;
@@ -13,8 +13,12 @@
     color: #1A1B22;
 }
 
+.search-result__button:hover {
+    background-color:rgba(255,255,255, 0.6);
+}
+
 .search-result__button:active {
-    opacity: 0.9;
+    background-color:rgba(255,255,255, 0.6);
 }
 
 @media screen and (max-width : 768px) {
